@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery Logika Proposisi & Analitis - 110 Soal Berbasis Chapter</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX for beautiful math formatting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap')    ;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff; /* Berubah menjadi putih */
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+    </style>
+</head>
+<body class="text-slate-900 min-h-screen flex flex-col justify-between selection:bg-indigo-100">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-blue-800 bg-blue-900 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 md:px-6 py-2.5 md:py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showDashboard()">
+                <div class="w-7 h-7 md:w-8 md:h-8 rounded-md bg-white flex items-center justify-center font-bold text-blue-900 tracking-wider text-xs md:text-base">
+                    L
+                </div>
+                <div>
+                    <span class="font-bold text-xs md:text-base tracking-tight text-white uppercase">Logika Matematika</span>
+                    <p class="text-[9px] md:text-[10px] text-blue-200 font-medium tracking-wide">STUDY SUITE &bull; 110 MASTERY</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <div class="hidden md:flex flex-col text-right">
+                    <span class="text-xs text-blue-200 font-semibold tracking-wide uppercase" id="total-overall-progress">Progress Belajar: 0%</span>
+                    <span class="text-[10px] text-blue-300 font-medium" id="total-overall-counter">0 dari 110 Soal Terjawab</span>
+                </div>
+                <button onclick="resetAllProgress()" class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase px-3 py-1.5 md:px-4 md:py-2 bg-blue-800 hover:bg-blue-700 text-white border border-blue-700 rounded-md transition duration-200">
+                    Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-6 py-10 bg-slate-50">
+        <div class="w-full max-w-4xl bg-blue-800 border border-blue-600 rounded-lg shadow-xl p-6 md:p-10 relative">
+
+            <!-- DASHBOARD / CHAPTER SELECTION SCREEN -->
+            <div id="dashboard-screen" class="space-y-8">
+                <div class="max-w-3xl py-2">
+                    <span class="px-3 py-1 rounded text-[10px] font-bold bg-blue-900 text-blue-200 border border-blue-600 tracking-wider uppercase">Persiapan SNBT & Evaluasi Kompetensi</span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold mt-3 tracking-tight text-white uppercase">Portal Penilaian Logika Informatika</h1>
+                    <p class="text-blue-100 text-sm md:text-base mt-2 leading-relaxed max-w-2xl">
+                        Uji kemampuan penalaran analitis, logika komputasi, dan struktur proposisi Anda.
+                    </p>
+                </div>
+
+                <!-- Overall Progress Card -->
+                <div class="bg-blue-900 border border-blue-600 rounded-lg p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2 w-full md:w-2/3">
+                        <div class="flex justify-between text-xs font-bold text-blue-200 uppercase tracking-wider">
+                            <span>Metrik Kesiapan Kognitif</span>
+                            <span id="dashboard-progress-text" class="text-blue-200">0%</span>
+                        </div>
+                        <div class="w-full bg-blue-950 h-2 rounded overflow-hidden">
+                            <div id="dashboard-progress-bar" class="bg-blue-400 h-full rounded transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-white px-5 py-4 rounded border border-indigo-100 w-full md:w-auto justify-center md:justify-start">
+                        <span class="text-4xl font-black text-indigo-700 tracking-tight" id="overall-correct-count">0</span>
+                        <div class="text-left leading-none">
+                            <p class="text-xs text-indigo-800 font-bold uppercase tracking-wider">Skor Total</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Jawaban benar dari 110 soal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapters Grid -->
+                <div>
+                    <h3 class="text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-5">Daftar Chapter 01 Pembelajaran</h3>
+                    <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Generates via JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUIZ RUNNER SCREEN -->
+            <div id="quiz-screen" class="hidden space-y-8">
+                <!-- Chapter Progress Header -->
+                <div class="flex flex-col space-y-3 border-b border-indigo-100 pb-5">
+                    <div class="flex justify-between items-center text-xs">
+                        <button onclick="confirmExitToDashboard()" class="text-indigo-500 hover:text-indigo-900 flex items-center space-x-1.5 transition duration-150 font-bold uppercase tracking-wider">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                            <span>Dashboard</span>
+                        </button>
+                        <span class="px-3 py-1 rounded bg-indigo-50 text-indigo-700 font-bold tracking-wider uppercase text-[10px] border border-indigo-200" id="chapter-badge">Chapter 1</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-tight" id="chapter-title-run">Materi Logika</h2>
+                            <p class="text-xs text-indigo-700 font-bold tracking-wider uppercase mt-1" id="question-index-run">Soal 1 dari 10</p>
+                        </div>
+                        <span class="text-xs font-bold text-slate-600 uppercase tracking-wider" id="quiz-score-run">Chapter Score: 0</span>
+                    </div>
+                    <div class="w-full bg-indigo-100 h-2 rounded overflow-hidden mt-1">
+                        <div id="chapter-progress-bar" class="bg-indigo-700 h-full w-0 transition-all duration-300 rounded"></div>
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <div class="bg-slate-50 p-6 rounded border border-slate-200">
+                    <h3 id="question-text" class="text-base md:text-lg font-bold text-slate-800 leading-relaxed"></h3>
+                </div>
+
+                <!-- Option Buttons -->
+                <div id="options-container" class="space-y-3"></div>
+
+                <!-- Feedback Area -->
+                <div id="feedback-card" class="hidden p-5 rounded border transition-all duration-350">
+                    <div class="flex items-start space-x-3.5">
+                        <div id="feedback-icon" class="w-6 h-6 rounded flex items-center justify-center shrink-0 text-white font-bold text-xs"></div>
+                        <div class="space-y-1">
+                            <h4 id="feedback-title" class="font-bold text-xs uppercase tracking-wider"></h4>
+                            <p id="feedback-text" class="text-xs md:text-sm text-slate-600 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button id="action-btn" class="w-full py-4 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-bold uppercase tracking-wider rounded transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm" disabled>
+                    Periksa Jawaban
+                </button>
+                
+                <!-- Tombol Navigasi Tambahan -->
+                <button onclick="confirmExitToDashboard()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold uppercase tracking-wider rounded transition">
+                    Kembali ke Dashboard
+                </button>
+            </div>
+
+            <!-- CHAPTER MILESTONE SCREEN (Triggered after every 10 questions) -->
+            <div id="milestone-screen" class="hidden text-center py-8 space-y-6">
+                <div class="inline-flex p-4 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 mb-2">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-xs font-bold text-indigo-700 tracking-wider uppercase">Chapter 01 Selesai</span>
+                    <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight" id="milestone-chapter-title">Chapter Selesai</h2>
+                    <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">Anda telah berhasil merampungkan materi di bagian ini. Berikut rincian performa belajar Anda:</p>
+                </div>
+
+                <!-- Score Board for Completed Chapter -->
+                <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto bg-indigo-50/50 p-5 rounded border border-indigo-100">
+                    <div class="text-center p-2 border-r border-indigo-100">
+                        <span class="text-3xl font-black text-slate-900" id="milestone-score">0</span>
+                        <p class="text-[9px] uppercase text-indigo-500 font-extrabold tracking-wider mt-2">Skor Chapter 01</p>
+                    </div>
+                    <div class="text-center p-2">
+                        <span class="text-3xl font-black text-emerald-600" id="milestone-correct">0/10</span>
+                        <p class="text-[9px] uppercase text-indigo-500 font-extrabold tracking-wider mt-2">Jawaban Benar</p>
+                    </div>
+                </div>
+
+                <div id="milestone-message" class="text-slate-600 font-medium text-sm px-4 max-w-lg mx-auto leading-relaxed"></div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto pt-6 border-t border-indigo-100">
+                    <button id="milestone-review-btn" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold uppercase tracking-wider text-xs rounded transition">
+                        Tinjau Pembahasan
+                    </button>
+                    <button id="milestone-next-btn" class="px-6 py-3 bg-indigo-700 hover:bg-indigo-800 text-white font-bold uppercase tracking-wider text-xs rounded transition shadow-sm">
+                        Lanjut ke Chapter Berikutnya
+                    </button>
+                </div>
+            </div>
+
+            <!-- REVIEW SCREEN -->
+            <div id="review-screen" class="hidden py-4 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 uppercase tracking-tight">Tinjauan Hasil Latihan</h2>
+                        <p class="text-xs text-slate-500" id="review-subtitle">Analisis pembahasan jawaban yang benar</p>
+                    </div>
+                    <button id="close-review-btn" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold uppercase tracking-wider rounded text-slate-700 border border-slate-200">
+                        Kembali
+                    </button>
+                </div>
+                <div id="review-list" class="space-y-6 max-h-[500px] overflow-y-auto pr-2">
+                    <!-- Dynamic review cards -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-400 font-medium tracking-wide uppercase">
+        &copy; 2026 Logika Matematika Study Suite. Edisi Spesial 11 Chapter &bull; 110 Soal Logika.
+    </footer>
+
+    <!-- Confirm Modal Overlay -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 p-6 rounded-lg max-w-sm w-full shadow-lg space-y-4 text-center">
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-tight">Keluar dari Latihan?</h3>
+            <p class="text-slate-500 text-xs leading-relaxed">Progres pengerjaan soal di modul ini akan tersimpan sampai jawaban terakhir Anda.</p>
+            <div class="flex gap-3 pt-2">
+                <button onclick="hideConfirmModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold uppercase tracking-wider text-[11px] rounded transition">Kembali Berlatih</button>
+                <button onclick="exitToDashboardDirectly()" class="w-1/2 py-2.5 bg-red-700 hover:bg-red-800 text-white font-bold uppercase tracking-wider text-[11px] rounded transition">Keluar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Database & Logic Script -->
+    <script>
+        // Database structured in 11 Chapters of 10 Questions each = 110 Questions (All unique)
+        const database = [
+            {
+                id: 1,
+                title: "Logika Proposisi & Klasifikasi",
+                questions: [
+                    {
+                        question: "Di antara ekspresi berikut, manakah yang memenuhi definisi baku sebagai sebuah **proposisi**?",
+                        options: [
+                            { text: "Berapakah hasil penjumlahan dari 12 dan 8?", isCorrect: false },
+                            { text: "Kerjakan seluruh soal latihan logika ini tepat waktu!", isCorrect: false },
+                            { text: "Ibukota negara Republik Indonesia adalah kota Jakarta.", isCorrect: true, rationale: "Ini adalah kalimat deklaratif dengan nilai kebenaran mutlak (Benar), sehingga dikategorikan sebagai proposisi." },
+                            { text: "$y - 5 = 12$", isCorrect: false }
+                        ],
+                        hint: "Cari kalimat yang menyatakan pernyataan dengan nilai kebenaran pasti."
+                    },
+                    {
+                        question: "Pernyataan manakah yang diklasifikasikan sebagai **proposisi majemuk**?",
+                        options: [
+                            { text: "Siswa kelas XII mengerjakan Ujian Nasional dengan tertib.", isCorrect: false },
+                            { text: "Jika cuaca mendung, maka udara terasa lebih dingin.", isCorrect: false },
+                            { text: "Gedung perpustakaan kampus berlantai empat.", isCorrect: false },
+                            { text: "Roni rajin membaca buku atau ia gemar menulis artikel.", isCorrect: true, rationale: "Kalimat ini menggunakan kata hubung disjungsi 'atau', menjadikannya proposisi majemuk." }
+                        ],
+                        hint: "Cari proposisi yang memuat kata hubung logika."
+                    },
+                    {
+                        question: "Mengapa kalimat aljabar terbuka seperti $3x - 4 = 11$ tidak dianggap sebagai proposisi?",
+                        options: [
+                            { text: "Nilai kebenarannya belum dapat dipastikan sebelum variabel $x$ diberi nilai tertentu.", isCorrect: true, rationale: "Kalimat terbuka memiliki peubah ($x$) yang membuat kebenarannya bergantung pada nilai pengganti peubah tersebut." },
+                            { text: "Mengandung tanda hitung aritmatika dasar.", isCorrect: false },
+                            { text: "Selalu bernilai salah dalam kondisi apapun.", isCorrect: false },
+                            { text: "Tidak memiliki subjek maupun predikat yang jelas.", isCorrect: false }
+                        ],
+                        hint: "Perhatikan dampak keberadaan variabel $x$."
+                    },
+                    {
+                        question: "Pilihlah kalimat deklaratif yang bernilai kebenaran **Benar** secara mutlak:",
+                        options: [
+                            { text: "Semua jenis bilangan prima adalah bilangan ganjil.", isCorrect: false },
+                            { text: "Pulau Bali terletak di wilayah bagian barat Indonesia.", isCorrect: false },
+                            { text: "Bilangan 2 adalah satu-satunya bilangan prima yang bernilai genap.", isCorrect: true, rationale: "Fakta matematika membuktikan bahwa angka 2 adalah satu-satunya bilangan prima genap, sehingga proposisi ini benar." },
+                            { text: "$5 \\times 4 = 25$", isCorrect: false }
+                        ],
+                        hint: "Ingat kembali sifat-sifat bilangan prima."
+                    },
+                    {
+                        question: "Kalimat \"Tolong ambilkan dokumen laporan di meja itu!\" bukan proposisi sebab...",
+                        options: [
+                            { text: "Berbentuk kalimat perintah atau imperatif.", isCorrect: true, rationale: "Kalimat perintah tidak menyatakan kebenaran atau kesalahan, melainkan instruksi tindakan." },
+                            { text: "Merupakan kalimat tanya interogatif.", isCorrect: false },
+                            { text: "Memuat waktu kejadian yang tidak jelas.", isCorrect: false },
+                            { text: "Tidak mempunyai subjek kalimat.", isCorrect: false }
+                        ],
+                        hint: "Kalimat ini meminta orang lain melakukan sesuatu."
+                    },
+                    {
+                        question: "Proposisi tunggal yang tidak bisa diuraikan lagi menjadi bagian lebih kecil dinamakan...",
+                        options: [
+                            { text: "Proposisi Atomik", isCorrect: true, rationale: "Proposisi atomik merupakan bentuk dasar proposisi." },
+                            { text: "Proposisi Majemuk", isCorrect: false },
+                            { text: "Proposisi Implisit", isCorrect: false },
+                            { text: "Proposisi Kompleks", isCorrect: false }
+                        ],
+                        hint: "Istilah untuk unsur dasar pembentuk materi."
+                    },
+                    {
+                        question: "Notasi matematis manakah yang melambangkan operasi **negasi** dalam logika?",
+                        options: [
+                            { text: "$\\lor$", isCorrect: false },
+                            { text: "$\\land$", isCorrect: false },
+                            { text: "$\\neg$ atau $\\sim$", isCorrect: true, rationale: "Simbol $\\neg$ atau $\\sim$ digunakan untuk menyatakan kebalikan nilai suatu proposisi." },
+                            { text: "$\\leftrightarrow$", isCorrect: false }
+                        ],
+                        hint: "Simbol berupa tanda tilde atau garis melengkung."
+                    },
+                    {
+                        question: "Misalkan $p$: \"Hari ini cerah\" dan $q$: \"Suhu udara panas\". Terjemahan simbolik dari \"Hari tidak cerah dan suhu udara panas\" adalah...",
+                        options: [
+                            { text: "$\\neg p \\land q$", isCorrect: true, rationale: "'Hari tidak cerah' adalah $\\neg p$, kata 'dan' adalah $\\land$, dan 'suhu udara panas' adalah $q$." },
+                            { text: "$p \\lor \\neg q$", isCorrect: false },
+                            { text: "$\\neg(p \\land q)$", isCorrect: false },
+                            { text: "$p \\land \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Pecah kalimat ke dalam unsur negasi dan konjungsinya."
+                    },
+                    {
+                        question: "Dalam kajian logika formal, sebuah kalimat tanya langsung...",
+                        options: [
+                            { text: "Selalu dinilai sebagai proposisi bernilai salah.", isCorrect: false },
+                            { text: "Tidak dikategorikan sebagai proposisi.", isCorrect: true, rationale: "Kalimat tanya berfungsi menggali informasi, bukan mendeklarasikan fakta bernilai B/S." },
+                            { text: "Dapat bernilai benar jika jawabannya pasti.", isCorrect: false },
+                            { text: "Merupakan bagian dari proposisi atomik.", isCorrect: false }
+                        ],
+                        hint: "Proses deklarasi nilai kebenaran tidak berlaku pada kalimat tanya."
+                    },
+                    {
+                        question: "Di antara opsi berikut, manakah proposisi yang bernilai **Salah** secara faktual?",
+                        options: [
+                            { text: "Matahari terbit dari arah timur.", isCorrect: false },
+                            { text: "Air murni mendidih pada suhu $100^\\circ$C pada tekanan 1 atm.", isCorrect: false },
+                            { text: "Bumi adalah planet pusat tata surya (Sistem Geosentris).", isCorrect: true, rationale: "Teori geosentris sudah terbantahkan; bumi mengelilingi matahari (heliosentris), sehingga proposisi ini bernilai Salah." },
+                            { text: "Jumlah hari dalam bulan Februari pada tahun kabisat adalah 29 hari.", isCorrect: false }
+                        ],
+                        hint: "Pikirkan model sistem tata surya yang benar secara ilmiah."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Tabel Kebenaran & Operator Logika",
+                questions: [
+                    {
+                        question: "Jika variabel $p$ bernilai Benar (B) dan $q$ bernilai Salah (S), berapakah nilai dari $\\neg p \\lor q$?",
+                        options: [
+                            { text: "Benar (B)", isCorrect: false },
+                            { text: "Salah (S)", isCorrect: true, rationale: "Karena $p$ Benar, maka $\\neg p$ menjadi Salah. Disjungsi antara dua nilai Salah ($S \\lor S$) menghasilkan nilai Salah." },
+                        ],
+                        hint: "Evaluasi nilai $\\neg p$ terlebih dahulu."
+                    },
+                    {
+                        question: "Berapakah total baris pada tabel kebenaran untuk ekspresi logika yang melibatkan 5 variabel proposisional berbeda?",
+                        options: [
+                            { text: "16 baris", isCorrect: false },
+                            { text: "32 baris", isCorrect: true, rationale: "Jumlah baris dihitung dengan rumus $2^n$. Untuk $n = 5$, maka $2^5 = 32$ baris." },
+                            { text: "64 baris", isCorrect: false },
+                            { text: "10 baris", isCorrect: false }
+                        ],
+                        hint: "Gunakan basis perpangkatan dua ($2^n$)."
+                    },
+                    {
+                        question: "Kapan operasi logika **konjungsi** ($p \\land q$) menghasilkan nilai **Benar**?",
+                        options: [
+                            { text: "Hanya apabila kedua komponen proposisi bernilai Benar.", isCorrect: true, rationale: "Konjungsi mensyaratkan seluruh elemen masukan bernilai benar agar keluarannya bernilai benar." },
+                            { text: "Jika salah satu komponen bernilai benar.", isCorrect: false },
+                            { text: "Jika kedua komponen bernilai salah.", isCorrect: false },
+                            { text: "Selalu benar dalam semua kondisi.", isCorrect: false }
+                        ],
+                        hint: "Sifat konjungsi sangat ketat terhadap nilai kebenaran."
+                    },
+                    {
+                        question: "Tentukan hasil evaluasi dari bentuk logika: $(B \\lor S) \\land (S \\lor B)$",
+                        options: [
+                            { text: "Benar", isCorrect: true, rationale: "Bagian kiri $(B \\lor S) = B$, bagian kanan $(S \\lor B) = B$. Hasil akhirnya adalah $B \\land B = Benar$." },
+                            { text: "Salah", isCorrect: false }
+                        ],
+                        hint: "Selesaikan operasi dalam masing-masing tanda kurung."
+                    },
+                    {
+                        question: "Jika $p$ bernilai Salah dan $q$ bernilai Benar, manakah ekspresi yang bernilai **Benar**?",
+                        options: [
+                            { text: "$p \\land q$", isCorrect: false },
+                            { text: "$p \\lor q$", isCorrect: true, rationale: "Karena $q$ bernilai Benar, disjungsi $p \\lor q$ otomatis menghasilkan nilai Benar." },
+                            { text: "$\\neg q \\land p$", isCorrect: false },
+                            { text: "$p \\land \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Cari operasi yang menghasilkan benar jika salah satu inputnya benar."
+                    },
+                    {
+                        question: "Operator logika **XOR** (Exclusive OR) bernilai **Salah** apabila...",
+                        options: [
+                            { text: "Kedua proposisi masukan memiliki nilai yang identik (sama-sama benar atau sama-sama salah).", isCorrect: true, rationale: "XOR bernilai salah jika kedua inputnya bernilai sama, dan bernilai benar jika inputnya berbeda." },
+                            { text: "Kedua proposisi masukan bernilai berbeda.", isCorrect: false },
+                            { text: "Masukan pertama bernilai benar dan kedua salah.", isCorrect: false },
+                            { text: "Kedua masukan bernilai benar.", isCorrect: false }
+                        ],
+                        hint: "Eksklusif berarti tidak boleh bernilai sama."
+                    },
+                    {
+                        question: "Berapa banyak baris yang bernilai **Benar** dalam tabel kebenaran untuk ekspresi $p \\land q \\land r$?",
+                        options: [
+                            { text: "1 baris", isCorrect: true, rationale: "Total baris adalah $2^3 = 8$. Konjungsi tiga variabel hanya bernilai benar pada 1 baris (ketika ketiganya bernilai benar)." },
+                            { text: "3 baris", isCorrect: false },
+                            { text: "7 baris", isCorrect: false },
+                            { text: "8 baris", isCorrect: false }
+                        ],
+                        hint: "Hanya ada satu kombinasi di mana semua variabel bernilai benar."
+                    },
+                    {
+                        question: "Berapakah nilai kebenaran dari ekspresi: $\\neg(S \\lor B) \\lor B$?",
+                        options: [
+                            { text: "Benar", isCorrect: true, rationale: "Evaluasi kurung: $(S \\lor B) = B \\rightarrow \\neg B = S$. Dilanjutkan dengan $S \\lor B = Benar$." },
+                            { text: "Salah", isCorrect: false }
+                        ],
+                        hint: "Kerjakan operasi di dalam kurung, lalu negasikan."
+                    },
+                    {
+                        question: "Simbol $\\lor$ dalam aljabar proposisi melambangkan operasi...",
+                        options: [
+                            { text: "Konjungsi", isCorrect: false },
+                            { text: "Disjungsi", isCorrect: true, rationale: "Simbol $\\lor$ dibaca 'Atau' atau disjungsi." },
+                            { text: "Implikasi", isCorrect: false },
+                            { text: "Biimplikasi", isCorrect: false }
+                        ],
+                        hint: "Operator pilihan alternatif."
+                    },
+                    {
+                        question: "Jika $p$ bernilai Benar dan $q$ bernilai Salah, berapakah nilai akhir dari $\\neg(p \\lor \\neg q)$?",
+                        options: [
+                            { text: "Benar", isCorrect: false },
+                            { text: "Salah", isCorrect: true, rationale: "$\\neg q = B \\rightarrow (p \\lor \\neg q) = (B \\lor B) = B$. Negasinya $\\neg B = Salah$." },
+                        ],
+                        hint: "Selesaikan dari bagian terdalam kurung."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Kondisional & Bikondisional (Implikasi)",
+                questions: [
+                    {
+                        question: "Kapan suatu pernyataan implikasi $p \\rightarrow q$ bernilai **Salah**?",
+                        options: [
+                            { text: "Ketika anteseden $p$ Benar dan konsekuen $q$ Salah.", isCorrect: true, rationale: "Implikasi hanya bernilai salah saat syarat terpenuhi ($p$ Benar) tetapi hasil tidak terjadi ($q$ Salah)." },
+                            { text: "Ketika $p$ Salah dan $q$ Benar.", isCorrect: false },
+                            { text: "Ketika keduanya bernilai Salah.", isCorrect: false },
+                            { text: "Ketika keduanya bernilai Benar.", isCorrect: false }
+                        ],
+                        hint: "Pikirkan kondisi ketika sebuah janji dilanggar."
+                    },
+                    {
+                        question: "Jika $p$ menyatakan \"Sistem offline\" dan $q$ menyatakan \"Admin bekerja\", bentuk $p \\rightarrow q$ dibaca sebagai...",
+                        options: [
+                            { text: "Admin bekerja jika sistem offline.", isCorrect: false },
+                            { text: "Jika sistem offline, maka admin bekerja.", isCorrect: true, rationale: "Struktur standar pembacaan implikasi adalah 'Jika p, maka q'." },
+                            { text: "Sistem offline dan admin bekerja.", isCorrect: false },
+                            { text: "Sistem offline atau admin bekerja.", isCorrect: false }
+                        ],
+                        hint: "Gunakan format penghubung 'Jika ... maka ...'."
+                    },
+                    {
+                        question: "Kapan biimplikasi (bikondisional) $p \\leftrightarrow q$ bernilai **Benar**?",
+                        options: [
+                            { text: "Apabila kedua variabel memiliki nilai kebenaran yang setara (sama-sama benar atau sama-sama salah).", isCorrect: true, rationale: "Biimplikasi bernilai benar jika kedua sisi bernilai sama." },
+                            { text: "Apabila kedua variabel bernilai berbeda.", isCorrect: false },
+                            { text: "Hanya jika keduanya bernilai benar.", isCorrect: false },
+                            { text: "Selalu bernilai benar tanpa syarat.", isCorrect: false }
+                        ],
+                        hint: "Keselarasan nilai input menentukan kebenarannya."
+                    },
+                    {
+                        question: "Jika diketahui nilai $p$ adalah Salah, berapakah nilai dari implikasi $p \\rightarrow q$ tanpa memperdulikan nilai $q$?",
+                        options: [
+                            { text: "Selalu Benar", isCorrect: true, rationale: "Berdasarkan sifat implikasi, jika anteseden bernilai Salah, maka pernyataan implikasi secara otomatis bernilai Benar (vacuously true)." },
+                            { text: "Selalu Salah", isCorrect: false },
+                            { text: "Bergantung penuh pada nilai $q$", isCorrect: false }
+                        ],
+                        hint: "Perhatikan kondisi awal anteseden yang bernilai salah."
+                    },
+                    {
+                        question: "Apabila $p$ bernilai Benar dan $q$ bernilai Salah, berapakah hasil kebenaran biimplikasi $p \\leftrightarrow q$?",
+                        options: [
+                            { text: "Benar", isCorrect: false },
+                            { text: "Salah", isCorrect: true, rationale: "Nilai yang berbeda ($B$ dan $S$) menghasilkan nilai biimplikasi yang Salah." }
+                        ],
+                        hint: "Cek apakah kedua nilai variabel tersebut sama."
+                    },
+                    {
+                        question: "Dalam struktur implikasi $p \\rightarrow q$, bagian variabel $p$ dikenal dengan istilah...",
+                        options: [
+                            { text: "Anteseden atau Premis", isCorrect: true, rationale: "Bagian anteseden adalah kondisi awal atau sebab." },
+                            { text: "Konsekuen atau Akibat", isCorrect: false },
+                            { text: "Konjugat", isCorrect: false },
+                            { text: "Disjungtor", isCorrect: false }
+                        ],
+                        hint: "Istilah untuk bagian pengondisi di sebelah kiri."
+                    },
+                    {
+                        question: "Bagian sebelah kanan panah pada implikasi ($p \\rightarrow q$), yaitu variabel $q$, disebut sebagai...",
+                        options: [
+                            { text: "Konsekuen", isCorrect: true, rationale: "Bagian akibat atau hasil disebut konsekuen." },
+                            { text: "Anteseden", isCorrect: false },
+                            { text: "Argumen", isCorrect: false },
+                            { text: "Ekuivalensi", isCorrect: false }
+                        ],
+                        hint: "Istilah untuk hasil atau akibat."
+                    },
+                    {
+                        question: "Tentukan nilai kebenaran dari ekspresi: $(B \\rightarrow S) \\rightarrow B$",
+                        options: [
+                            { text: "Benar", isCorrect: true, rationale: "Evaluasi kurung: $(B \\rightarrow S) = S$. Dilanjutkan dengan $S \\rightarrow B = Benar$." },
+                            { text: "Salah", isCorrect: false }
+                        ],
+                        hint: "Selesaikan operasi implikasi di dalam tanda kurung terlebih dahulu."
+                    },
+                    {
+                        question: "Manakah bentuk ekspresi yang menghasilkan nilai **Benar** ketika $p$ dan $q$ bernilai Benar?",
+                        options: [
+                            { text: "$p \\leftrightarrow q$", isCorrect: true, rationale: "Biimplikasi bernilai benar apabila kedua komponennya bernilai sama (sama-sama benar)." },
+                            { text: "$p \\rightarrow \\neg q$", isCorrect: false },
+                            { text: "$\\neg p \\leftrightarrow q$", isCorrect: false },
+                            { text: "$p \\land \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Cari operator yang menyelaraskan nilai kembar."
+                    },
+                    {
+                        question: "Istilah lain yang sering dipakai untuk menyatakan biimplikasi ($p \\leftrightarrow q$) dalam literatur logika adalah...",
+                        options: [
+                            { text: "If and only if (Jika dan hanya jika)", isCorrect: true, rationale: "Bikondisional menyatakan syarat perlu dan cukup." },
+                            { text: "If-then statement", isCorrect: false },
+                            { text: "Either-or rule", isCorrect: false },
+                            { text: "Not-and gate", isCorrect: false }
+                        ],
+                        hint: "Pernyataan dua arah timbal balik."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Konvers, Invers, & Kontraposisi",
+                questions: [
+                    {
+                        question: "Tentukan bentuk **konvers** dari implikasi: \"Jika Siska rajin belajar, maka ia memenangkan kompetisi.\"",
+                        options: [
+                            { text: "Jika Siska tidak rajin belajar, maka ia tidak memenangkan kompetisi.", isCorrect: false },
+                            { text: "Jika Siska memenangkan kompetisi, maka ia rajin belajar.", isCorrect: true, rationale: "Konvers dari $p \\rightarrow q$ dibalik posisinya menjadi $q \\rightarrow p$." },
+                            { text: "Jika Siska tidak memenangkan kompetisi, maka ia tidak rajin belajar.", isCorrect: false },
+                            { text: "Siska rajin belajar dan tidak memenangkan kompetisi.", isCorrect: false }
+                        ],
+                        hint: "Tukar posisi anteseden dan konsekuen tanpa negasi."
+                    },
+                    {
+                        question: "Bentuk **invers** dari implikasi \"Jika jaringan stabil, maka akses data cepat\" adalah...",
+                        options: [
+                            { text: "Jika akses data cepat, maka jaringan stabil.", isCorrect: false },
+                            { text: "Jika jaringan tidak stabil, maka akses data tidak cepat.", isCorrect: true, rationale: "Invers dari $p \\rightarrow q$ adalah $\\neg p \\rightarrow \\neg q$ (tetap posisi, diberi negasi)." },
+                            { text: "Jika akses data tidak cepat, maka jaringan tidak stabil.", isCorrect: false },
+                            { text: "Jaringan stabil dan akses data tidak cepat.", isCorrect: false }
+                        ],
+                        hint: "Pertahankan posisi awal dan akhir, lalu berikan negasi."
+                    },
+                    {
+                        question: "Tentukan **kontraposisi** dari pernyataan \"Jika $a > 5$, maka $a^2 > 25$\"",
+                        options: [
+                            { text: "Jika $a^2 \\le 25$, maka $a \\le 5$.", isCorrect: true, rationale: "Kontraposisi menukar posisi sekaligus menegasikan: $\\neg q \\rightarrow \\neg p$." },
+                            { text: "Jika $a \\le 5$, maka $a^2 \\le 25$.", isCorrect: false },
+                            { text: "Jika $a^2 > 25$, maka $a > 5$.", isCorrect: false },
+                            { text: "Jika $a \\ne 5$, maka $a^2 \\ne 25$.", isCorrect: false }
+                        ],
+                        hint: "Balik posisi syarat dan hasil, lalu negasikan keduanya."
+                    },
+                    {
+                        question: "Pernyataan manakah yang dijamin selalu **ekuivalen** (senilai) dengan implikasi $p \\rightarrow q$?",
+                        options: [
+                            { text: "Konvers ($q \\rightarrow p$)", isCorrect: false },
+                            { text: "Invers ($\\neg p \\rightarrow \\neg q$)", isCorrect: false },
+                            { text: "Kontraposisi ($\\neg q \\rightarrow \\neg p$)", isCorrect: true, rationale: "Kontraposisi memiliki tabel kebenaran yang persis sama dengan implikasi asal." },
+                            { text: "Disjungsi ($p \\lor q$)", isCorrect: false }
+                        ],
+                        hint: "Bentuk ekuivalen mutlak dari implikasi."
+                    },
+                    {
+                        question: "Jika invers suatu implikasi adalah $\\neg p \\rightarrow \\neg q$, maka bentuk **konvers** dari implikasi tersebut ekuivalen dengan...",
+                        options: [
+                            { text: "Implikasinya sendiri ($p \\rightarrow q$)", isCorrect: false },
+                            { text: "Inversnya sendiri ($\\neg p \\rightarrow \\neg q$)", isCorrect: true, rationale: "Konvers ($q \\rightarrow p$) dan Invers ($\\neg p \\rightarrow \\neg q$) adalah kontraposisi satu sama lain, sehingga nilainya ekuivalen." },
+                            { text: "Kontraposisinya ($\\neg q \\rightarrow \\neg p$)", isCorrect: false },
+                            { text: "Negasi mutlaknya", isCorrect: false }
+                        ],
+                        hint: "Perhatikan hubungan kesetaraan silang."
+                    },
+                    {
+                        question: "Kontraposisi dari kalimat \"Jika cuaca mendung, maka hari terasa dingin\" adalah...",
+                        options: [
+                            { text: "Jika hari tidak terasa dingin, maka cuaca tidak mendung.", isCorrect: true, rationale: "Dibalik dan dinegasikan menjadi $\\neg q \\rightarrow \\neg p$." },
+                            { text: "Jika hari terasa dingin, maka cuaca mendung.", isCorrect: false },
+                            { text: "Jika cuaca tidak mendung, maka hari tidak terasa dingin.", isCorrect: false },
+                            { text: "Cuaca mendung dan hari tidak dingin.", isCorrect: false }
+                        ],
+                        hint: "Tukar posisi dan beri negasi pada masing-masing."
+                    },
+                    {
+                        question: "Invers dari pernyataan \"Jika bilangan habis dibagi 2, maka bilangan tersebut genap\" adalah...",
+                        options: [
+                            { text: "Jika bilangan tidak habis dibagi 2, maka bilangan tersebut tidak genap.", isCorrect: true, rationale: "Invers diperoleh dengan memberi negasi pada kedua sisi tanpa membalik posisi." },
+                            { text: "Jika bilangan genap, maka bilangan habis dibagi 2.", isCorrect: false },
+                            { text: "Jika bilangan tidak genap, maka tidak habis dibagi 2.", isCorrect: false },
+                            { text: "Bilangan habis dibagi 2 dan ganjil.", isCorrect: false }
+                        ],
+                        hint: "Negasikan anteseden dan konsekuen pada posisinya."
+                    },
+                    {
+                        question: "Tentukan konvers dari pernyataan: \"Jika mahasiswa hadir di kuliah, maka ia memahami materi.\"",
+                        options: [
+                            { text: "Jika mahasiswa memahami materi, maka ia hadir di kuliah.", isCorrect: true, rationale: "Konvers membalik posisi anteseden dan konsekuen." },
+                            { text: "Jika mahasiswa tidak hadir, ia tidak memahami materi.", isCorrect: false },
+                            { text: "Jika mahasiswa tidak memahami materi, ia tidak hadir.", isCorrect: false },
+                            { text: "Mahasiswa hadir dan tidak memahami materi.", isCorrect: false }
+                        ],
+                        hint: "Balik posisi kalimat secara langsung."
+                    },
+                    {
+                        question: "Apakah nilai kebenaran konvers selalu ekuivalen dengan kontraposisi?",
+                        options: [
+                            { text: "Ya, selalu sama persis.", isCorrect: false },
+                            { text: "Tidak, keduanya tidak selalu ekuivalen.", isCorrect: true, rationale: "Konvers ekuivalen dengan invers, sedangkan kontraposisi ekuivalen dengan implikasi asal." },
+                        ],
+                        hint: "Ingat kembali pasangan ekuivalensi yang benar."
+                    },
+                    {
+                        question: "Kontraposisi dari \"Jika sistem beroperasi, maka lampu indikator menyala\" adalah...",
+                        options: [
+                            { text: "Jika lampu indikator tidak menyala, maka sistem tidak beroperasi.", isCorrect: true, rationale: "Tukar posisi dan negasikan keduanya: $\\neg q \\rightarrow \\neg p$." },
+                            { text: "Jika lampu indikator menyala, maka sistem beroperasi.", isCorrect: false },
+                            { text: "Jika sistem tidak beroperasi, maka lampu indikator tidak menyala.", isCorrect: false },
+                            { text: "Sistem beroperasi dan lampu indikator mati.", isCorrect: false }
+                        ],
+                        hint: "Pindahkan posisi akhir ke depan dengan negasi."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Hukum Logika & De Morgan",
+                questions: [
+                    {
+                        question: "Berdasarkan Hukum De Morgan, bentuk yang ekuivalen dengan negasi $\\neg(p \\land \\neg q)$ adalah...",
+                        options: [
+                            { text: "$\\neg p \\lor q$", isCorrect: true, rationale: "Hukum De Morgan: $\\neg(A \\land B) \\equiv \\neg A \\lor \\neg B$. Maka $\\neg(p \\land \\neg q) \\equiv \\neg p \\lor q$." },
+                            { text: "$\\neg p \\land q$", isCorrect: false },
+                            { text: "$p \\lor \\neg q$", isCorrect: false },
+                            { text: "$\\neg p \\lor \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Sebarkan tanda negasi ke dalam kurung dan ubah operator konjungsi."
+                    },
+                    {
+                        question: "Hukum Asosiatif pada operasi konjungsi menyatakan bahwa $(p \\land q) \\land r$ ekuivalen dengan...",
+                        options: [
+                            { text: "$p \\land (q \\land r)$", isCorrect: true, rationale: "Hukum asosiatif mengizinkan pengelompokan ulang tanpa mengubah urutan variabel." },
+                            { text: "$(p \\lor q) \\land r$", isCorrect: false },
+                            { text: "$p \\land q \\lor r$", isCorrect: false },
+                            { text: "$(p \\land r) \\lor q$", isCorrect: false }
+                        ],
+                        hint: "Perhatikan pergeseran tanda kurung pengelompokan."
+                    },
+                    {
+                        question: "Hukum Penyerapan (Absorpsi) menyatakan bahwa bentuk $p \\land (p \\lor q)$ secara logis ekuivalen dengan...",
+                        options: [
+                            { text: "$p$", isCorrect: true, rationale: "Variabel $p$ menyerap bagian disjungsi di dalamnya, menghasilkan $p$." },
+                            { text: "$q$", isCorrect: false },
+                            { text: "$p \\lor q$", isCorrect: false },
+                            { text: "Salah", isCorrect: false }
+                        ],
+                        hint: "Uji nilai kebenaran saat $p$ benar dan salah."
+                    },
+                    {
+                        question: "Bentuk sederhana dari negasi ganda $\\neg(\\neg q)$ adalah $q$. Hukum ini dinamakan...",
+                        options: [
+                            { text: "Hukum Identitas", isCorrect: false },
+                            { text: "Hukum Involusi / Negasi Ganda", isCorrect: true, rationale: "Negasi yang diterapkan dua kali menghasilkan proposisi asalnya." },
+                            { text: "Hukum Komutatif", isCorrect: false },
+                            { text: "Hukum Idempoten", isCorrect: false }
+                        ],
+                        hint: "Pembalikan tanda negasi sebanyak dua kali."
+                    },
+                    {
+                        question: "Negasi dari kalimat \"Lampu ruang tamu menyala **atau** pintu depan terkunci\" adalah...",
+                        options: [
+                            { text: "Lampu ruang tamu tidak menyala dan pintu depan tidak terkunci.", isCorrect: true, rationale: "Hukum De Morgan: $\\neg(p \\lor q) \\equiv \\neg p \\land \\neg q$." },
+                            { text: "Lampu ruang tamu tidak menyala atau pintu depan tidak terkunci.", isCorrect: false },
+                            { text: "Jika lampu menyala, maka pintu terkunci.", isCorrect: false },
+                            { text: "Lampu menyala dan pintu terkunci.", isCorrect: false }
+                        ],
+                        hint: "Ubah 'atau' menjadi 'dan', lalu negasikan kedua komponennya."
+                    },
+                    {
+                        question: "Bentuk ekuivalen implikasi $p \\rightarrow q$ ke dalam operator dasar negasi dan disjungsi adalah...",
+                        options: [
+                            { text: "$\\neg p \\lor q$", isCorrect: true, rationale: "Implikasi selalu setara dengan $\\neg p \\lor q$." },
+                            { text: "$p \\lor \\neg q$", isCorrect: false },
+                            { text: "$\\neg p \\land q$", isCorrect: false },
+                            { text: "$p \\land \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Pernyataan 'jika ... maka ...' setara dengan 'tidak ... atau ...'."
+                    },
+                    {
+                        question: "Hukum Idempoten pada disjungsi menyatakan bahwa $p \\lor p$ ekuivalen dengan...",
+                        options: [
+                            { text: "$p$", isCorrect: true, rationale: "Operasi proposisi dengan dirinya sendiri menghasilkan proposisi itu sendiri." },
+                            { text: "Benar", isCorrect: false },
+                            { text: "Salah", isCorrect: false },
+                            { text: "$\\neg p$", isCorrect: false }
+                        ],
+                        hint: "Penggabungan elemen yang sama."
+                    },
+                    {
+                        question: "Negasi dari pernyataan berkuantor: \"Semua peserta ujian lulus seleksi\" adalah...",
+                        options: [
+                            { text: "Ada peserta ujian yang tidak lulus seleksi.", isCorrect: true, rationale: "Negasi kuantor universal 'Semua' menjadi kuantor eksistensial 'Ada' dengan predikat dinegasikan." },
+                            { text: "Semua peserta ujian tidak lulus seleksi.", isCorrect: false },
+                            { text: "Beberapa peserta ujian lulus seleksi.", isCorrect: false },
+                            { text: "Tidak ada peserta ujian yang lulus.", isCorrect: false }
+                        ],
+                        hint: "Lawan dari 'Semua ya' adalah 'Ada yang tidak'."
+                    },
+                    {
+                        question: "Bentuk ekuivalen untuk negasi implikasi $\\neg(p \\rightarrow q)$ adalah...",
+                        options: [
+                            { text: "$p \\land \\neg q$", isCorrect: true, rationale: "$\\neg(p \\rightarrow q) \\equiv \\neg(\\neg p \\lor q) \\equiv \\neg(\\neg p) \\land \\neg q \\equiv p \\land \\neg q$." },
+                            { text: "$\\neg p \\lor q$", isCorrect: false },
+                            { text: "$\\neg p \\land q$", isCorrect: false },
+                            { text: "$p \\lor \\neg q$", isCorrect: false }
+                        ],
+                        hint: "Ubah bentuk implikasi ke disjungsi, lalu terapkan hukum De Morgan."
+                    },
+                    {
+                        question: "Manakah operator logika berikut yang **tidak** memenuhi sifat komutatif?",
+                        options: [
+                            { text: "Konjungsi ($\\land$)", isCorrect: false },
+                            { text: "Disjungsi ($\\lor$)", isCorrect: false },
+                            { text: "Implikasi ($\\rightarrow$)", isCorrect: true, rationale: "Implikasi tidak komutatif karena $p \\rightarrow q$ berbeda makna dengan $q \\rightarrow p$." },
+                            { text: "Biimplikasi ($\\leftrightarrow$)", isCorrect: false }
+                        ],
+                        hint: "Operator yang urutannya tidak boleh ditukar bebas."
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Tautologi, Kontradiksi, & Kontingensi",
+                questions: [
+                    {
+                        question: "Proposisi majemuk yang seluruh nilai pada kolom akhir tabel kebenarannya bernilai **Salah** disebut...",
+                        options: [
+                            { text: "Tautologi", isCorrect: false },
+                            { text: "Kontradiksi", isCorrect: true, rationale: "Kontradiksi adalah bentuk proposisi yang selalu bernilai salah dalam setiap kondisi." },
+                            { text: "Kontingensi", isCorrect: false },
+                            { text: "Ekuivalensi", isCorrect: false }
+                        ],
+                        hint: "Kebalikan dari tautologi."
+                    },
+                    {
+                        question: "Di antara ekspresi berikut, manakah yang merupakan sebuah **Tautologi**?",
+                        options: [
+                            { text: "$p \\land \\neg p$", isCorrect: false },
+                            { text: "$p \\lor \\neg p$", isCorrect: true, rationale: "Pernyataan $p \\lor \\neg p$ selalu bernilai benar karena suatu hal pasti bernilai benar atau salah." },
+                            { text: "$p \\rightarrow \\neg p$", isCorrect: false },
+                            { text: "$p \\leftrightarrow \\neg p$", isCorrect: false }
+                        ],
+                        hint: "Cari kalimat yang selalu benar apapun nilai $p$."
+                    },
+                    {
+                        question: "Proposisi majemuk yang nilai kebenarannya memuat kombinasi Benar dan Salah sekaligus dinamakan...",
+                        options: [
+                            { text: "Tautologi", isCorrect: false },
+                            { text: "Kontradiksi", isCorrect: false },
+                            { text: "Kontingensi", isCorrect: true, rationale: "Kontingensi adalah proposisi yang nilai akhirnya bercampur antara benar dan salah." },
+                            { text: "Validitas mutlak", isCorrect: false }
+                        ],
+                        hint: "Nilai kebenaran yang tidak konsisten satu jenis."
+                    },
+                    {
+                        question: "Ekspresi logika $p \\land \\neg p$ diklasifikasikan sebagai...",
+                        options: [
+                            { text: "Tautologi", isCorrect: false },
+                            { text: "Kontradiksi", isCorrect: true, rationale: "Sebuah proposisi tidak mungkin bernilai benar dan salah secara serentak, sehingga nilainya selalu Salah." },
+                            { text: "Kontingensi", isCorrect: false },
+                            { text: "Implikasi", isCorrect: false }
+                        ],
+                        hint: "Contoh: Anda hadir dan sekaligus tidak hadir."
+                    },
+                    {
+                        question: "Evaluasi nilai kebenaran dari tautologi $p \\lor \\neg p$ apabila $p$ bernilai Salah:",
+                        options: [
+                            { text: "Benar", isCorrect: true, rationale: "Jika $p$ Salah, maka $\\neg p$ Benar. Hasil disjungsinya $S \\lor B = Benar$." },
+                            { text: "Salah", isCorrect: false }
+                        ],
+                        hint: "Perhatikan hasil operasi disjungsi dengan negasinya."
+                    },
+                    {
+                        question: "Jika suatu kontradiksi dinegasikan, apa hasil bentuk proposisi tersebut?",
+                        options: [
+                            { text: "Tautologi", isCorrect: true, rationale: "Seluruh nilai Salah pada kontradiksi jika dinegasikan akan berubah menjadi Benar semua (Tautologi)." },
+                            { text: "Kontingensi", isCorrect: false },
+                            { text: "Tetap kontradiksi", isCorrect: false }
+                        ],
+                        hint: "Pembalikan total nilai salah pada tabel kebenaran."
+                    },
+                    {
+                        question: "Bentuk ekspresi $(p \\land q) \\rightarrow p$ tergolong sebagai...",
+                        options: [
+                            { text: "Tautologi", isCorrect: true, rationale: "Hasil evaluasi tabel kebenarannya selalu bernilai Benar di semua baris." },
+                            { text: "Kontradiksi", isCorrect: false },
+                            { text: "Kontingensi", isCorrect: false },
+                            { text: "Konvers", isCorrect: false }
+                        ],
+                        hint: "Uji nilai kebenaran kombinasi anteseden dan konsekuen."
+                    },
+                    {
+                        question: "Manakah di bawah ini yang merupakan contoh bentuk **Kontingensi**?",
+                        options: [
+                            { text: "$p \\lor \\neg p$", isCorrect: false },
+                            { text: "$p \\land \\neg p$", isCorrect: false },
+                            { text: "$p \\rightarrow q$", isCorrect: true, rationale: "Nilai implikasi $p \\rightarrow q$ bervariasi (ada B dan ada S), sehingga berupa kontingensi." },
+                            { text: "$(p \\land q) \\rightarrow p$", isCorrect: false }
+                        ],
+                        hint: "Cari ekspresi yang nilai akhirnya memiliki nilai B dan S."
+                    },
+                    {
+                        question: "Definisi akhir pada kolom tabel kebenaran untuk sebuah **Tautologi** adalah...",
+                        options: [
+                            { text: "Semuanya Benar", isCorrect: true, rationale: "Tautologi diartikan sebagai pernyataan yang selalu bernilai benar." },
+                            { text: "Semuanya Salah", isCorrect: false },
+                            { text: "Bauran benar dan salah", isCorrect: false },
+                            { text: "Bergantung pada jumlah variabel", isCorrect: false }
+                        ],
+                        hint: "Arti harfiah dari kata tautologi."
+                    },
+                    {
+                        question: "Nilai kebenaran dari ekspresi $\\neg(p \\lor \\neg p)$ adalah...",
+                        options: [
+                            { text: "Selalu Benar", isCorrect: false },
+                            { text: "Selalu Salah", isCorrect: true, rationale: "Bagian dalam kurung $p \\lor \\neg p$ adalah Tautologi (Benar). Negasinya membuat ekspresi ini selalu Salah." },
+                            { text: "Bergantung pada $p$", isCorrect: false }
+                        ],
+                        hint: "Sederhanakan bagian dalam kurung terlebih dahulu."
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Penarikan Kesimpulan I (Ponens & Tollens)",
+                questions: [
+                    {
+                        question: "Berdasarkan kaidah **Modus Ponens**, dari premis $p \\rightarrow q$ dan $p$, kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "$q$", isCorrect: true, rationale: "Modus Ponens menyimpulkan akibat ($q$) ketika sebab ($p$) terbukti terjadi." },
+                            { text: "$\\neg p$", isCorrect: false },
+                            { text: "$\\neg q$", isCorrect: false },
+                            { text: "$p \\land q$", isCorrect: false }
+                        ],
+                        hint: "Afirmasi pada anteseden."
+                    },
+                    {
+                        question: "Berdasarkan kaidah **Modus Tollens**, dari premis $p \\rightarrow q$ dan $\\neg q$, kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "$p$", isCorrect: false },
+                            { text: "$\\neg p$", isCorrect: true, rationale: "Modus Tollens menyimpulkan penolakan sebab ($\\neg p$) karena akibatnya ditolak ($\\neg q$)." },
+                            { text: "$\\neg q$", isCorrect: false },
+                            { text: "$p \\lor q$", isCorrect: false }
+                        ],
+                        hint: "Penolakan pada konsekuen."
+                    },
+                    {
+                        question: "Premis 1: Jika algoritma efisien, waktu eksekusi cepat.<br>Premis 2: Waktu eksekusi cepat.<br>Apakah kesimpulan \"Algoritma efisien\" sah?",
+                        options: [
+                            { text: "Sah melalui Modus Ponens.", isCorrect: false },
+                            { text: "Tidak sah (Merupakan sesat pikir Affirming the Consequent).", isCorrect: true, rationale: "Mengiyakan akibat tidak serta-merta membuktikan sebabnya benar; waktu eksekusi bisa cepat karena faktor lain." },
+                            { text: "Sah melalui Modus Tollens.", isCorrect: false },
+                            { text: "Sah karena premisnya linear.", isCorrect: false }
+                        ],
+                        hint: "Hati-hati dengan jebakan mengiyakan akibat."
+                    },
+                    {
+                        question: "Premis 1: Jika sistem aman, penyerang gagal masuk.<br>Premis 2: Penyerang berhasil masuk.<br>Kesimpulan sah berdasarkan Modus Tollens adalah...",
+                        options: [
+                            { text: "Sistem tidak aman.", isCorrect: true, rationale: "Konsekuen ditolak (penyerang masuk, artinya $\\neg q$), maka anteseden juga ditolak (sistem tidak aman / $\\neg p$)." },
+                            { text: "Sistem sangat aman.", isCorrect: false },
+                            { text: "Penyerang sangat cerdas.", isCorrect: false },
+                            { text: "Tidak ada kesimpulan.", isCorrect: false }
+                        ],
+                        hint: "Terapkan aturan penolakan konsekuen."
+                    },
+                    {
+                        question: "Premis 1: Jika mahasiswa rajin latihan, ia menguasai pemrograman.<br>Premis 2: Mahasiswa rajin latihan.<br>Kesimpulannya adalah...",
+                        options: [
+                            { text: "Ia menguasai pemrograman.", isCorrect: true, rationale: "Penerapan langsung kaidah Modus Ponens." },
+                            { text: "Ia tidak menguasai pemrograman.", isCorrect: false },
+                            { text: "Ia lulus ujian.", isCorrect: false },
+                            { text: "Tidak dapat disimpulkan.", isCorrect: false }
+                        ],
+                        hint: "Gunakan Modus Ponens."
+                    },
+                    {
+                        question: "Mengapa argumen berikut tidak sah?<br>P1: $p \\rightarrow q$<br>P2: $\\neg p$<br>Kesimpulan: $\\neg q$",
+                        options: [
+                            { text: "Karena melanggar aturan logika dasar.", isCorrect: false },
+                            { text: "Merupakan kesesatan logika Denying the Antecedent.", isCorrect: true, rationale: "Menolak anteseden tidak otomatis menjamin akibat tidak terjadi." },
+                            { text: "Karena bentuknya berupa tautologi.", isCorrect: false },
+                            { text: "Karena variabel kurang lengkap.", isCorrect: false }
+                        ],
+                        hint: "Menyangkal sebab tidak berarti akibat pasti batal."
+                    },
+                    {
+                        question: "Premis 1: Jika jaringan terhubung, data dapat dikirim.<br>Premis 2: Data tidak dapat dikirim.<br>Kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Jaringan tidak terhubung.", isCorrect: true, rationale: "Menggunakan kaidah Modus Tollens." },
+                            { text: "Jaringan terhubung.", isCorrect: false },
+                            { text: "Koneksi stabil.", isCorrect: false },
+                            { text: "Tidak bisa disimpulkan.", isCorrect: false }
+                        ],
+                        hint: "Akibat tidak terjadi, maka sebabnya pasti tidak terpenuhi."
+                    },
+                    {
+                        question: "Validitas Modus Ponens diuji melalui bentuk implikasi utamanya yang berupa...",
+                        options: [
+                            { text: "Tautologi", isCorrect: true, rationale: "Semua metode penarikan kesimpulan yang valid diturunkan dari struktur tautologi." },
+                            { text: "Kontradiksi", isCorrect: false },
+                            { text: "Kontingensi", isCorrect: false }
+                        ],
+                        hint: "Argumen sah selalu bernilai benar secara mutlak."
+                    },
+                    {
+                        question: "Jika diketahui premis \"Jika $X$ maka $Y$\" dan \"Bukan $X$\", apakah sah menyimpulkan \"Bukan $Y$\"?",
+                        options: [
+                            { text: "Sah secara mutlak.", isCorrect: false },
+                            { text: "Tidak sah (Fallacy).", isCorrect: true, rationale: "Ini adalah bentuk sesat pikir Denying the Antecedent." },
+                        ],
+                        hint: "Kesalahan umum dalam penalaran implikasi."
+                    },
+                    {
+                        question: "P1: Jika hari hujan, pertandingan sepak bola ditunda.<br>P2: Hari tidak hujan.<br>Kesimpulan yang paling tepat adalah...",
+                        options: [
+                            { text: "Pertandingan tidak ditunda.", isCorrect: false },
+                            { text: "Pertandingan tetap berjalan.", isCorrect: false },
+                            { text: "Tidak ada kesimpulan yang sah.", isCorrect: true, rationale: "Pertandingan bisa ditunda karena alasan lain (misal lampu stadion rusak), bukan hanya hujan. Ini Denying the Antecedent." },
+                        ],
+                        hint: "Apakah hujan penyebab mutlak satu-satunya penundaan?"
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Penarikan Kesimpulan II (Silogisme)",
+                questions: [
+                    {
+                        question: "Jika diberikan $p \\rightarrow q$ dan $q \\rightarrow r$, kesimpulan yang sah adalah $p \\rightarrow r$. Nama aturan ini adalah...",
+                        options: [
+                            { text: "Modus Ponens", isCorrect: false },
+                            { text: "Silogisme Hipotetis", isCorrect: true, rationale: "Silogisme hipotetis menyambungkan rantai implikasi secara transitif." },
+                            { text: "Silogisme Disjungtif", isCorrect: false },
+                            { text: "Modus Tollens", isCorrect: false }
+                        ],
+                        hint: "Transitivitas rantai implikasi."
+                    },
+                    {
+                        question: "Berdasarkan **Silogisme Disjungtif**, jika diketahui $p \\lor q$ dan $\\neg p$, kesimpulan sahnya adalah...",
+                        options: [
+                            { text: "$q$", isCorrect: true, rationale: "Karena salah satu harus benar dan $p$ ditolak, maka $q$ wajib benar." },
+                            { text: "$p$", isCorrect: false },
+                            { text: "$\\neg q$", isCorrect: false },
+                            { text: "$p \\land q$", isCorrect: false }
+                        ],
+                        hint: "Eliminasi pilihan yang salah."
+                    },
+                    {
+                        question: "Premis 1: Jika mahasiswa mengambil matakuliah AI, ia mempelajari Machine Learning.<br>Premis 2: Jika ia mempelajari Machine Learning, ia menggunakan Python.<br>Kesimpulan dengan Silogisme Hipotetis adalah...",
+                        options: [
+                            { text: "Jika mahasiswa mengambil matakuliah AI, ia menggunakan Python.", isCorrect: true, rationale: "Menghubungkan langsung awal rantai ke ujung akhir." },
+                            { text: "Mahasiswa menggunakan Python.", isCorrect: false },
+                            { text: "Mahasiswa mengambil matakuliah AI.", isCorrect: false },
+                            { text: "Jika pakai Python, ambil AI.", isCorrect: false }
+                        ],
+                        hint: "Gabungkan premis pertama dan kedua secara transitif."
+                    },
+                    {
+                        question: "Premis 1: Dokumen tersimpan di folder lokal atau di cloud.<br>Premis 2: Dokumen tidak tersimpan di folder lokal.<br>Kesimpulannya adalah...",
+                        options: [
+                            { text: "Dokumen tersimpan di cloud.", isCorrect: true, rationale: "Silogisme disjungtif mengeliminasi opsi lokal dan memilih opsi cloud." },
+                            { text: "Dokumen terhapus.", isCorrect: false },
+                            { text: "Dokumen ada di flashdisk.", isCorrect: false },
+                            { text: "Dokumen gagal diunduh.", isCorrect: false }
+                        ],
+                        hint: "Gunakan aturan eliminasi pilihan."
+                    },
+                    {
+                        question: "Bagaimanakah kesimpulan dari rangkaian:<br>P1: $p \\rightarrow q$<br>P2: $q \\rightarrow r$<br>P3: $\\neg r$?",
+                        options: [
+                            { text: "$\\neg p$", isCorrect: true, rationale: "Silogisme hipotetis menghasilkan $p \\rightarrow r$. Dikombinasikan dengan $\\neg r$ via Modus Tollens menghasilkan $\\neg p$." },
+                            { text: "$p$", isCorrect: false },
+                            { text: "$\\neg q$", isCorrect: false },
+                            { text: "Tidak dapat disimpulkan", isCorrect: false }
+                        ],
+                        hint: "Rantai silogisme dilanjutkan dengan modus tollens."
+                    },
+                    {
+                        question: "Kesimpulan dari: \"Sistem berfungsi normal atau perlu instal ulang. Sistem tidak perlu instal ulang.\"",
+                        options: [
+                            { text: "Sistem berfungsi normal.", isCorrect: true, rationale: "Mengeliminasi pilihan kedua menyisakan pilihan pertama." },
+                            { text: "Sistem rusak total.", isCorrect: false },
+                            { text: "Sistem perlu instal ulang.", isCorrect: false }
+                        ],
+                        hint: "Penerapan silogisme disjungtif langsung."
+                    },
+                    {
+                        question: "Jika diketahui $p \\lor q$ dan $p$, apakah sah menyimpulkan $\\neg q$ pada disjungsi inklusif?",
+                        options: [
+                            { text: "Tidak sah, karena pada disjungsi inklusif keduanya bisa bernilai benar bersamaan.", isCorrect: true, rationale: "Disjungsi biasa ($\\lor$) memungkinkan keduanya benar, sehingga mengetahui $p$ benar tidak membuat $q$ pasti salah." },
+                            { text: "Sah secara mutlak.", isCorrect: false },
+                            { text: "Selalu benar.", isCorrect: false }
+                        ],
+                        hint: "Perhatikan sifat inklusif kata 'atau'."
+                    },
+                    {
+                        question: "P1: Jika program berjalan, memori terpakai.<br>P2: Jika memori terpakai, kipas pendingin berputar.<br>P3: Kipas pendingin tidak berputar.<br>Kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Program tidak berjalan.", isCorrect: true, rationale: "Rantai silogisme: Program $\\rightarrow$ Memori $\\rightarrow$ Kipas. Diketahui kipas tidak berputar, maka via tollens berantai disimpulkan program tidak berjalan." },
+                            { text: "Program berjalan.", isCorrect: false },
+                            { text: "Memori rusak.", isCorrect: false }
+                        ],
+                        hint: "Lacak balik dari akibat paling akhir."
+                    },
+                    {
+                        question: "Bentuk proposisi majemuk $(p \\lor q) \\land \\neg p$ ekuivalen secara logis dengan...",
+                        options: [
+                            { text: "$\\neg p \\land q$", isCorrect: false },
+                            { text: "$q \\land \\neg p$", isCorrect: true, rationale: "Distributif: $(p \\land \\neg p) \\lor (q \\land \\neg p) \\equiv Salah \\lor (q \\land \\neg p) \\equiv q \\land \\neg p$." },
+                            { text: "$p \\lor q$", isCorrect: false }
+                        ],
+                        hint: "Gunakan hukum distributif logika."
+                    },
+                    {
+                        question: "Filsuf Yunani kuno yang pertama kali merumuskan aturan silogisme formal adalah...",
+                        options: [
+                            { text: "Aristoteles", isCorrect: true, rationale: "Aristoteles dikenal sebagai bapak logika formal." },
+                            { text: "Socrates", isCorrect: false },
+                            { text: "Plato", isCorrect: false },
+                            { text: "Pythagoras", isCorrect: false }
+                        ],
+                        hint: "Tokoh pemikir mazab Athena abad kuno."
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Logika Kuantor (Semua & Beberapa)",
+                questions: [
+                    {
+                        question: "Negasi dari pernyataan berkuantor \"Semua mahasiswa mengikuti praktikum\" adalah...",
+                        options: [
+                            { text: "Semua mahasiswa tidak mengikuti praktikum.", isCorrect: false },
+                            { text: "Ada mahasiswa yang tidak mengikuti praktikum.", isCorrect: true, rationale: "Negasi kuantor universal 'Semua' adalah kuantor eksistensial 'Ada' diikuti predikat negatif." },
+                            { text: "Beberapa mahasiswa mengikuti praktikum.", isCorrect: false },
+                            { text: "Tidak ada mahasiswa praktikum.", isCorrect: false }
+                        ],
+                        hint: "Lawan dari 'Semua ya' adalah 'Cukup ada satu yang tidak'."
+                    },
+                    {
+                        question: "Pernyataan \"Beberapa file tidak dapat diakses\" ekuivalen dengan...",
+                        options: [
+                            { text: "Tidak semua file dapat diakses.", isCorrect: true, rationale: "Frasa 'Ada yang tidak' setara maknanya dengan negasi dari kuantor universal 'Tidak semua'." },
+                            { text: "Semua file tidak dapat diakses.", isCorrect: false },
+                            { text: "Semua file dapat diakses.", isCorrect: false },
+                            { text: "Tidak ada file yang aman.", isCorrect: false }
+                        ],
+                        hint: "Padanan makna keberadaan parsial."
+                    },
+                    {
+                        question: "Premis 1: Semua perangkat elektronik membutuhkan sumber daya listrik.<br>Premis 2: Komputer jinjing adalah perangkat elektronik.<br>Kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Komputer jinjing membutuhkan sumber daya listrik.", isCorrect: true, rationale: "Sifat universal perangkat elektronik menurun ke komputer jinjing sebagai bagian anggotanya." },
+                            { text: "Komputer jinjing tidak butuh listrik.", isCorrect: false },
+                            { text: "Sebagian komputer butuh listrik.", isCorrect: false },
+                            { text: "Perangkat elektronik bukan komputer.", isCorrect: false }
+                        ],
+                        hint: "Penerapan silogisme kategoris universal."
+                    },
+                    {
+                        question: "Negasi dari pernyataan: \"Beberapa algoritma pencarian bekerja lambat.\"",
+                        options: [
+                            { text: "Semua algoritma pencarian tidak bekerja lambat (cepat).", isCorrect: true, rationale: "Negasi dari 'Ada $x$ yang $P$' menjadi 'Semua $x$ adalah $\\neg P$'." },
+                            { text: "Semua algoritma pencarian bekerja lambat.", isCorrect: false },
+                            { text: "Beberapa algoritma bekerja cepat.", isCorrect: false }
+                        ],
+                        hint: "Lawan dari 'beberapa lambat' adalah 'semuanya tidak lambat'."
+                    },
+                    {
+                        question: "Premis 1: Semua burung berbulu.<br>Premis 2: Sebagian hewan peliharaan adalah burung.<br>Kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Sebagian hewan peliharaan berbulu.", isCorrect: true, rationale: "Burung yang menjadi hewan peliharaan sudah pasti berbulu karena semua burung berbulu." },
+                            { text: "Semua hewan peliharaan berbulu.", isCorrect: false },
+                            { text: "Tidak ada hewan peliharaan berbulu.", isCorrect: false },
+                            { text: "Semua hewan berbulu adalah burung.", isCorrect: false }
+                        ],
+                        hint: "Irisan kelompok hewan peliharaan dan burung."
+                    },
+                    {
+                        question: "Simbol kuantor eksistensial $\\exists$ dibaca sebagai...",
+                        options: [
+                            { text: "Untuk setiap / Semua", isCorrect: false },
+                            { text: "Ada / Terdapat / Beberapa", isCorrect: true, rationale: "$\\exists$ menunjukkan keberadaan objek (eksistensi)." },
+                            { text: "Tidak ada satupun", isCorrect: false },
+                            { text: "Hanya tunggal", isCorrect: false }
+                        ],
+                        hint: "Melambangkan keberadaan minimal satu."
+                    },
+                    {
+                        question: "Simbol kuantor universal $\\forall$ dibaca sebagai...",
+                        options: [
+                            { text: "Untuk setiap / Semua", isCorrect: true, rationale: "$\\forall$ menyatakan keberlakuan untuk keseluruhan semesta pembicaraan." },
+                            { text: "Ada sebagian", isCorrect: false },
+                            { text: "Bukan untuk semua", isCorrect: false }
+                        ],
+                        hint: "Melambangkan sifat menyeluruh."
+                    },
+                    {
+                        question: "Premis 1: Semua mahasiswa teknik informatika menguasai logika.<br>Premis 2: Budi tidak menguasai logika.<br>Kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Budi bukan mahasiswa teknik informatika.", isCorrect: true, rationale: "Modus tollens universal: jika bagian sifat universal tidak terpenuhi, maka objek bukan anggota himpunan tersebut." },
+                            { text: "Budi adalah mahasiswa teknik informatika.", isCorrect: false },
+                            { text: "Budi harus belajar logika.", isCorrect: false }
+                        ],
+                        hint: "Budi gagal memenuhi syarat wajib anak informatika."
+                    },
+                    {
+                        question: "Negasi dari kalimat \"Tidak ada manusia yang tidak pernah berbuat salah\" setara dengan...",
+                        options: [
+                            { text: "Ada manusia yang tidak pernah berbuat salah.", isCorrect: true, rationale: "Kalimat asal bermakna 'Semua manusia pernah berbuat salah'. Negasinya adalah 'Ada manusia yang tidak pernah berbuat salah'." },
+                            { text: "Semua manusia tidak pernah salah.", isCorrect: false },
+                            { text: "Tidak ada manusia yang salah.", isCorrect: false }
+                        ],
+                        hint: "Terjemahkan dulu ke bentuk kuantor universal."
+                    },
+                    {
+                        question: "Premis 1: Semua staf IT menyukai kopi.<br>Premis 2: Sebagian staf IT hobi bermain gim.<br>Maka kesimpulan yang sah adalah...",
+                        options: [
+                            { text: "Sebagian staf yang hobi bermain gim menyukai kopi.", isCorrect: true, rationale: "Staf IT yang hobi main gim otomatis menyukai kopi karena seluruh staf IT menyukai kopi." },
+                            { text: "Semua staf gim menyukai kopi.", isCorrect: false },
+                            { text: "Staf IT tidak suka gim.", isCorrect: false }
+                        ],
+                        hint: "Irisan himpunan staf IT, penyuka kopi, dan pehobi gim."
+                    }
+                ]
+            },
+            {
+                id: 10,
+                title: "Penalaran Analitis (Urutan & Posisi)",
+                questions: [
+                    {
+                        question: "Rian lebih tinggi daripada Doni. Doni lebih pendek daripada Fajar. Gilang lebih tinggi daripada Fajar namun lebih pendek daripada Rian. Siapakah yang tinggi badannya paling maksimal?",
+                        options: [
+                            { text: "Rian", isCorrect: true, rationale: "Urutan tinggi badan dari tertinggi: Rian > Gilang > Fajar > Doni." },
+                            { text: "Doni", isCorrect: false },
+                            { text: "Fajar", isCorrect: false },
+                            { text: "Gilang", isCorrect: false }
+                        ],
+                        hint: "Susun posisi berdasarkan keterangan tinggi relatif."
+                    },
+                    {
+                        question: "Lima komputer (P, Q, R, S, T) diuji kecepatan prosesnya. Q lebih cepat dari P. R lebih lambat dari S. T lebih cepat dari Q. S lebih cepat dari P tetapi lebih lambat dari Q. Komputer mana yang paling lambat?",
+                        options: [
+                            { text: "P", isCorrect: true, rationale: "Urutan kecepatan dari tercepat ke lambat: T > Q > S > P dan R (R dan P di bawah, dengan P paling lambat)." },
+                            { text: "Q", isCorrect: false },
+                            { text: "T", isCorrect: false },
+                            { text: "R", isCorrect: false }
+                        ],
+                        hint: "Petakan tingkat kecepatan dari yang tertinggi."
+                    },
+                    {
+                        question: "Dalam diskusi meja bundar berkapasitas 4 kursi: Wati duduk berhadapan dengan Yanto. Sinta duduk di sebelah kanan Wati. Di manakah posisi Jono?",
+                        options: [
+                            { text: "Di sebelah kiri Wati.", isCorrect: true, rationale: "Sisa kursi kosong berada di sebelah kiri Wati (yang juga berada di sebelah kanan Yanto)." },
+                            { text: "Berhadapan dengan Sinta.", isCorrect: false },
+                            { text: "Di sebelah kanan Yanto.", isCorrect: false },
+                            { text: "Di depan Wati.", isCorrect: false }
+                        ],
+                        hint: "Gambarkan posisi melingkar keempat orang."
+                    },
+                    {
+                        question: "Enam buku ditumpuk vertikal: Buku Fisika di atas Buku Kimia. Buku Biologi di bawah Buku Matematika. Buku Kimia di atas Buku Matematika. Buku Sejarah di bawah Buku Biologi. Buku mana yang letaknya paling bawah?",
+                        options: [
+                            { text: "Buku Sejarah", isCorrect: true, rationale: "Urutan dari atas ke bawah: Fisika - Kimia - Matematika - Biologi - Sejarah. Paling bawah adalah Sejarah." },
+                            { text: "Buku Biologi", isCorrect: false },
+                            { text: "Buku Matematika", isCorrect: false },
+                            { text: "Buku Fisika", isCorrect: false }
+                        ],
+                        hint: "Susun tumpukan buku secara berurutan ke bawah."
+                    },
+                    {
+                        question: "Urutan pengerjaan modul belajar: Modul Java dikerjakan sebelum HTML. Modul CSS dikerjakan tepat setelah HTML. Modul pertama bukan PHP. Jika PHP dikerjakan paling akhir, susunan urutan belajar yang benar adalah...",
+                        options: [
+                            { text: "Java - HTML - CSS - PHP", isCorrect: true, rationale: "Java sebelum HTML. CSS setelah HTML (Java - HTML - CSS). PHP terakhir. Total urutan: Java - HTML - CSS - PHP." },
+                            { text: "HTML - Java - CSS - PHP", isCorrect: false },
+                            { text: "PHP - Java - HTML - CSS", isCorrect: false }
+                        ],
+                        hint: "Paket 'HTML - CSS' berurutan, Java di sebelah kirinya."
+                    },
+                    {
+                        question: "Enam peserta lari (A, B, C, D, E, F) mencapai garis finis. C finis di depan D. A di depan B. F di belakang B. E di depan C. D di depan A. Siapakah peserta yang finis di urutan paling buncit?",
+                        options: [
+                            { text: "F", isCorrect: true, rationale: "Urutan finis dari depan ke belakang: E - C - D - A - B - F. F berada di urutan terakhir." },
+                            { text: "B", isCorrect: false },
+                            { text: "A", isCorrect: false }
+                        ],
+                        hint: "F berada di belakang B, dan B di belakang A."
+                    },
+                    {
+                        question: "Diketahui usia A lebih tua dari B, B lebih muda dari C, dan C lebih tua dari A. Urutan dari yang usianya paling muda adalah...",
+                        options: [
+                            { text: "B, A, C", isCorrect: true, rationale: "C > A > B, maka urutan dari termuda adalah B, lalu A, kemudian C." },
+                            { text: "B, C, A", isCorrect: false },
+                            { text: "A, B, C", isCorrect: false }
+                        ],
+                        hint: "Bandingkan jenjang usia ketiganya secara cermat."
+                    },
+                    {
+                        question: "Dalam antrean loket tiket, urutan posisi: Budi di depan Ani. Candra di belakang Dedi. Ani di depan Dedi. Siapa yang berada di urutan paling depan?",
+                        options: [
+                            { text: "Budi", isCorrect: true, rationale: "Rantai antrean: Budi -> Ani -> Dedi -> Candra. Budi di posisi paling depan." },
+                            { text: "Ani", isCorrect: false },
+                            { text: "Candra", isCorrect: false }
+                        ],
+                        hint: "Cari orang yang posisinya mendahului semua orang lain."
+                    },
+                    {
+                        question: "Jadwal rilis software: Versi Alpha rilis sebelum Beta. Versi Gamma rilis tepat setelah Beta. Versi Delta rilis sebelum Alpha. Versi manakah yang rilis paling pertama?",
+                        options: [
+                            { text: "Delta", isCorrect: true, rationale: "Urutan rilis: Delta -> Alpha -> Beta -> Gamma. Delta rilis paling awal." },
+                            { text: "Alpha", isCorrect: false },
+                            { text: "Beta", isCorrect: false }
+                        ],
+                        hint: "Cari versi yang dijadwalkan sebelum Alpha."
+                    },
+                    {
+                        question: "Pada barisan kursi bioskop, Tono duduk di antara Udin dan Vina. Udin duduk tepat di sebelah kiri Tono. Di manakah posisi duduk Vina?",
+                        options: [
+                            { text: "Di sebelah kanan Tono.", isCorrect: true, rationale: "Karena Tono di tengah Udin dan Vina, dan Udin di sebelah kiri Tono, maka Vina pasti di sebelah kanan Tono." },
+                            { text: "Di sebelah kiri Udin.", isCorrect: false },
+                            { text: "Di depan Tono.", isCorrect: false }
+                        ],
+                        hint: "Bayangkan formasi tiga orang duduk bersebelahan."
+                    }
+                ]
+            },
+            {
+                id: 11,
+                title: "Logika Komputasi Terapan & Alur Algoritma",
+                questions: [
+                    {
+                        question: "Dalam struktur kontrol percabangan pemrograman, ekspresi kondisi yang dievaluasi harus menghasilkan tipe data...",
+                        options: [
+                            { text: "Boolean (True / False)", isCorrect: true, rationale: "Kondisi percabangan wajib bertipe Boolean agar komputer dapat memilih jalur eksekusi." },
+                            { text: "Integer (Bilangan bulat)", isCorrect: false },
+                            { text: "String (Teks karakter)", isCorrect: false },
+                            { text: "Float (Pecahan desimal)", isCorrect: false }
+                        ],
+                        hint: "Tipe data yang merepresentasikan benar atau salah."
+                    },
+                    {
+                        question: "Gerbang logika **AND** dalam sistem digital bekerja menyerupai operator logika proposisi...",
+                        options: [
+                            { text: "Konjungsi ($\\land$)", isCorrect: true, rationale: "Gerbang AND mengeluarkan nilai 1 hanya jika semua input bernilai 1." },
+                            { text: "Disjungsi ($\\lor$)", isCorrect: false },
+                            { text: "Implikasi ($\\rightarrow$)", isCorrect: false },
+                            { text: "Negasi ($\\neg$)", isCorrect: false }
+                        ],
+                        hint: "Operasi yang menuntut seluruh syarat terpenuhi."
+                    },
+                    {
+                        question: "Gerbang logika **OR** menghasilkan keluaran bernilai 0 (False) hanya apabila...",
+                        options: [
+                            { text: "Semua masukan bernilai 0.", isCorrect: true, rationale: "OR bernilai 0 jika tidak ada satupun masukan yang aktif." },
+                            { text: "Salah satu masukan bernilai 1.", isCorrect: false },
+                            { text: "Semua masukan bernilai 1.", isCorrect: false }
+                        ],
+                        hint: "Kondisi ketika tidak ada input yang bernilai aktif."
+                    },
+                    {
+                        question: "Sebuah program mengeksekusi baris kode: `if (y >= 4) and (y < 12)`. Nilai `y` manakah yang membuat kondisi ini bernilai **True**?",
+                        options: [
+                            { text: "2", isCorrect: false },
+                            { text: "8", isCorrect: true, rationale: "$8 \\ge 4$ (Benar) dan $8 < 12$ (Benar). Karena kedua syarat terpenuhi, konjungsi bernilai True." },
+                            { text: "12", isCorrect: false },
+                            { text: "15", isCorrect: false }
+                        ],
+                        hint: "Cari angka di rentang 4 sampai di bawah 12."
+                    },
+                    {
+                        question: "Gerbang logika **NOT** bertindak sebagai pembalik sinyal. Jika masukan bernilai 1, maka keluarannya adalah...",
+                        options: [
+                            { text: "0 (False)", isCorrect: true, rationale: "NOT adalah representasi gerbang negasi yang membalik nilai." },
+                            { text: "1 (True)", isCorrect: false }
+                        ],
+                        hint: "Pembalik nilai input digital."
+                    },
+                    {
+                        question: "Simbol bangun **belah ketupat** dalam diagram alir (flowchart) digunakan untuk menyatakan...",
+                        options: [
+                            { text: "Proses keputusan / percabangan kondisi", isCorrect: true, rationale: "Belah ketupat melambangkan titik keputusan ya/tidak dalam alur program." },
+                            { text: "Input atau output data", isCorrect: false },
+                            { text: "Awal dan akhir program", isCorrect: false },
+                            { text: "Penghubung antarhalaman", isCorrect: false }
+                        ],
+                        hint: "Simbol yang memiliki dua jalur cabang keluar."
+                    },
+                    {
+                        question: "Jika $X = 0$ (False) dan $Y = 1$ (True), berapakah hasil dari ekspresi komputasi: $(X \\text{ AND } Y) \\text{ OR } (\\text{NOT } X)$?",
+                        options: [
+                            { text: "1 (True)", isCorrect: true, rationale: "$(0 \\text{ AND } 1) = 0$. $\\text{NOT } 0 = 1$. Maka $0 \\text{ OR } 1 = 1$." },
+                            { text: "0 (False)", isCorrect: false }
+                        ],
+                        hint: "Selesaikan operasi dalam kurung dan negasi terlebih dahulu."
+                    },
+                    {
+                        question: "Pada gerbang logika **NAND** (NOT AND), keluaran akan bernilai 0 (False) jika...",
+                        options: [
+                            { text: "Semua masukan bernilai 1.", isCorrect: true, rationale: "Hasil AND bernilai 1, kemudian dinegasikan oleh NAND menjadi 0." },
+                            { text: "Salah satu masukan bernilai 0.", isCorrect: false },
+                            { text: "Semua masukan bernilai 0.", isCorrect: false }
+                        ],
+                        hint: "Kebalikan persis dari gerbang AND."
+                    },
+                    {
+                        question: "Dalam penulisan kode program, operator perbandingan `!=` digunakan untuk mengecek...",
+                        options: [
+                            { text: "Apakah dua nilai tidak sama.", isCorrect: true, rationale: "Simbol `!=` melambangkan ketidaksamaan (not equal)." },
+                            { text: "Apakah dua nilai persis sama.", isCorrect: false },
+                            { text: "Apakah nilai lebih besar.", isCorrect: false }
+                        ],
+                        hint: "Tanda seru menunjukkan negasi kesamaan."
+                    },
+                    {
+                        question: "Perhatikan cuplikan kode: `if (nilai > 70) then Cetak('Lulus') else Cetak('Remidi')`. Jika diinput nilai = 70, apa keluaran program?",
+                        options: [
+                            { text: "Remidi", isCorrect: true, rationale: "Karena syaratnya adalah `nilai > 70` (lebih besar murni), nilai 70 tidak memenuhinya sehingga lari ke blok `else` (Remidi)." },
+                            { text: "Lulus", isCorrect: false },
+                            { text: "Error program", isCorrect: false }
+                        ],
+                        hint: "Perhatikan tanda operator perbandingan (tanpa sama dengan)."
+                    }
+                ]
+            }
+        ];
+
+        // State variables
+        let currentChapterIdx = 0;
+        let currentQuestionIdxInChapter = 0;
+        let userSelectedOptionIdx = null;
+        let isAnswerChecked = false;
+        
+        // Progress tracking: save answers & scores
+        let chapterAnswers = Array.from({ length: database.length }, () => []);
+        let chapterScores = Array.from({ length: database.length }, () => 0); 
+        let chapterStatus = Array.from({ length: database.length }, (_, i) => i === 0 ? 'unlocked' : 'locked');
+
+        // Load progress from localStorage on start
+        loadProgressFromStorage();
+
+        function saveProgressToStorage() {
+            try {
+                localStorage.setItem('si_quiz_chapter_answers', JSON.stringify(chapterAnswers));
+                localStorage.setItem('si_quiz_chapter_scores', JSON.stringify(chapterScores));
+                localStorage.setItem('si_quiz_chapter_status', JSON.stringify(chapterStatus));
+            } catch (e) {
+                console.warn("Storage tidak dapat diakses", e);
+            }
+        }
+
+        function loadProgressFromStorage() {
+            try {
+                const storedAnswers = localStorage.getItem('si_quiz_chapter_answers');
+                const storedScores = localStorage.getItem('si_quiz_chapter_scores');
+                const storedStatus = localStorage.getItem('si_quiz_chapter_status');
+
+                if (storedAnswers) chapterAnswers = JSON.parse(storedAnswers);
+                if (storedScores) chapterScores = JSON.parse(storedScores);
+                if (storedStatus) chapterStatus = JSON.parse(storedStatus);
+            } catch (e) {
+                console.warn("Gagal me-load progres", e);
+            }
+        }
+
+        function resetAllProgress() {
+            chapterAnswers = Array.from({ length: database.length }, () => []);
+            chapterScores = Array.from({ length: database.length }, () => 0);
+            chapterStatus = Array.from({ length: database.length }, (_, i) => i === 0 ? 'unlocked' : 'locked');
+            saveProgressToStorage();
+            showDashboard();
+        }
+
+        // DOM Elements
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const milestoneScreen = document.getElementById('milestone-screen');
+        const reviewScreen = document.getElementById('review-screen');
+        const confirmModal = document.getElementById('confirm-modal');
+
+        const chaptersGrid = document.getElementById('chapters-grid');
+        const dashboardProgressBar = document.getElementById('dashboard-progress-bar');
+        const dashboardProgressText = document.getElementById('dashboard-progress-text');
+        const overallCorrectCount = document.getElementById('overall-correct-count');
+        
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const chapterBadge = document.getElementById('chapter-badge');
+        const chapterTitleRun = document.getElementById('chapter-title-run');
+        const questionIndexRun = document.getElementById('question-index-run');
+        const quizScoreRun = document.getElementById('quiz-score-run');
+        const chapterProgressBar = document.getElementById('chapter-progress-bar');
+        
+        const feedbackCard = document.getElementById('feedback-card');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackText = document.getElementById('feedback-text');
+        const actionBtn = document.getElementById('action-btn');
+
+        const totalOverallProgress = document.getElementById('total-overall-progress');
+        const totalOverallCounter = document.getElementById('total-overall-counter');
+
+        // Init UI on load
+        window.onload = function() {
+            showDashboard();
+            actionBtn.addEventListener('click', handleActionButton);
+        };
+
+        function showDashboard() {
+            quizScreen.classList.add('hidden');
+            milestoneScreen.classList.add('hidden');
+            reviewScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+
+            renderDashboard();
+        }
+
+        function renderDashboard() {
+            chaptersGrid.innerHTML = '';
+            let totalQuestionsAnswered = 0;
+            let totalCorrectAnswers = 0;
+
+            database.forEach((chapter, index) => {
+                const status = chapterStatus[index];
+                const score = chapterScores[index];
+                const answeredCount = chapterAnswers[index].length;
+                totalQuestionsAnswered += answeredCount;
+                totalCorrectAnswers += score;
+
+                let borderStyle = 'border-slate-200';
+                let leftBarColor = 'bg-slate-300';
+                let opacityStyle = '';
+
+                if (status === 'locked') {
+                    opacityStyle = 'opacity-55 select-none pointer-events-none';
+                    leftBarColor = 'bg-slate-200';
+                } else if (status === 'completed') {
+                    borderStyle = 'border-emerald-200';
+                    leftBarColor = 'bg-emerald-600';
+                } else {
+                    borderStyle = 'border-blue-300';
+                    leftBarColor = 'bg-blue-700';
+                }
+
+                const card = document.createElement('div');
+                card.className = `bg-white border ${borderStyle} rounded-lg p-5 flex flex-col justify-between relative transition duration-200 hover:border-slate-400 ${opacityStyle}`;
+
+                let statusBadgeHTML = '';
+                if (status === 'locked') {
+                    statusBadgeHTML = `
+                        <span class="flex items-center space-x-1 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <span>Locked</span>
+                        </span>
+                    `;
+                } else if (status === 'completed') {
+                    statusBadgeHTML = `
+                        <span class="flex items-center space-x-1 text-[9px] font-extrabold text-emerald-700 uppercase bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 tracking-wider">
+                            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Selesai (${score}/10)</span>
+                        </span>
+                    `;
+                } else {
+                    statusBadgeHTML = `
+                        <span class="flex items-center space-x-1 text-[9px] font-extrabold text-blue-700 uppercase bg-blue-50 px-2.5 py-1 rounded border border-blue-200 tracking-wider">
+                            <span>Ready</span>
+                        </span>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="absolute left-0 top-0 bottom-0 w-[5px] ${leftBarColor} rounded-l-lg"></div>
+                    <div class="space-y-2.5 pl-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Chapter 0${index + 1}</span>
+                            ${statusBadgeHTML}
+                        </div>
+                        <h4 class="font-bold text-base tracking-tight text-slate-900 leading-snug">${chapter.title}</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Chapter 01 berisi 10 pertanyaan logika komputasi bertahap.</p>
+                    </div>
+                    <div class="mt-5 pt-4 pl-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold">
+                        <span class="text-slate-400 uppercase tracking-wide">${answeredCount}/10 SOAL TERJAWAB</span>
+                        ${status !== 'locked' ? `
+                            <button onclick="startChapter(${index})" class="text-blue-700 hover:text-blue-900 font-bold uppercase tracking-wider flex items-center space-x-1 transition">
+                                <span>${status === 'completed' ? 'Ulangi' : `Buka Chapter 0${index + 1}`}</span>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                chaptersGrid.appendChild(card);
+            });
+
+            const percentage = Math.round((totalQuestionsAnswered / 110) * 100);
+            dashboardProgressText.innerText = `${percentage}%`;
+            dashboardProgressBar.style.width = `${percentage}%`;
+            overallCorrectCount.innerText = totalCorrectAnswers;
+            totalOverallProgress.innerText = `PROGRESS BELAJAR: ${percentage}%`;
+            totalOverallCounter.innerText = `${totalQuestionsAnswered} dari 110 Soal Terjawab`;
+        }
+
+        function startChapter(chapterIdx) {
+            if (chapterStatus[chapterIdx] === 'locked') return;
+
+            currentChapterIdx = chapterIdx;
+            
+            const answers = chapterAnswers[chapterIdx];
+            if (answers.length >= 10) {
+                chapterAnswers[chapterIdx] = [];
+                chapterScores[chapterIdx] = 0;
+                currentQuestionIdxInChapter = 0;
+            } else {
+                currentQuestionIdxInChapter = answers.length;
+            }
+
+            dashboardScreen.classList.add('hidden');
+            milestoneScreen.classList.add('hidden'); 
+            reviewScreen.classList.add('hidden');    
+            quizScreen.classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            isAnswerChecked = false;
+            userSelectedOptionIdx = null;
+            actionBtn.disabled = true;
+            actionBtn.innerText = "Periksa Jawaban";
+            feedbackCard.classList.add('hidden');
+
+            const chapter = database[currentChapterIdx];
+            const questionData = chapter.questions[currentQuestionIdxInChapter];
+
+            // Render text
+            chapterBadge.innerText = `Chapter 0${currentChapterIdx + 1}`;
+            chapterTitleRun.innerText = chapter.title;
+            questionIndexRun.innerText = `Soal 0${currentQuestionIdxInChapter + 1} dari 10`;
+            quizScoreRun.innerText = `CHAPTER SCORE: ${chapterScores[currentChapterIdx]}`;
+
+            const percent = ((currentQuestionIdxInChapter) / 10) * 100;
+            chapterProgressBar.style.width = `${percent}%`;
+
+            questionText.innerHTML = questionData.question;
+
+            // Render options (Professional White-Blue palette, sharp corners)
+            optionsContainer.innerHTML = '';
+            questionData.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-400 transition duration-150 flex items-center justify-between text-slate-800 text-sm font-medium`;
+                btn.innerHTML = `
+                    <span class="opt-txt">${opt.text}</span>
+                    <span class="ind w-5 h-5 rounded border border-slate-300 shrink-0"></span>
+                `;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            setTimeout(() => {
+                if (window.renderMathInElement) {
+                    renderMathInElement(quizScreen, {
+                        delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+                        throwOnError: false
+                    });
+                }
+            }, 50);
+        }
+
+        function selectOption(idx) {
+            if (isAnswerChecked) return;
+            userSelectedOptionIdx = idx;
+            actionBtn.disabled = false;
+
+            Array.from(optionsContainer.children).forEach((btn, i) => {
+                const ind = btn.querySelector('.ind');
+                if (i === idx) {
+                    // Crisp Blue Accent selection (Professional UI style)
+                    btn.className = `w-full text-left p-4 rounded border-2 border-blue-700 bg-blue-50/50 transition duration-150 flex items-center justify-between text-blue-900 font-bold`;
+                    ind.className = `ind w-5 h-5 rounded bg-blue-700 flex items-center justify-center shrink-0 text-white text-[10px] font-bold`;
+                    ind.innerText = '✓';
+                } else {
+                    btn.className = `w-full text-left p-4 rounded border border-slate-200 bg-white hover:bg-slate-50 transition duration-150 flex items-center justify-between text-slate-800 text-sm font-medium`;
+                    ind.className = `ind w-5 h-5 rounded border border-slate-300 shrink-0`;
+                    ind.innerText = '';
+                }
+            });
+        }
+
+        function handleActionButton() {
+            if (!isAnswerChecked) checkAnswer();
+            else nextQuestion();
+        }
+
+        function checkAnswer() {
+            isAnswerChecked = true;
+            const chapter = database[currentChapterIdx];
+            const questionData = chapter.questions[currentQuestionIdxInChapter];
+            const chosenOption = questionData.options[userSelectedOptionIdx];
+            const isCorrect = chosenOption.isCorrect;
+
+            // Track answer
+            chapterAnswers[currentChapterIdx].push({
+                questionIdx: currentQuestionIdxInChapter,
+                chosenIdx: userSelectedOptionIdx,
+                isCorrect: isCorrect
+            });
+
+            if (isCorrect) {
+                chapterScores[currentChapterIdx] += 1;
+            }
+
+            quizScoreRun.innerText = `CHAPTER SCORE: ${chapterScores[currentChapterIdx]}`;
+
+            // Show feedback card in a professional light border format
+            const correctOpt = questionData.options.find(o => o.isCorrect);
+            showFeedbackCard(isCorrect, isCorrect ? "Konfirmasi: Jawaban Benar" : "Koreksi: Kurang Tepat", correctOpt.rationale || "Evaluasi logika dan skema formal proposisi di atas.");
+
+            // Disable options and present correct/incorrect values
+            Array.from(optionsContainer.children).forEach((btn, i) => {
+                btn.disabled = true;
+                if (questionData.options[i].isCorrect) {
+                    btn.className = `w-full text-left p-4 rounded border-2 border-emerald-600 bg-emerald-50 flex items-center justify-between text-emerald-900 font-bold`;
+                    btn.querySelector('.ind').className = `ind w-5 h-5 rounded bg-emerald-600 flex items-center justify-center shrink-0 text-white text-[10px] font-bold`;
+                    btn.querySelector('.ind').innerText = '✓';
+                } else if (i === userSelectedOptionIdx) {
+                    btn.className = `w-full text-left p-4 rounded border-2 border-red-600 bg-red-50 flex items-center justify-between text-red-900 font-bold`;
+                    btn.querySelector('.ind').className = `ind w-5 h-5 rounded bg-red-600 flex items-center justify-center shrink-0 text-white text-[10px] font-bold`;
+                    btn.querySelector('.ind').innerText = '✗';
+                }
+            });
+
+            actionBtn.innerText = currentQuestionIdxInChapter === 9 ? "Selesaikan Chapter" : "Berikutnya";
+            saveProgressToStorage();
+        }
+
+        function showFeedbackCard(correct, title, msg) {
+            feedbackCard.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'bg-red-50', 'border-red-300');
+            feedbackCard.classList.add(correct ? 'bg-emerald-50/50' : 'bg-red-50/50', correct ? 'border-emerald-200' : 'border-red-200');
+            
+            feedbackIcon.className = `w-6 h-6 rounded flex items-center justify-center shrink-0 font-bold ${correct ? 'bg-emerald-600' : 'bg-red-600'}`;
+            feedbackIcon.innerText = correct ? '✓' : '✗';
+            
+            feedbackTitle.innerText = title;
+            feedbackTitle.className = `font-bold text-[10px] uppercase tracking-wider ${correct ? 'text-emerald-800' : 'text-red-800'}`;
+            
+            feedbackText.innerHTML = msg;
+
+            setTimeout(() => {
+                if (window.renderMathInElement) {
+                    renderMathInElement(feedbackCard, {
+                        delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+                        throwOnError: false
+                    });
+                }
+            }, 50);
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIdxInChapter < 9) {
+                currentQuestionIdxInChapter++;
+                loadQuestion();
+            } else {
+                triggerChapterMilestone();
+            }
+        }
+
+        function triggerChapterMilestone() {
+            chapterStatus[currentChapterIdx] = 'completed';
+            
+            if (currentChapterIdx + 1 < database.length) {
+                if (chapterStatus[currentChapterIdx + 1] === 'locked') {
+                    chapterStatus[currentChapterIdx + 1] = 'unlocked';
+                }
+            }
+
+            saveProgressToStorage();
+
+            quizScreen.classList.add('hidden');
+            milestoneScreen.classList.remove('hidden');
+
+            const score = chapterScores[currentChapterIdx];
+            document.getElementById('milestone-chapter-title').innerText = database[currentChapterIdx].title;
+            document.getElementById('milestone-score').innerText = score * 10;
+            document.getElementById('milestone-correct').innerText = `${score}/10`;
+
+            let msg = "";
+            if (score === 10) {
+                msg = "Sempurna! Anda memiliki kecerdasan logika analitis yang sangat matang. Seluruh soal diselesaikan dengan tepat.";
+            } else if (score >= 8) {
+                msg = "Performa Sangat Baik! Penguasaan materi logika proposisi dan analisis sistem Anda sudah kokoh.";
+            } else if (score >= 6) {
+                msg = "Kerja Bagus! Anda berhasil melampaui standar kelulusan minimum. Gunakan tinjauan untuk mengevaluasi kesalahan.";
+            } else {
+                msg = "Terus Berlatih. Dasar analisis logika membutuhkan latihan teratur. Pelajari pembahasan dan ulangi kembali Chapter 01 ini.";
+            }
+            document.getElementById('milestone-message').innerText = msg;
+
+            document.getElementById('milestone-review-btn').onclick = () => showChapterReview(currentChapterIdx);
+            
+            const nextBtn = document.getElementById('milestone-next-btn');
+            if (currentChapterIdx + 1 < database.length) {
+                nextBtn.innerText = "Lanjut ke Chapter Berikutnya";
+                nextBtn.onclick = () => {
+                    startChapter(currentChapterIdx + 1);
+                };
+            } else {
+                nextBtn.innerText = "Selesai & Lihat Dashboard";
+                nextBtn.onclick = () => {
+                    showDashboard();
+                };
+            }
+        }
+
+        function showChapterReview(chapterIdx) {
+            milestoneScreen.classList.add('hidden');
+            reviewScreen.classList.remove('hidden');
+            
+            const chapter = database[chapterIdx];
+            document.getElementById('review-subtitle').innerText = `Materi: ${chapter.title}`;
+            
+            const listContainer = document.getElementById('review-list');
+            listContainer.innerHTML = '';
+
+            const answers = chapterAnswers[chapterIdx];
+            answers.forEach((ans) => {
+                const q = chapter.questions[ans.questionIdx];
+                const chosen = q.options[ans.chosenIdx];
+                const correctOpt = q.options.find(o => o.isCorrect);
+
+                const card = document.createElement('div');
+                card.className = `p-5 rounded border ${ans.isCorrect ? 'border-emerald-200 bg-emerald-50/20' : 'border-red-200 bg-red-50/20'} space-y-3`;
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-[9px] font-bold px-2.5 py-1 rounded uppercase tracking-wider ${ans.isCorrect ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'}">
+                            ${ans.isCorrect ? 'BENAR (+10 POIN)' : 'SALAH (0 POIN)'}
+                        </span>
+                        <span class="text-xs text-slate-400 font-bold">SOAL #${ans.questionIdx + 1}</span>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base leading-relaxed q-body">${q.question}</h3>
+                    <div class="space-y-1.5 pt-1 text-xs">
+                        <p class="text-slate-500">Pilihan Anda: <span class="font-bold ${ans.isCorrect ? 'text-emerald-700' : 'text-red-700'} ch-body">${chosen ? chosen.text : 'Tidak menjawab'}</span></p>
+                        ${!ans.isCorrect ? `<p class="text-slate-500">Kunci Jawaban: <span class="font-bold text-emerald-700 cr-body">${correctOpt.text}</span></p>` : ''}
+                    </div>
+                    <div class="text-xs text-slate-600 bg-white p-4 rounded border border-slate-200 leading-relaxed r-body">
+                        <strong class="text-blue-700 block mb-1 uppercase tracking-wider text-[10px]">Pembahasan Logika:</strong>
+                        ${correctOpt.rationale}
+                    </div>
+                `;
+
+                listContainer.appendChild(card);
+            });
+
+            document.getElementById('close-review-btn').onclick = () => {
+                reviewScreen.classList.add('hidden');
+                milestoneScreen.classList.remove('hidden');
+            };
+
+            setTimeout(() => {
+                if (window.renderMathInElement) {
+                    renderMathInElement(listContainer, {
+                        delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+                        throwOnError: false
+                    });
+                }
+            }, 50);
+        }
+
+        function confirmExitToDashboard() {
+            confirmModal.classList.remove('hidden');
+        }
+
+        function hideConfirmModal() {
+            confirmModal.classList.add('hidden');
+        }
+
+        function exitToDashboardDirectly() {
+            hideConfirmModal();
+            showDashboard();
+        }
+    </script>
+</body>
+</html>
