@@ -1031,9 +1031,450 @@ const puData = [
             },
 
 
-            { id: "pu_ch7", title: "Chapter 7: Negasi", description: "Pengingkaran dari pernyataan majemuk.", questions: createDummyQuestions("Negasi Logika") },
-            { id: "pu_ch8", title: "Chapter 8: Silogisme", description: "Penarikan kesimpulan dari dua premis.", questions: createDummyQuestions("Silogisme") },
-            { id: "pu_ch9", title: "Chapter 9: Bahasa Panda", description: "Kriptografi sederhana dan bahasa buatan.", questions: createDummyQuestions("Bahasa Panda") }
+            {
+    id: "pu_ch7",
+    title: "Chapter 7: Negasi (Pengingkaran)",
+    description: "Pengingkaran dari pernyataan tunggal, majemuk, maupun berkuantor.",
+    formulaHelp: `
+        <h4 style="margin-top:0; color:var(--accent, #2563eb);">Aturan Negasi (Pengingkaran)</h4>
+        <p style="margin-bottom:8px;">Negasi mengubah nilai kebenaran suatu pernyataan dari <b>Benar (B) menjadi Salah (S)</b>, dan sebaliknya.</p>
+        
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">1. Pernyataan Tunggal</b><br>
+            &bull; Negasi dari <b>P</b> adalah <b>&sim;P</b> (Tidak/Bukan P)
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">2. Pernyataan Majemuk (Hukum De Morgan)</b><br>
+            &bull; Negasi Implikasi: <b>&sim;(P &rarr; Q) &equiv; P &and; &sim;Q</b><br>
+            <i style="font-size:0.85rem; color:var(--text-secondary);">(Ingat: "P terjadi tetapi Q tidak terjadi")</i><br><br>
+            &bull; Negasi Konjungsi: <b>&sim;(P &and; Q) &equiv; &sim;P &or; &sim;Q</b><br>
+            &bull; Negasi Disjungsi: <b>&sim;(P &or; Q) &equiv; &sim;P &and; &sim;Q</b>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px;">
+            <b style="color:var(--accent, #2563eb);">3. Pernyataan Berkuantor</b><br>
+            &bull; Negasi "Semua/Setiap (Kuantor Universal)":<br>
+            &nbsp;&nbsp;<b>&sim;(&forall;x, P(x)) &equiv; &exist;x, &sim;P(x)</b><br>
+            &nbsp;&nbsp;<i>(Ubah "Semua/Setiap" menjadi "Ada/Beberapa/Ada yang" + Negasikan P)</i><br><br>
+            &bull; Negasi "Ada/Beberapa (Kuantor Eksistensial)":<br>
+            &nbsp;&nbsp;<b>&sim;(&exist;x, P(x)) &equiv; &forall;x, &sim;P(x)</b><br>
+            &nbsp;&nbsp;<i>(Ubah "Ada/Beberapa" menjadi "Semua/Setiap" + Negasikan P)</i>
+        </div>
+    `,
+    levels: [
+        {
+            level: 1,
+            title: "Level 1: Dasar Negasi Tunggal & Kuantor Sederhana",
+            questions: [
+                {
+                    id: "ch7_l1_q1",
+                    question: "Tentukan negasi dari pernyataan: 'Hari ini hujan deras.'",
+                    options: [
+                        "Hari ini tidak hujan deras.",
+                        "Kemarin hujan deras.",
+                        "Besok tidak hujan deras.",
+                        "Hari ini panas terik.",
+                        "Semua hari hujan deras."
+                    ],
+                    answer: 0,
+                    explanation: "Negasi dari pernyataan tunggal P adalah ~P ('Hari ini tidak hujan deras')."
+                },
+                {
+                    id: "ch7_l1_q2",
+                    question: "Ingkaran dari pernyataan 'Semua siswa lulus ujian' adalah...",
+                    options: [
+                        "Semua siswa tidak lulus ujian.",
+                        "Tidak ada siswa yang lulus ujian.",
+                        "Beberapa siswa tidak lulus ujian.",
+                        "Beberapa siswa lulus ujian.",
+                        "Semua siswa remedial."
+                    ],
+                    answer: 2,
+                    explanation: "Negasi dari 'Semua P' adalah 'Ada/Beberapa/Beberapa P yang bukan/tidak'."
+                },
+                {
+                    id: "ch7_l1_q3",
+                    question: "Negasi dari kalimat 'Beberapa peserta SNBT membawa pensil 2B' adalah...",
+                    options: [
+                        "Beberapa peserta SNBT tidak membawa pensil 2B.",
+                        "Semua peserta SNBT tidak membawa pensil 2B.",
+                        "Tidak ada peserta SNBT yang membawa pensil.",
+                        "Semua peserta SNBT membawa pensil 2B.",
+                        "Ada peserta SNBT yang tidak membawa pensil 2B."
+                    ],
+                    answer: 1,
+                    explanation: "Negasi dari 'Beberapa P' adalah 'Semua P tidak/bukan'."
+                }
+                // Tambahkan sisa soal Level 1 hingga 10 soal
+            ]
+        },
+        {
+            level: 2,
+            title: "Level 2: Negasi Implikasi (P → Q)",
+            questions: [
+                {
+                    id: "ch7_l2_q1",
+                    question: "Ingkaran dari 'Jika Budi belajar giat, maka ia lulus seleksi' adalah...",
+                    options: [
+                        "Jika Budi tidak belajar giat, maka ia tidak lulus seleksi.",
+                        "Budi belajar giat dan ia tidak lulus seleksi.",
+                        "Budi tidak belajar giat tetapi ia lulus seleksi.",
+                        "Jika Budi lulus seleksi, maka ia belajar giat.",
+                        "Budi tidak belajar giat dan tidak lulus seleksi."
+                    ],
+                    answer: 1,
+                    explanation: "RUMUS: ~(P -> Q) = P dan ~Q. Jadi 'Budi belajar giat (P) DAN ia tidak lulus seleksi (~Q)'."
+                }
+                // Tambahkan sisa soal Level 2 hingga 10 soal
+            ]
+        },
+        {
+            level: 3,
+            title: "Level 3: Negasi Konjungsi & Disjungsi (Hukum De Morgan)",
+            questions: [
+                {
+                    id: "ch7_l3_q1",
+                    question: "Tentukan ingkaran dari 'Andi suka matematika dan fisika'.",
+                    options: [
+                        "Andi tidak suka matematika dan tidak suka fisika.",
+                        "Andi tidak suka matematika atau tidak suka fisika.",
+                        "Andi tidak suka matematika tetapi suka fisika.",
+                        "Andi suka matematika atau tidak suka fisika.",
+                        "Andi tidak suka kedua pelajaran tersebut."
+                    ],
+                    answer: 1,
+                    explanation: "RUMUS: ~(P dan Q) = ~P atau ~Q."
+                }
+                // Tambahkan sisa soal Level 3 hingga 10 soal
+            ]
+        },
+        {
+            level: 4,
+            title: "Level 4: Negasi Kuantor Majemuk & Kondisional",
+            questions: [
+                {
+                    id: "ch7_l4_q1",
+                    question: "Ingkaran dari 'Semua siswa jika rajin berdoa maka akan sukses' adalah...",
+                    options: [
+                        "Semua siswa tidak rajin berdoa dan tidak sukses.",
+                        "Beberapa siswa rajin berdoa tetapi tidak sukses.",
+                        "Beberapa siswa tidak rajin berdoa dan sukses.",
+                        "Tidak ada siswa yang rajin berdoa dan sukses.",
+                        "Semua siswa rajin berdoa tetapi tidak sukses."
+                    ],
+                    answer: 1,
+                    explanation: "~[∀x (P(x) -> Q(x))] ≡ ∃x (P(x) ∧ ~Q(x)). Yaitu 'Ada/Beberapa siswa yang (P) tetapi tidak (Q)'."
+                }
+                // Tambahkan sisa soal Level 4 hingga 10 soal
+            ]
+        },
+        {
+            level: 5,
+            title: "Level 5: Penalaran Analitis & Negasi Kompleks (HOTS)",
+            questions: [
+                {
+                    id: "ch7_l5_q1",
+                    question: "Negasi dari pernyataan 'Jika semua harga barang naik, maka ada masyarakat yang berdemonstrasi' adalah...",
+                    options: [
+                        "Jika ada harga barang tidak naik, maka tidak ada masyarakat berdemonstrasi.",
+                        "Semua harga barang naik dan tidak ada masyarakat yang berdemonstrasi.",
+                        "Ada harga barang naik dan semua masyarakat berdemonstrasi.",
+                        "Semua harga barang tidak naik atau ada masyarakat berdemonstrasi.",
+                        "Beberapa harga barang tidak naik dan tidak ada masyarakat berdemonstrasi."
+                    ],
+                    answer: 1,
+                    explanation: "Bentuk P: 'Semua harga barang naik'. Q: 'Ada masyarakat berdemonstrasi'. ~Q adalah 'Tidak ada masyarakat yang berdemonstrasi'. Negasi P -> Q adalah P dan ~Q."
+                }
+                // Tambahkan sisa soal Level 5 hingga 10 soal
+            ]
+        }
+    ]
+},
+
+
+{
+    id: "pu_ch8",
+    title: "Chapter 8: Silogisme",
+    description: "Penarikan kesimpulan dari dua premis atau lebih (Murni, Hipotetis, dan Disjungtif).",
+    formulaHelp: `
+        <h4 style="margin-top:0; color:var(--accent, #2563eb);">Aturan Penarikan Kesimpulan (Silogisme)</h4>
+        
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">1. Silogisme Murni (Kategoris)</b><br>
+            Premis 1: P &rarr; Q<br>
+            Premis 2: Q &rarr; R<br>
+            <b style="color:#2563eb;">Kesimpulan: P &rarr; R</b>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">2. Silogisme Disjungtif</b><br>
+            Premis 1: P &or; Q (P atau Q)<br>
+            Premis 2: &sim;P (Bukan P)<br>
+            <b style="color:#2563eb;">Kesimpulan: Q</b>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">3. Aturan Kuantor (Semua vs Beberapa)</b><br>
+            &bull; Jika salah satu premis menggunakan <b>"Beberapa/Ada/Partisial"</b>, maka kesimpulan <b>WAJIB</b> diawali kata <b>"Beberapa/Ada"</b>.<br>
+            &bull; Kesimpulan hanya bisa bernilai <b>"Semua"</b> jika <b>KEDUA premis</b> bernilai <b>"Semua"</b>.
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px;">
+            <b style="color:var(--accent, #2563eb);">4. Aturan Premis Negatif</b><br>
+            &bull; Jika salah satu premis bernilai <b>Negatif (Tidak/Bukan)</b>, maka kesimpulan <b>WAJIB Negatif</b>.<br>
+            &bull; Jika <b>kedua premis Negatif</b>, maka <b>TIDAK DAPAT ditarik kesimpulan</b> yang sah.
+        </div>
+    `,
+    levels: [
+        {
+            level: 1,
+            title: "Level 1: Silogisme Dasar (P → Q, Q → R)",
+            questions: [
+                {
+                    id: "ch8_l1_q1",
+                    question: "Premis 1: Jika Budi rajin belajar, maka ia pintar.\nPremis 2: Jika Budi pintar, maka ia lulus ujian.\nKesimpulan yang sah adalah...",
+                    options: [
+                        "Jika Budi rajin belajar, maka ia lulus ujian.",
+                        "Jika Budi tidak rajin belajar, maka ia tidak lulus ujian.",
+                        "Budi lulus ujian karena rajin belajar.",
+                        "Jika Budi lulus ujian, maka ia rajin belajar.",
+                        "Budi tidak pintar tetapi lulus ujian."
+                    ],
+                    answer: 0,
+                    explanation: "Menggunakan aturan Silogisme Murni: (P -> Q) dan (Q -> R) menghasilkan (P -> R)."
+                },
+                {
+                    id: "ch8_l1_q2",
+                    question: "Premis 1: Semua mamalia menyusui anaknya.\nPremis 2: Semua sapi adalah mamalia.\nKesimpulan yang tepat adalah...",
+                    options: [
+                        "Beberapa sapi menyusui anaknya.",
+                        "Semua sapi menyusui anaknya.",
+                        "Semua yang menyusui anak adalah sapi.",
+                        "Sapi bukan merupakan mamalia.",
+                        "Ada mamalia yang bukan sapi."
+                    ],
+                    answer: 1,
+                    explanation: "Kedua premis bersifat universal ('Semua'), sehingga kesimpulannya adalah 'Semua sapi menyusui anaknya'."
+                }
+            ]
+        },
+        {
+            level: 2,
+            title: "Level 2: Silogisme Disjungtif & Premis Negatif",
+            questions: [
+                {
+                    id: "ch8_l2_q1",
+                    question: "Premis 1: Andi pergi ke Bandung atau ke Surabaya.\nPremis 2: Andi tidak pergi ke Bandung.\nKesimpulan yang sah adalah...",
+                    options: [
+                        "Andi pergi ke Surabaya.",
+                        "Andi tidak pergi ke Surabaya.",
+                        "Andi pergi ke Bandung dan Surabaya.",
+                        "Andi tetap tinggal di rumah.",
+                        "Tidak dapat ditarik kesimpulan."
+                    ],
+                    answer: 0,
+                    explanation: "Mengikuti Silogisme Disjungtif: (P atau Q) dan (~P) maka kesimpulannya adalah Q ('Andi pergi ke Surabaya')."
+                }
+            ]
+        },
+        {
+            level: 3,
+            title: "Level 3: Penggabungan Kuantor Universal & Eksistensial",
+            questions: [
+                {
+                    id: "ch8_l3_q1",
+                    question: "Premis 1: Semua unggas bertelur.\nPremis 2: Beberapa hewan berbisa adalah unggas.\nKesimpulan yang tepat adalah...",
+                    options: [
+                        "Semua hewan berbisa bertelur.",
+                        "Beberapa hewan berbisa bertelur.",
+                        "Beberapa ungag tidak berbisa.",
+                        "Semua unggas berbisa dan bertelur.",
+                        "Tidak ada hewan berbisa yang bertelur."
+                    ],
+                    answer: 1,
+                    explanation: "Karena ada premis partisial ('Beberapa'), kesimpulan harus diawali kata 'Beberapa' -> 'Beberapa hewan berbisa bertelur'."
+                }
+            ]
+        },
+        {
+            level: 4,
+            title: "Level 4: Silogisme Rantai & Kompleks",
+            questions: [
+                {
+                    id: "ch8_l4_q1",
+                    question: "Premis 1: Jika cuaca cerah, petani memanen padi.\nPremis 2: Jika petani memanen padi, harga beras turun.\nPremis 3: Jika harga beras turun, daya beli meningkat.\nKesimpulan dari ketiga pernyataan di atas adalah...",
+                    options: [
+                        "Jika cuaca cerah, maka daya beli meningkat.",
+                        "Jika daya beli meningkat, maka cuaca cerah.",
+                        "Cuaca cerah menyebabkan beras mahal.",
+                        "Jika cuaca tidak cerah, daya beli tidak meningkat.",
+                        "Petani memanen padi saat daya beli meningkat."
+                    ],
+                    answer: 0,
+                    explanation: "Silogisme Rantai: P -> Q, Q -> R, R -> S menghasilkan P -> S ('Jika cuaca cerah, maka daya beli meningkat')."
+                }
+            ]
+        },
+        {
+            level: 5,
+            title: "Level 5: Penalaran Analitis & Jebakan Silogisme (HOTS)",
+            questions: [
+                {
+                    id: "ch8_l5_q1",
+                    question: "Premis 1: Semua seniman kreatif.\nPremis 2: Beberapa desainer tidak kreatif.\nKesimpulan yang paling tepat adalah...",
+                    options: [
+                        "Semua desainer bukan seniman.",
+                        "Beberapa desainer bukan seniman.",
+                        "Beberapa seniman adalah desainer.",
+                        "Semua yang kreatif adalah desainer.",
+                        "Tidak ada kesimpulan yang sah."
+                    ],
+                    answer: 1,
+                    explanation: "Desainer yang tidak kreatif jelas bukan seniman (karena semua seniman kreatif). Maka 'Beberapa desainer bukan seniman'."
+                }
+            ]
+        }
+    ]
+},
+{
+    id: "pu_ch9",
+    title: "Chapter 9: Bahasa Panda",
+    description: "Analisis pola enkripsi, pergeseran abjad (Caesar Cipher), substitusi kata, dan logika bahasa buatan.",
+    formulaHelp: `
+        <h4 style="margin-top:0; color:var(--accent, #2563eb);">Trik & Aturan Bahasa Panda</h4>
+        
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">1. Pergeseran Abjad (Caesar Cipher)</b><br>
+            Tentukan nilai pergeseran dari huruf kunci yang diberikan:<br>
+            &bull; Contoh: Jika <b>A = 3 (atau C)</b>, berarti huruf bergeser <b>+2</b> dari posisi asli (A &rarr; C, B &rarr; D, C &rarr; E).<br>
+            &bull; Jika kodenya berupa angka: cocokan urutan abjad A=1, B=2, C=3, dst.
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <b style="color:var(--accent, #2563eb);">2. Analisis Struktur Tata Bahasa (S-P-O)</b><br>
+            Bahasa Panda sering kali membalik struktur kata atau imbuhan:<br>
+            &bull; Bandingkan dua atau lebih kalimat terjemahan untuk menemukan <b>kata kunci dasar</b>.<br>
+            &bull; Perhatikan posisi Kata Kerja, Subjek, dan Objek (apakah tetap S-P-O atau berubah menjadi O-P-S / P-S-O).
+        </div>
+
+        <div style="background: rgba(37,99,235,0.08); padding: 10px; border-radius: 8px;">
+            <b style="color:var(--accent, #2563eb);">3. Pola Imbuhan / Perubahan Bentuk</b><br>
+            &bull; Cari akhiran/awalan yang selalu muncul pada bentuk tertentu (misal: penanda jamak, kata sifat, atau kata kerja pasif).
+        </div>
+    `,
+    levels: [
+        {
+            level: 1,
+            title: "Level 1: Pergeseran Abjad Sederhana (Caesar Cipher)",
+            questions: [
+                {
+                    id: "ch9_l1_q1",
+                    question: "Jika kata 'KUCING' dikodekan menjadi 'LVDJOH' (pergeseran +1 abjad), maka kata 'PANDA' dikodekan menjadi...",
+                    options: [
+                        "QBOEB",
+                        "QBNEC",
+                        "OCMCZ",
+                        "QAOEB",
+                        "PBNEB"
+                    ],
+                    answer: 0,
+                    explanation: "Setiap huruf bergeser +1 abjad ke depan:\nP (+1) = Q\nA (+1) = B\nN (+1) = O\nD (+1) = E\nA (+1) = B\nSehingga hasilnya adalah QBOEB."
+                },
+                {
+                    id: "ch9_l1_q2",
+                    question: "Dalam suatu bahasa rahasia, jika 'BUKU' ditulis sebagai 'CVLV', maka 'PENA' ditulis sebagai...",
+                    options: [
+                        "QFOB",
+                        "QGOB",
+                        "QEMZ",
+                        "ODMZ",
+                        "QFOB"
+                    ],
+                    answer: 0,
+                    explanation: "Pola pergeseran tiap huruf adalah +1 (B->C, U->V, K->L, U->V). Maka P->Q, E->F, N->O, A->B -> QFOB."
+                }
+            ]
+        },
+        {
+            level: 2,
+            title: "Level 2: Kode Angka & Urutan Abjad",
+            questions: [
+                {
+                    id: "ch9_l2_q1",
+                    question: "Jika A = 1, B = 2, C = 3, dan kata 'DUA' = 4-21-1, maka hasil penjumlahan nilai huruf dari kata 'TIGA' adalah...",
+                    options: [
+                        "38",
+                        "42",
+                        "40",
+                        "36",
+                        "45"
+                    ],
+                    answer: 1,
+                    explanation: "T = 20, I = 9, G = 7, A = 1. Jumlah = 20 + 9 + 7 + 1 = 37. (Cek urutan abjad standar)."
+                }
+            ]
+        },
+        {
+            level: 3,
+            title: "Level 3: Substitusi Kata Sederhana",
+            questions: [
+                {
+                    id: "ch9_l3_q1",
+                    question: "Berikut adalah kode dalam bahasa Panda:\n- 'mora joo' berarti 'rumah besar'\n- 'mora kiko' berarti 'rumah putih'\n- 'pina kiko' berarti 'mobil putih'\n\nBerdasarkan data di atas, apa bahasa Panda dari 'mobil besar'?",
+                    options: [
+                        "pina joo",
+                        "joo pina",
+                        "mora pina",
+                        "kiko joo",
+                        "pina mora"
+                    ],
+                    answer: 0,
+                    explanation: "'mora' = rumah, 'kiko' = putih, 'joo' = besar, 'pina' = mobil. Maka 'mobil besar' = pina joo."
+                }
+            ]
+        },
+        {
+            level: 4,
+            title: "Level 4: Struktur Kalimat Kompleks (SPO & Imbuhan)",
+            questions: [
+                {
+                    id: "ch9_l4_q1",
+                    question: "Perhatikan terjemahan bahasa rahasia berikut:\n- 'elok nami' = anak makan\n- 'elok nami-z' = anak-anak makan\n- 'elok nami-z roti' = anak-anak makan roti\n\nBagaimanakah cara mengatakan 'anak makan roti'?",
+                    options: [
+                        "elok nami roti",
+                        "roti elok nami",
+                        "elok roti nami",
+                        "nami elok roti",
+                        "elok nami-z roti"
+                    ],
+                    answer: 0,
+                    explanation: "Akhiran '-z' menyatakan bentuk jamak. Tanpa '-z', 'anak makan roti' ditulis 'elok nami roti'."
+                }
+            ]
+        },
+        {
+            level: 5,
+            title: "Level 5: Penalaran Kriptografi HOTS (Sistem Kombinasi)",
+            questions: [
+                {
+                    id: "ch9_l5_q1",
+                    question: "Diberikan informasi berikut:\n- 'klap bor' = minum air\n- 'bor tin-z' = air jernih\n- 'klap-na bor' = sedang minum air\n\nBagaimanakah terjemahan dari 'sedang minum air jernih'?",
+                    options: [
+                        "klap-na bor tin-z",
+                        "klap bor-na tin-z",
+                        "tin-z klap-na bor",
+                        "bor tin-z klap",
+                        "klap-na tin-z bor"
+                    ],
+                    answer: 0,
+                    explanation: "'klap-na' = sedang minum, 'bor' = air, 'tin-z' = jernih. Maka susunannya adalah 'klap-na bor tin-z'."
+                }
+            ]
+        }
+    ]
+} 
+            
         ];
 
         // Fungsi untuk membuka Modal Panduan Rumus (Safe Check)
