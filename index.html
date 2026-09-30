@@ -349,7 +349,7 @@
             <li>
                 <a class="nav-link active" id="nav-logika" onclick="switchModule('logika')">
                     <span>Logika Informatika</span>
-                    
+                    <span>Soon</span>
                 </a>
             </li>
             <li>
@@ -378,16 +378,51 @@
         <!-- Quiz View Area -->
         <div class="quiz-box" id="quiz-view">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <span id="quiz-chapter-title" style="color: var(--accent); font-weight: bold;">Chapter 1</span>
-                <span id="quiz-progress-text" style="color: var(--text-secondary);">Soal 1 dari 10</span>
+        <!-- Sisi Kiri: Judul Chapter & Progres Soal -->
+        <div style="display: flex; flex-direction: column;">
+            <span id="quiz-chapter-title" style="color: var(--accent); font-weight: bold;"></span>
+            <span id="quiz-progress-text" style="color: var(--text-secondary);">Soal 1 dari 10</span>
+        </div>
+            
+            <button onclick="openFormulaModal()" class="faq-btn" style="background: none; border: 1px solid var(--border, #ccc); color: #2563eb; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Panduan Rumus
+        </button>
+            
             </div>
+
+            <!-- Modal Popup Panduan Rumus -->
+        <div id="formula-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; padding: 16px;">
+    <div style="background: var(--bg-card, #ffffff); width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto; border-radius: 12px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative;">
+        
+        <!-- Header Modal -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
+            <h3 id="formula-title" style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Panduan Rumus</h3>
+            <button onclick="closeFormulaModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
+        </div>
+
+        <!-- Konten Panduan (Dinamis dari JS) -->
+        <div id="formula-content" style="font-size: 0.9rem; line-height: 1.6; color: var(--text-primary);">
+            <!-- Isi rumus akan muncul di sini sesuai chapter -->
+        </div>
+
+        <!-- Tombol Tutup -->
+        <button onclick="closeFormulaModal()" style="margin-top: 20px; width: 100%; padding: 10px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+            Paham, Tutup Panduan
+        </button>
+             </div>
+        </div>
             
             <h2 id="quiz-question-text" style="margin-bottom: 1rem;">Pertanyaan soal...</h2>
             
             <div class="options-list" id="quiz-options-container"></div>
 
             <div style="display: flex; justify-content: space-between; gap: 1rem;">
-                <button class="btn-action" style="background: var(--border); color: white;" onclick="exitQuiz()">Batal / Keluar</button>
+                <button class="btn-action" style="background: var(--border); color: white;" onclick="exitQuiz()">Keluar</button>
                 <button class="btn-action" id="next-btn" onclick="nextQuestion()">Soal Berikutnya</button>
             </div>
         </div>
@@ -399,12 +434,12 @@
 
     <!-- TARUH KODE HTML TOMBOL DONASI DI SINI -->
      <div class="donate-container">
-361  <a href="https://tako.id/Alipuyyy" target="_blank" rel="noopener noreferrer" class="donate-float-btn">
-362      <svg class="heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-363          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-364      </svg>
-365      <span>Dukung Kami</span>
-366  </a>
+  <a href="https://tako.id/Alipuyyy" target="_blank" rel="noopener noreferrer" class="donate-float-btn">
+      <svg class="heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+     <span>Support</span>
+  </a>
     </div>
 
     <script>
@@ -412,8 +447,8 @@
         // DATA SET: LOGIKA INFORMATIKA & PENALARAN UMUM
         // ==========================================
         const logikaData = [
-            { id: "log_c1", title: "Chapter 1: Proposisi & Tabel Kebenaran", description: "Dasar logika proposisi dan evaluasi kebenaran.", questions: createDummyQuestions("Logika Proposisi") },
-            { id: "log_c2", title: "Chapter 2: Negasi & Implikasi", description: "Pengingkaran serta operasi syarat majemuk.", questions: createDummyQuestions("Negasi Implikasi") }
+            { id: "log_c1", title: "Chapter 1: Proposisi & Tabel Kebenaran", description: "Dasar logika proposisi dan evaluasi kebenaran.Soon", questions: createDummyQuestions("Logika Proposisi") },
+            { id: "log_c2", title: "Chapter 2: Negasi & Implikasi", description: "Pengingkaran serta operasi syarat majemuk.Soon", questions: createDummyQuestions("Negasi Implikasi") }
         ];
 const puData = [
             {
@@ -678,13 +713,351 @@ const puData = [
                 ]
             },
         
-            { id: "pu_ch4", title: "Chapter 4: Modus Ponens", description: "Penarikan kesimpulan aturan Implikasi (P -> Q, P).", questions: createDummyQuestions("Modus Ponens") },
-            { id: "pu_ch5", title: "Chapter 5: Modus Tollens", description: "Penarikan kesimpulan Kontraposisi (P -> Q, ~Q).", questions: createDummyQuestions("Modus Tollens") },
-            { id: "pu_ch6", title: "Chapter 6: Ekuivalensi Logika", description: "Pernyataan majemuk yang senilai.", questions: createDummyQuestions("Ekuivalensi Logika") },
+           {
+                id: "pu_ch4",
+                title: "Chapter 4: Modus Ponens",
+                description: "Penarikan kesimpulan berdasarkan aturan Implikasi (P -> Q, P) (5 Level Ketuntasan).",
+                    formulaHelp: `
+                    <h3 style="font-weight:700; margin-bottom:10px;">Aturan Modus Ponens</h3>
+                      <p>Jika premis 1 berupa implikasi dan premis 2 membenarkan sebab (antecedent), maka kesimpulannya adalah membenarkan akibat (consequent).</p>
+                    <div style="background:var(--border, #eee); padding:10px; border-radius:8px; margin:10px 0; font-family:monospace;">
+                         Premis 1: P -> Q (Jika P maka Q)<br>
+                                   Premis 2: P (Terjadi P)<br>
+                          -----------------------------<br>
+                             Kesimpulan: Q (Maka terjadi Q)
+                              </div>
+                                <p><strong>Contoh:</strong><br>
+                             P1: Jika hari hujan, maka jalanan basah.<br>
+                          P2: Hari hujan.<br>
+                        <strong>Kesimpulan:</strong> Jalanan basah.</p>
+            `,
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Implikasi Sederhana (Teks Langsung)",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika hari hujan, maka jalanan basah.\nPremis 2: Hari hujan.\nKesimpulan yang sah adalah?", options: ["Jalanan basah", "Jalanan tidak basah", "Hari tidak hujan", "Jalanan licin"], correctAnswer: 0 },
+                            { id: 2, question: "Premis 1: Jika Budi belajar, maka ia lulus ujian.\nPremis 2: Budi belajar.\nKesimpulan yang tepat adalah?", options: ["Budi tidak lulus ujian", "Budi lulus ujian", "Budi rajin", "Ujiannya mudah"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika lampu berwarna merah, maka kendaraan harus berhenti.\nPremis 2: Lampu berwarna merah.\nKesimpulan yang benar adalah?", options: ["Kendaraan berjalan", "Kendaraan harus berhenti", "Kendaraan memutar balik", "Lampu padam"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika harga bahan pokok naik, maka biaya hidup meningkat.\nPremis 2: Harga bahan pokok naik.\nKesimpulan yang sah adalah?", options: ["Biaya hidup meningkat", "Biaya hidup menurun", "Pendapatan naik", "Harga bahan pokok turun"], correctAnswer: 0 },
+                            { id: 5, question: "Premis 1: Jika Andi makan makanan pedas, maka perutnya sakit.\nPremis 2: Andi makan makanan pedas.\nKesimpulan yang benar adalah?", options: ["Andi minum obat", "Perut Andi sakit", "Andi tidak makan", "Perut Andi tidak sakit"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika mesin dinyalakan, maka indikator lampu menyala.\nPremis 2: Mesin dinyalakan.\nKesimpulan yang tepat adalah?", options: ["Mesin rusak", "Indikator lampu menyala", "Indikator lampu mati", "Listrik padam"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika toko buka, maka pelanggan berdatangan.\nPremis 2: Toko buka.\nKesimpulan yang sah adalah?", options: ["Pelanggan berdatangan", "Toko tutup", "Pelanggan pergi", "Barang habis"], correctAnswer: 0 },
+                            { id: 8, question: "Premis 1: Jika tim A mencetak gol, maka penonton bersorak.\nPremis 2: Tim A mencetak gol.\nKesimpulan yang benar adalah?", options: ["Penonton diam", "Penonton bersorak", "Pertandingan selesai", "Tim B menang"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika tanaman disiram, maka tanaman tumbuh subur.\nPremis 2: Tanaman disiram.\nKesimpulan yang tepat adalah?", options: ["Tanaman layu", "Tanaman mati", "Tanaman tumbuh subur", "Tanaman dipanen"], correctAnswer: 2 },
+                            { id: 10, question: "Premis 1: Jika server mati, maka situs web tidak dapat diakses.\nPremis 2: Server mati.\nKesimpulan yang sah adalah?", options: ["Situs web lancar", "Situs web dapat diakses", "Situs web tidak dapat diakses", "Server diperbaiki"], correctAnswer: 2 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Konjungsi & Disjungsi pada Premis",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika Budi belajar dan berdoa, maka ia akan berhasil.\nPremis 2: Budi belajar dan berdoa.\nKesimpulan yang benar adalah?", options: ["Budi gagal", "Budi akan berhasil", "Budi tidak berdoa", "Budi belum belajar"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika Ani membeli baju atau celana, maka ia mendapat diskon.\nPremis 2: Ani membeli baju.\nKesimpulan yang sah adalah?", options: ["Ani tidak dapat diskon", "Ani mendapat diskon", "Ani membeli celana saja", "Diskon membatalkan pembelian"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika terjadi banjir dan tanah longsor, maka warga dievakuasi.\nPremis 2: Terjadi banjir dan tanah longsor.\nKesimpulan yang tepat adalah?", options: ["Warga dievakuasi", "Warga tetap di rumah", "Tidak terjadi bencana", "Bantuan datang"], correctAnswer: 0 },
+                            { id: 4, question: "Premis 1: Jika peserta membawa kartu ujian dan KTP, maka diperbolehkan masuk.\nPremis 2: Peserta membawa kartu ujian dan KTP.\nKesimpulan yang benar adalah?", options: ["Peserta dilarang masuk", "Peserta diperbolehkan masuk", "Peserta harus pulang", "Peserta menunggu di luar"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika suhu udara turun dan kelembapan tinggi, maka hujan turun.\nPremis 2: Suhu udara turun dan kelembapan tinggi.\nKesimpulan yang sah adalah?", options: ["Cuaca cerah", "Hujan turun", "Angin kencang", "Suhu udara naik"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika pegawai datang tepat waktu atau bekerja lembur, maka mendapat bonus.\nPremis 2: Pegawai bekerja lembur.\nKesimpulan yang tepat adalah?", options: ["Pegawai mendapat bonus", "Pegawai dipotong gaji", "Pegawai terlambat", "Pegawai tidak dapat bonus"], correctAnswer: 0 },
+                            { id: 7, question: "Premis 1: Jika sistem dienkripsi dan diproteksi, maka data aman.\nPremis 2: Sistem dienkripsi dan diproteksi.\nKesimpulan yang benar adalah?", options: ["Data bocor", "Data aman", "Sistem rusak", "Data hilang"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika mobil kehabisan bensin atau mogok, maka perjalanan terhambat.\nPremis 2: Mobil kehabisan bensin.\nKesimpulan yang sah adalah?", options: ["Perjalanan lancar", "Perjalanan terhambat", "Bensin terisi penuh", "Mobil berjalan cepat"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika siswa aktif dan disiplin, maka mendapat nilai A.\nPremis 2: Siswa aktif dan disiplin.\nKesimpulan yang benar adalah?", options: ["Siswa mendapat nilai B", "Siswa tidak lulus", "Siswa mendapat nilai A", "Siswa remedial"], correctAnswer: 2 },
+                            { id: 10, question: "Premis 1: Jika listrik padam atau terjadi gangguan, maka AC mati.\nPremis 2: Terjadi gangguan.\nKesimpulan yang tepat adalah?", options: ["AC menyala", "AC mati", "Suhu dingin", "Listrik menyala"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Negasi (Pengingkaran) Kompleks",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika Andi tidak sarapan, maka Andi merasa lemas.\nPremis 2: Andi tidak sarapan.\nKesimpulan yang tepat adalah?", options: ["Andi merasa lemas", "Andi bertenaga", "Andi merasa kenyang", "Andi makan siang"], correctAnswer: 0 },
+                            { id: 2, question: "Premis 1: Jika proyek tidak selesai, maka kontraktor tidak dibayar.\nPremis 2: Proyek tidak selesai.\nKesimpulan yang benar adalah?", options: ["Kontraktor dibayar", "Kontraktor tidak dibayar", "Proyek dilanjutkan", "Biaya bertambah"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika siswa tidak membawa buku, maka guru memberi teguran.\nPremis 2: Siswa tidak membawa buku.\nKesimpulan yang sah adalah?", options: ["Guru memberi hadiah", "Guru memberi teguran", "Siswa membaca buku", "Siswa tidak masuk"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika hari tidak hujan, maka kuis tetap dilaksanakan.\nPremis 2: Hari tidak hujan.\nKesimpulan yang benar adalah?", options: ["Kuis ditunda", "Kuis tetap dilaksanakan", "Kuis dibatalkan", "Hari mendung"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika nilai x tidak sama dengan 0, maka pecahan tersebut terdefinisi.\nPremis 2: Nilai x tidak sama dengan 0.\nKesimpulan yang tepat adalah?", options: ["Pecahan tidak terdefinisi", "Pecahan bernilai nol", "Pecahan tersebut terdefinisi", "Nilai x positif"], correctAnswer: 2 },
+                            { id: 6, question: "Premis 1: Jika barang tidak lulus uji kualitas, maka barang dimusnahkan.\nPremis 2: Barang tidak lulus uji kualitas.\nKesimpulan yang sah adalah?", options: ["Barang dijual", "Barang dimusnahkan", "Barang disimpan", "Barang diuji ulang"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika sinyal tidak stabil, maka koneksi terputus.\nPremis 2: Sinyal tidak stabil.\nKesimpulan yang tepat adalah?", options: ["Koneksi cepat", "Koneksi terputus", "Koneksi stabil", "Sinyal kuat"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika tim tidak berlatih keras, maka tim akan kalah.\nPremis 2: Tim tidak berlatih keras.\nKesimpulan yang sah adalah?", options: ["Tim akan menang", "Tim akan kalah", "Pertandingan seri", "Pelatih diganti"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika pemicu tidak ditekan, maka alat tidak berfungsi.\nPremis 2: Pemicu tidak ditekan.\nKesimpulan yang benar adalah?", options: ["Alat berfungsi", "Alat tidak berfungsi", "Alat rusak", "Alat meledak"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika anggaran tidak disetujui, maka kegiatan dibatalkan.\nPremis 2: Anggaran tidak disetujui.\nKesimpulan yang tepat adalah?", options: ["Kegiatan berjalan", "Kegiatan dibatalkan", "Anggaran ditambah", "Kegiatan diundur"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Narasi Panjang & Konteks Nyata",
+                        questions: [
+                            { id: 1, question: "Seorang manajer menerapkan aturan: 'Jika penjualan bulan ini mencapai target, maka seluruh tim diberikan bonus liburan ke Bali.' Di akhir bulan, pencatatan menunjukkan bahwa penjualan berhasil mencapai target. Kesimpulan yang benar adalah?", options: ["Tim bekerja lembur", "Seluruh tim diberikan bonus liburan ke Bali", "Target dinaikkan bulan depan", "Bonus dibatalkan"], correctAnswer: 1 },
+                            { id: 2, question: "Berdasarkan SOP Rumah Sakit: 'Jika pasien mengalami demam di atas 38 derajat Celsius, maka perawat harus segera memberikan paracetamol.' Seorang pasien yang baru masuk terukur suhunya 39 derajat Celsius. Tindakan yang sah menurut logika adalah?", options: ["Pasien dipulangkan", "Perawat harus segera memberikan paracetamol", "Pasien tidak diberi obat", "Suhu diperiksa esok hari"], correctAnswer: 1 },
+                            { id: 3, question: "Ketentuan kompetisi menyatakan: 'Jika peserta mengunggah karya melewati batas waktu pukul 23.59, maka karya secara otomatis didiskualifikasi.' Budi mengunggah karyanya pada pukul 00.15. Kesimpulan yang tepat adalah?", options: ["Karya Budi didiskualifikasi", "Karya Budi tetap dinilai", "Budi mendapat bonus waktu", "Kompetisi diperpanjang"], correctAnswer: 0 },
+                            { id: 4, question: "Aturan lalu lintas menyebutkan: 'Jika pengemudi tidak menggunakan sabuk pengaman, maka petugas akan menerbitkan surat tilang.' Seorang pengemudi tertangkap kamera tidak memakai sabuk pengaman. Kesimpulan yang benar adalah?", options: ["Petugas memberi peringatan verbal", "Petugas akan menerbitkan surat tilang", "Pengemudi melanjutkan perjalanan", "Surat tilang dibatalkan"], correctAnswer: 1 },
+                            { id: 5, question: "Hukum ekonomi menyatakan: 'Jika jumlah penawaran suatu barang melonjak melebihi permintaan, maka harga barang tersebut akan mengalami penurunan.' Saat ini penawaran cabai melonjak tajam melebihi permintaannya. Kesimpulan yang tepat adalah?", options: ["Harga cabai naik", "Harga cabai akan mengalami penurunan", "Harga cabai tetap", "Petani berhenti panen"], correctAnswer: 1 },
+                            { id: 6, question: "Syarat penerimaan beasiswa: 'Jika IPK mahasiswa di atas 3.50, maka mahasiswa dibebaskan dari biaya SPP.' Rina memiliki IPK 3.75. Kesimpulan yang sah adalah?", options: ["Rina membayar SPP setengahnya", "Rina dibebaskan dari biaya SPP", "Rina tidak mendapat beasiswa", "Rina harus mendaftar ulang"], correctAnswer: 1 },
+                            { id: 7, question: "Aturan laboratorium: 'Jika zat A dicampur dengan zat B, maka akan terjadi reaksi eksoterm yang memancarkan panas.' Seorang praktikan mencampurkan zat A dan zat B di dalam tabung reaksi. Kesimpulan yang sah adalah?", options: ["Suhu tabung reaksi dingin", "Terjadi reaksi eksoterm yang memancarkan panas", "Zat menguap habis", "Tidak terjadi reaksi"], correctAnswer: 1 },
+                            { id: 8, question: "Kebijakan keamanan Siber: 'Jika pengguna salah memasukkan PIN sebanyak tiga kali, maka kartu ATM akan diblokir otomatis.' Dian salah memasukkan PIN ATM miliknya sebanyak tiga kali berturut-turut. Kesimpulan yang benar adalah?", options: ["Kartu ATM Dian dapat digunakan", "Kartu ATM Dian akan diblokir otomatis", "PIN Dian diperbarui", "Mesin ATM rusak"], correctAnswer: 1 },
+                            { id: 9, question: "Sistem alarm kebakaran: 'Jika sensor mendeteksi adanya konsentrasi asap pekat, maka alarm akan berbunyi dan spinkler air akan aktif.' Sensor di gedung A mendeteksi asap pekat. Kesimpulan yang tepat adalah?", options: ["Alarm berbunyi dan spinkler air aktif", "Gedung dievakuasi", "Alarm diperbaiki", "Listrik padam"], correctAnswer: 0 },
+                            { id: 10, question: "Aturan perpustakaan: 'Jika peminjam mengembalikan buku terlambat, maka dikenakan denda Rp 1.000 per hari.' Doni mengembalikan buku terlambat selama 3 hari. Kesimpulan yang sah adalah?", options: ["Doni dibebaskan denda", "Doni dikenakan denda", "Buku Doni disita", "Doni tidak boleh meminjam lagi"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Penalaran Modus Ponens HOTS",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika P dan Q bernilai benar, maka R bernilai salah.\nPremis 2: P dan Q bernilai benar.\nKesimpulan yang sah adalah?", options: ["R bernilai benar", "R bernilai salah", "P bernilai salah", "Q bernilai salah"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika (x^2 - 4 = 0), maka (x = 2 atau x = -2).\nPremis 2: x^2 - 4 = 0.\nKesimpulan yang benar adalah?", options: ["x = 2 saja", "x = -2 saja", "x = 2 atau x = -2", "x = 0"], correctAnswer: 2 },
+                            { id: 3, question: "Premis 1: Jika semua syarat A, B, dan C terpenuhi, maka sertifikat terbit.\nPremis 2: Syarat A, B, dan C terpenuhi seluruhnya.\nKesimpulan yang sah adalah?", options: ["Sertifikat tertunda", "Sertifikat terbit", "Sertifikat dibatalkan", "Syarat diperbarui"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika matriks A memiliki determinan nol, maka matriks A tidak memiliki invers.\nPremis 2: Determinan matriks A adalah nol.\nKesimpulan yang tepat adalah?", options: ["Matriks A memiliki invers", "Matriks A tidak memiliki invers", "Matriks A adalah matriks identitas", "Determinan A = 1"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika fungsi f(x) terdiferensialkan di x = a, maka f(x) kontinu di x = a.\nPremis 2: Fungsi f(x) terdiferensialkan di x = a.\nKesimpulan yang benar adalah?", options: ["f(x) diskontinu di x = a", "f(x) kontinu di x = a", "f(x) bernilai nol", "f(a) tidak ada"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika suku bunga naik dan inflasi tinggi, maka daya beli masyarakat melemah.\nPremis 2: Suku bunga naik dan inflasi tinggi.\nKesimpulan yang tepat adalah?", options: ["Daya beli masyarakat menguat", "Daya beli masyarakat melemah", "Daya beli tetap", "Perekonomian stabil"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika p -> ~q dan p bernilai benar.\nPremis 2: p bernilai benar.\nKesimpulan logika formal yang sah adalah?", options: ["q bernilai benar", "~q bernilai benar", "p bernilai salah", "q -> p"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika kendaraan bermotor lulus uji emisi dan memiliki sertifikat, maka bebas pajak lingkungan.\nPremis 2: Kendaraan bermotor lulus uji emisi dan memiliki sertifikat.\nKesimpulan yang benar adalah?", options: ["Kendaraan kena pajak ganda", "Kendaraan bebas pajak lingkungan", "Sertifikat dicabut", "Kendaraan dilarang beroperasi"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika reaksi kimia menghasilkan gas hidrogen, maka tekanan dalam tabung meningkat.\nPremis 2: Reaksi kimia menghasilkan gas hidrogen.\nKesimpulan yang tepat adalah?", options: ["Tekanan dalam tabung turun", "Tekanan dalam tabung meningkat", "Suhu tabung konstan", "Tabung bocor"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika p -> (q v r) dan p bernilai benar.\nPremis 2: p bernilai benar.\nKesimpulan yang sah adalah?", options: ["~q dan ~r", "q v r", "q dan r", "~p"], correctAnswer: 1 }
+                        ]
+                    }
+                ]
+            },
+
+            {
+                id: "pu_ch5",
+                 title: "Chapter 5: Modus Tollens",
+                description: "Penarikan kesimpulan berdasarkan pengingkaran akibat (P -> Q, ~Q) (5 Level Ketuntasan).",
+                formulaHelp: `
+    <h3 style="font-weight:700; margin-bottom:10px;">Aturan Modus Tollens</h3>
+    <p>Jika premis 1 berupa implikasi dan premis 2 mengingkari akibat (~Q), maka kesimpulannya adalah mengingkari sebab (~P).</p>
+    <div style="background:var(--border, #eee); padding:10px; border-radius:8px; margin:10px 0; font-family:monospace;">
+        Premis 1: P -> Q (Jika P maka Q)<br>
+        Premis 2: ~Q (Tidak terjadi Q)<br>
+        -----------------------------<br>
+        Kesimpulan: ~P (Maka tidak terjadi P)
+    </div>
+    <p><strong>Contoh:</strong><br>
+    P1: Jika Budi belajar, maka ia lulus ujian.<br>
+    P2: Budi tidak lulus ujian.<br>
+    <strong>Kesimpulan:</strong> Budi tidak belajar.</p>
+`,
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Implikasi Sederhana (Teks Langsung)",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika hari hujan, maka jalanan basah.\nPremis 2: Jalanan tidak basah.\nKesimpulan yang sah adalah?", options: ["Hari hujan", "Hari tidak hujan", "Jalanan licin", "Hari mendung"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika Budi belajar, maka ia lulus ujian.\nPremis 2: Budi tidak lulus ujian.\nKesimpulan yang tepat adalah?", options: ["Budi belajar", "Budi tidak belajar", "Ujiannya sulit", "Budi rajin"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika lampu berwarna merah, maka kendaraan harus berhenti.\nPremis 2: Kendaraan tidak berhenti.\nKesimpulan yang benar adalah?", options: ["Lampu tidak berwarna merah", "Lampu berwarna merah", "Kendaraan melaju cepat", "Lampu hijau"], correctAnswer: 0 },
+                            { id: 4, question: "Premis 1: Jika harga bahan pokok naik, maka biaya hidup meningkat.\nPremis 2: Biaya hidup tidak meningkat.\nKesimpulan yang sah adalah?", options: ["Harga bahan pokok naik", "Harga bahan pokok tidak naik", "Pendapatan berkurang", "Biaya hidup turun"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika Andi makan makanan pedas, maka perutnya sakit.\nPremis 2: Perut Andi tidak sakit.\nKesimpulan yang benar adalah?", options: ["Andi makan makanan pedas", "Andi tidak makan makanan pedas", "Andi minum obat", "Andi kenyang"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika mesin dinyalakan, maka indikator lampu menyala.\nPremis 2: Indikator lampu tidak menyala.\nKesimpulan yang tepat adalah?", options: ["Mesin dinyalakan", "Mesin tidak dinyalakan", "Mesin rusak", "Baterai habis"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika toko buka, maka pelanggan berdatangan.\nPremis 2: Pelanggan tidak berdatangan.\nKesimpulan yang sah adalah?", options: ["Toko buka", "Toko tidak buka", "Barang diskon", "Toko ramai"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika tim A mencetak gol, maka penonton bersorak.\nPremis 2: Penonton tidak bersorak.\nKesimpulan yang benar adalah?", options: ["Tim A mencetak gol", "Tim A tidak mencetak gol", "Pertandingan ditunda", "Tim B menang"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika tanaman disiram, maka tanaman tumbuh subur.\nPremis 2: Tanaman tidak tumbuh subur.\nKesimpulan yang tepat adalah?", options: ["Tanaman disiram", "Tanaman tidak disiram", "Tanaman dipupuk", "Tanaman mati"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika server mati, maka situs web tidak dapat diakses.\nPremis 2: Situs web dapat diakses.\nKesimpulan yang sah adalah?", options: ["Server mati", "Server tidak mati", "Server sedang diperbaiki", "Situs web lambat"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Negasi pada Akibat Berbentuk Majemuk",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika Budi rajin, maka ia akan pintar dan sukses.\nPremis 2: Budi tidak pintar atau tidak sukses.\nKesimpulan yang benar adalah?", options: ["Budi rajin", "Budi tidak rajin", "Budi sangat sukses", "Budi belum belajar"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika Ani berbelanja, maka ia membeli baju dan sepatu.\nPremis 2: Ani tidak membeli baju atau tidak membeli sepatu.\nKesimpulan yang sah adalah?", options: ["Ani berbelanja", "Ani tidak berbelanja", "Ani hemat", "Ani membeli barang lain"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika cuaca cerah, maka penerbangan aman dan tepat waktu.\nPremis 2: Penerbangan tidak aman atau tidak tepat waktu.\nKesimpulan yang tepat adalah?", options: ["Cuaca cerah", "Cuaca tidak cerah", "Penerbangan dibatalkan", "Pesawat mendarat"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika siswa disiplin, maka siswa datang tepat waktu dan memakai seragam lengkap.\nPremis 2: Siswa tidak datang tepat waktu atau tidak memakai seragam lengkap.\nKesimpulan yang benar adalah?", options: ["Siswa disiplin", "Siswa tidak disiplin", "Siswa dihukum", "Siswa izin sakit"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika komputer berfungsi baik, maka layar menyala dan keyboard merespons.\nPremis 2: Layar tidak menyala atau keyboard tidak merespons.\nKesimpulan yang sah adalah?", options: ["Komputer berfungsi baik", "Komputer tidak berfungsi baik", "Listrik padam", "Komputer baru"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika mobil diservis, maka oli diganti dan rem diperiksa.\nPremis 2: Oli tidak diganti atau rem tidak diperiksa.\nKesimpulan yang tepat adalah?", options: ["Mobil diservis", "Mobil tidak diservis", "Mobil rusak berat", "Mobil siap dipakai"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika proyek berhasil, maka anggaran hemat dan target tercapai.\nPremis 2: Anggaran tidak hemat atau target tidak tercapai.\nKesimpulan yang benar adalah?", options: ["Proyek berhasil", "Proyek tidak berhasil", "Proyek diperpanjang", "Anggaran ditambah"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika makanan higienis, maka terasa enak dan bersih.\nPremis 2: Makanan tidak terasa enak atau tidak bersih.\nKesimpulan yang sah adalah?", options: ["Makanan higienis", "Makanan tidak higienis", "Makanan mahal", "Makanan basi"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika terumbu karang terjaga, maka ikan melimpah dan air jernih.\nPremis 2: Ikan tidak melimpah atau air tidak jernih.\nKesimpulan yang benar adalah?", options: ["Terumbu karang terjaga", "Terumbu karang tidak terjaga", "Laut tercemar", "Nelayan panen"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika sistem stabil, maka koneksi cepat dan tidak ada error.\nPremis 2: Koneksi tidak cepat atau ada error.\nKesimpulan yang tepat adalah?", options: ["Sistem stabil", "Sistem tidak stabil", "Sistem diperbarui", "Koneksi terputus"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Implikasi Bertanda Negasi (Pengingkaran Ganda)",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika Andi tidak olahraga, maka Andi mudah sakit.\nPremis 2: Andi tidak mudah sakit.\nKesimpulan yang tepat adalah?", options: ["Andi tidak olahraga", "Andi olahraga", "Andi makan sehat", "Andi minum vitamin"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika proyek tidak diawasi, maka hasil kerja buruk.\nPremis 2: Hasil kerja tidak buruk.\nKesimpulan yang benar adalah?", options: ["Proyek tidak diawasi", "Proyek diawasi", "Proyek selesai", "Hasil kerja memuaskan"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika siswa tidak membawa kartu ujian, maka tidak boleh masuk.\nPremis 2: Siswa boleh masuk.\nKesimpulan yang sah adalah?", options: ["Siswa tidak membawa kartu ujian", "Siswa membawa kartu ujian", "Ujian dibatalkan", "Siswa terlambat"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika hari tidak mendung, maka suhu udara panas.\nPremis 2: Suhu udara tidak panas.\nKesimpulan yang benar adalah?", options: ["Hari tidak mendung", "Hari mendung", "Hari hujan", "Cuaca sejuk"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika barang tidak langka, maka harga barang murah.\nPremis 2: Harga barang tidak murah.\nKesimpulan yang tepat adalah?", options: ["Barang tidak langka", "Barang langka", "Barang tidak dijual", "Produksi meningkat"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika mesin tidak dirawat, maka suara mesin kasar.\nPremis 2: Suara mesin tidak kasar.\nKesimpulan yang sah adalah?", options: ["Mesin tidak dirawat", "Mesin dirawat", "Mesin baru", "Mesin rusak"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika sinyal tidak kuat, maka video mengalami buffering.\nPremis 2: Video tidak mengalami buffering.\nKesimpulan yang tepat adalah?", options: ["Sinyal tidak kuat", "Sinyal kuat", "Video diunduh", "Kuota habis"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika obat tidak diminum teratur, maka penyakit tidak sembuh.\nPremis 2: Penyakit sembuh.\nKesimpulan yang sah adalah?", options: ["Obat tidak diminum teratur", "Obat diminum teratur", "Dosis ditambah", "Penyakit parah"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika tanggul tidak diperbaiki, maka permukiman tergenang.\nPremis 2: Permukiman tidak tergenang.\nKesimpulan yang benar adalah?", options: ["Tanggul tidak diperbaiki", "Tanggul diperbaiki", "Hujan deras", "Air sungai surut"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika postingan tidak melanggar aturan, maka postingan tidak dihapus.\nPremis 2: Postingan dihapus.\nKesimpulan yang tepat adalah?", options: ["Postingan tidak melanggar aturan", "Postingan melanggar aturan", "Postingan disukai", "Akun diblokir"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Narasi Panjang & Konteks Nyata",
+                        questions: [
+                            { id: 1, question: "Peraturan perusahaan menetapkan: 'Jika karyawan terlambat masuk kerja tiga kali dalam sebulan, maka tunjangan kehadiran tidak akan dicairkan.' Pada akhir bulan, diketahui bahwa tunjangan kehadiran Budi tetap dicairkan secara penuh. Kesimpulan yang sah berdasarkan Modus Tollens adalah?", options: ["Budi rajin bekerja", "Budi tidak terlambat masuk kerja tiga kali dalam sebulan", "Budi mendapat kenaikan gaji", "Aturan perusahaan diubah"], correctAnswer: 1 },
+                            { id: 2, question: "SOP Keselamatan Kerja: 'Jika pekerja memasuki area konstruksi, maka pekerja wajib menggunakan helm pelindung.' Seorang pengawas melihat bahwa Doni tidak menggunakan helm pelindung. Kesimpulan yang benar adalah?", options: ["Doni mematuhi aturan", "Doni tidak memasuki area konstruksi", "Helm Doni hilang", "Doni sedang beristirahat"], correctAnswer: 1 },
+                            { id: 3, question: "Ketentuan Toko Online: 'Jika pesanan dikirim menggunakan layanan ekspres, maka paket akan sampai dalam waktu 24 jam.' Kenyataannya, paket pesanan Rina tidak sampai dalam waktu 24 jam. Kesimpulan yang tepat adalah?", options: ["Paket hilang", "Pesanan tidak dikirim menggunakan layanan ekspres", "Ekspres mengalami kendala", "Rina salah alamat"], correctAnswer: 1 },
+                            { id: 4, question: "Prinsip Kedokteran: 'Jika seseorang terserang infeksi bakteri, maka jumlah sel darah putih dalam tubuhnya akan meningkat pesat.' Hasil pemeriksaan laboratorium menunjukkan jumlah sel darah putih pasien tidak meningkat. Kesimpulan yang benar adalah?", options: ["Pasien mengalami infeksi bakteri", "Seseorang tidak terserang infeksi bakteri", "Pasien butuh rawat inap", "Pemeriksaan lab salah"], correctAnswer: 1 },
+                            { id: 5, question: "Ketentuan Akademik: 'Jika mahasiswa mengumpulkan tugas akhir tepat waktu, maka Dosen Pembimbing akan memberikan nilai apresiasi.' Dosen Pembimbing tidak memberikan nilai apresiasi kepada Ahmad. Kesimpulan yang sah adalah?", options: ["Ahmad mengumpulkan tugas tepat waktu", "Ahmad tidak mengumpulkan tugas akhir tepat waktu", "Ahmad lulus ujian", "Tugas Ahmad sangat bagus"], correctAnswer: 1 },
+                            { id: 6, question: "Prosedur Perbankan: 'Jika nasabah mengaktifkan fitur autentikasi dua faktor, maka transaksi keuangan di atas Rp 10 juta memerlukan kode OTP.' Nasabah melakukan transaksi Rp 15 juta tanpa memerlukan kode OTP. Kesimpulan yang tepat adalah?", options: ["Nasabah telah mengaktifkan fitur autentikasi dua faktor", "Nasabah tidak mengaktifkan fitur autentikasi dua faktor", "Sistem bank mengalami error", "Fitur OTP tidak berguna"], correctAnswer: 1 },
+                            { id: 7, question: "Aturan Pertanian: 'Jika lahan pertanian diberi pupuk organik secara teratur, maka kualitas tanah tidak akan memburuk.' Setelah diteliti, kualitas tanah di lahan Pak Tani ternyata memburuk. Kesimpulan yang sah adalah?", options: ["Lahan pertanian diberi pupuk organik secara teratur", "Lahan pertanian tidak diberi pupuk organik secara teratur", "Pak Tani memanen hasil", "Tanah sangat subur"], correctAnswer: 1 },
+                            { id: 8, question: "Aturan Garansi: 'Jika segel barang elektronik rusak, maka klaim garansi resmi ditolak.' Garansi resmi perangkat milik Citra diterima dan ditindaklanjuti. Kesimpulan yang benar adalah?", options: ["Segel barang elektronik rusak", "Segel barang elektronik tidak rusak", "Perangkat tidak bisa diperbaiki", "Citra membeli barang baru"], correctAnswer: 1 },
+                            { id: 9, question: "Prinsip Fisika: 'Jika sebuah benda dicelupkan ke dalam air dan massa jenisnya lebih kecil dari air, maka benda tersebut akan terapung.' Sebuah benda yang dicelupkan ke dalam air ternyata tidak terapung (tenggelam). Kesimpulan yang tepat adalah?", options: ["Massa jenis benda lebih kecil dari air", "Massa jenis benda tidak lebih kecil dari air", "Air menguap", "Benda hancur"], correctAnswer: 1 },
+                            { id: 10, question: "Syarat Beasiswa Luar Negeri: 'Jika pelamar memiliki skor TOEFL di atas 550, maka pelamar berhak mengikuti wawancara tahap akhir.' Joko tidak berhak mengikuti wawancara tahap akhir. Kesimpulan yang sah adalah?", options: ["Skor TOEFL Joko di atas 550", "Skor TOEFL Joko tidak di atas 550", "Joko memilih beasiswa lain", "Joko lulus administrasi"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Penalaran Modus Tollens HOTS",
+                        questions: [
+                            { id: 1, question: "Premis 1: Jika P -> (Q dan R) bernilai benar.\nPremis 2: (Q dan R) bernilai salah.\nKesimpulan logika formal yang sah adalah?", options: ["P bernilai benar", "P bernilai salah", "Q bernilai benar", "R bernilai benar"], correctAnswer: 1 },
+                            { id: 2, question: "Premis 1: Jika x > 5, maka x^2 > 25.\nPremis 2: x^2 tidak lebih besar dari 25 (x^2 <= 25).\nKesimpulan yang sah adalah?", options: ["x > 5", "x <= 5", "x = 6", "x = 25"], correctAnswer: 1 },
+                            { id: 3, question: "Premis 1: Jika matriks A memiliki invers, maka determinan A tidak sama dengan 0.\nPremis 2: Determinan A sama dengan 0.\nKesimpulan yang tepat adalah?", options: ["Matriks A memiliki invers", "Matriks A tidak memiliki invers", "Matriks A adalah matriks persegi", "Determinan A = 1"], correctAnswer: 1 },
+                            { id: 4, question: "Premis 1: Jika persentase kesalahan sistem < 0.01%, maka sistem dinyatakan stabil sempurna.\nPremis 2: Sistem tidak dinyatakan stabil sempurna.\nKesimpulan yang sah adalah?", options: ["Persentase kesalahan < 0.01%", "Persentase kesalahan tidak < 0.01%", "Sistem tidak memiliki kesalahan", "Sistem diganti total"], correctAnswer: 1 },
+                            { id: 5, question: "Premis 1: Jika fungsi f(x) kontinu di x = c, maka limit f(x) saat x mendekati c ada.\nPremis 2: Limit f(x) saat x mendekati c tidak ada.\nKesimpulan yang benar adalah?", options: ["f(x) kontinu di x = c", "f(x) tidak kontinu di x = c", "f(c) terdefinisi", "f(x) diferensialkan"], correctAnswer: 1 },
+                            { id: 6, question: "Premis 1: Jika p -> ~q bernilai benar.\nPremis 2: q bernilai benar (~(~q)).\nKesimpulan yang tepat adalah?", options: ["p bernilai benar", "p bernilai salah", "q bernilai salah", "p -> q"], correctAnswer: 1 },
+                            { id: 7, question: "Premis 1: Jika inflasi terkendali dan investasi naik, maka pertumbuhan ekonomi positif.\nPremis 2: Pertumbuhan ekonomi tidak positif.\nKesimpulan yang sah adalah?", options: ["Inflasi terkendali dan investasi naik", "Inflasi tidak terkendali atau investasi tidak naik", "Perekonomian hancur", "Investasi tetap naik"], correctAnswer: 1 },
+                            { id: 8, question: "Premis 1: Jika segitiga ABC sama sisi, maka ketiga sudutnya masing-masing 60 derajat.\nPremis 2: Ketiga sudut segitiga ABC tidak masing-masing 60 derajat.\nKesimpulan yang benar adalah?", options: ["Segitiga ABC sama sisi", "Segitiga ABC tidak sama sisi", "Segitiga ABC siku-siku", "Luas segitiga nol"], correctAnswer: 1 },
+                            { id: 9, question: "Premis 1: Jika senyawa X murni, maka titik lelehnya tepat pada suhu 150 derajat Celsius.\nPremis 2: Titik leleh senyawa X tidak tepat pada suhu 150 derajat Celsius.\nKesimpulan yang tepat adalah?", options: ["Senyawa X murni", "Senyawa X tidak murni", "Senyawa X menguap", "Suhu laboratorium salah"], correctAnswer: 1 },
+                            { id: 10, question: "Premis 1: Jika (P atau Q) -> R bernilai benar.\nPremis 2: R bernilai salah.\nKesimpulan yang sah adalah?", options: ["P benar dan Q benar", "P salah dan Q salah (~P dan ~Q)", "P benar atau Q benar", "R benar"], correctAnswer: 1 }
+                        ]
+                    }
+                ]
+            },
+           
+{ 
+                id: "pu_ch6",
+                title: "Chapter 6: Ekuivalensi Logika",
+                description: "Pernyataan majemuk yang setara/ekuivalen secara logika (Kontraposisi, Negasi, De Morgan) (5 Level Ketuntasan).",
+                formulaHelp: `
+                    <h4 style="margin-top:0; color:#2563eb;">Aturan Ekuivalensi Logika</h4>
+                    <p>Pernyataan yang memiliki nilai kebenaran yang <b>sama/setara</b>.</p>
+                    
+                    <b>1. Kontraposisi Implikasi:</b>
+                    <div style="background: rgba(37,99,235,0.1); padding: 8px; border-radius: 6px; margin: 5px 0;">
+                        (P &rarr; Q) &equiv; (~Q &rarr; ~P)
+                    </div>
+
+                    <b>2. Implikasi ke Disjungsi:</b>
+                    <div style="background: rgba(37,99,235,0.1); padding: 8px; border-radius: 6px; margin: 5px 0;">
+                        (P &rarr; Q) &equiv; (~P &or; Q)
+                    </div>
+
+                    <b>3. Negasi Implikasi:</b>
+                    <div style="background: rgba(37,99,235,0.1); padding: 8px; border-radius: 6px; margin: 5px 0;">
+                        ~(P &rarr; Q) &equiv; (P &and; ~Q)
+                    </div>
+
+                    <b>4. Hukum De Morgan:</b>
+                    <div style="background: rgba(37,99,235,0.1); padding: 8px; border-radius: 6px; margin: 5px 0;">
+                        ~(P &and; Q) &equiv; (~P &or; ~Q)<br>
+                        ~(P &or; Q) &equiv; (~P &and; ~Q)
+                    </div>
+                `,
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Ekuivalensi Implikasi (Kontraposisi)",
+                        questions: [
+                            { id: 1, question: "Pernyataan yang ekuivalen dengan 'Jika hari hujan, maka jalanan basah' adalah?", options: ["Jika jalanan basah, maka hari hujan", "Jika jalanan tidak basah, maka hari tidak hujan", "Jika hari tidak hujan, maka jalanan tidak basah", "Hari tidak hujan dan jalanan basah"], correctAnswer: 1 },
+                            { id: 2, question: "Pernyataan yang setara dengan 'Jika Budi belajar, maka ia lulus ujian' adalah?", options: ["Jika Budi lulus ujian, maka ia belajar", "Jika Budi tidak lulus ujian, maka ia tidak belajar", "Jika Budi tidak belajar, maka ia tidak lulus ujian", "Budi tidak belajar dan lulus ujian"], correctAnswer: 1 },
+                            { id: 3, question: "Pernyataan yang setara dengan 'Jika harga BBM naik, maka ongkos angkutan naik' adalah?", options: ["Jika ongkos angkutan tidak naik, maka harga BBM tidak naik", "Jika harga BBM tidak naik, maka ongkos angkutan tidak naik", "Jika ongkos angkutan naik, maka harga BBM naik", "Harga BBM naik atau ongkos angkutan tidak naik"], correctAnswer: 0 },
+                            { id: 4, question: "Pernyataan yang ekuivalen dengan 'Jika Andi rajin, maka Andi pintar' adalah?", options: ["Jika Andi pintar, maka Andi rajin", "Jika Andi tidak pintar, maka Andi tidak rajin", "Jika Andi tidak rajin, maka Andi tidak pintar", "Andi tidak rajin dan Andi pintar"], correctAnswer: 1 },
+                            { id: 5, question: "Pernyataan yang setara dengan 'Jika lampu merah menyala, maka kendaraan berhenti' adalah?", options: ["Jika kendaraan tidak berhenti, maka lampu merah tidak menyala", "Jika kendaraan berhenti, maka lampu merah menyala", "Jika lampu merah tidak menyala, maka kendaraan tidak berhenti", "Lampu merah tidak menyala dan kendaraan berhenti"], correctAnswer: 0 },
+                            { id: 6, question: "Pernyataan yang ekuivalen dengan 'Jika air dipanaskan, maka air menguap' adalah?", options: ["Jika air tidak menguap, maka air tidak dipanaskan", "Jika air menguap, maka air dipanaskan", "Jika air tidak dipanaskan, maka air tidak menguap", "Air dipanaskan dan air tidak menguap"], correctAnswer: 0 },
+                            { id: 7, question: "Pernyataan yang setara dengan 'Jika toko buka, maka ada pembeli' adalah?", options: ["Jika tidak ada pembeli, maka toko tidak buka", "Jika toko tidak buka, maka tidak ada pembeli", "Jika ada pembeli, maka toko buka", "Toko buka dan tidak ada pembeli"], correctAnswer: 0 },
+                            { id: 8, question: "Pernyataan yang ekuivalen dengan 'Jika siswa hadir, maka kelas dimulai' adalah?", options: ["Jika kelas tidak dimulai, maka siswa tidak hadir", "Jika siswa tidak hadir, maka kelas tidak dimulai", "Jika kelas dimulai, maka siswa hadir", "Siswa hadir dan kelas tidak dimulai"], correctAnswer: 0 },
+                            { id: 9, question: "Pernyataan yang setara dengan 'Jika sinyal kuat, maka koneksi lancar' adalah?", options: ["Jika koneksi tidak lancar, maka sinyal tidak kuat", "Jika sinyal tidak kuat, maka koneksi tidak lancar", "Jika koneksi lancar, maka sinyal kuat", "Sinyal kuat atau koneksi tidak lancar"], correctAnswer: 0 },
+                            { id: 10, question: "Pernyataan yang ekuivalen dengan 'Jika obat diminum, maka penyakit sembuh' adalah?", options: ["Jika penyakit tidak sembuh, maka obat tidak diminum", "Jika penyakit sembuh, maka obat diminum", "Jika obat tidak diminum, maka penyakit tidak sembuh", "Obat diminum dan penyakit tidak sembuh"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Ekuivalensi Implikasi ke Disjungsi (~P v Q)",
+                        questions: [
+                            { id: 1, question: "Bentuk ekuivalen dari 'Jika hari hujan, maka jalanan basah' dalam bentuk disjungsi (~P v Q) adalah?", options: ["Hari tidak hujan atau jalanan basah", "Hari hujan atau jalanan tidak basah", "Hari tidak hujan dan jalanan basah", "Hari hujan dan jalanan tidak basah"], correctAnswer: 0 },
+                            { id: 2, question: "Pernyataan 'Jika Ani belajar, maka Ani lulus' ekuivalen dengan?", options: ["Ani tidak belajar atau Ani lulus", "Ani belajar atau Ani tidak lulus", "Ani tidak belajar dan Ani lulus", "Ani lulus dan Ani belajar"], correctAnswer: 0 },
+                            { id: 3, question: "Bentuk ekuivalen dari 'Jika harga barang turun, maka tingkat penjualan naik' adalah?", options: ["Harga barang tidak turun atau tingkat penjualan naik", "Harga barang turun atau tingkat penjualan tidak naik", "Harga barang turun dan tingkat penjualan naik", "Harga barang tidak turun dan tingkat penjualan naik"], correctAnswer: 0 },
+                            { id: 4, question: "Pernyataan 'Jika karyawan bekerja keras, maka perusahaan untung' setara dengan?", options: ["Karyawan tidak bekerja keras atau perusahaan untung", "Karyawan bekerja keras atau perusahaan tidak untung", "Karyawan bekerja keras dan perusahaan untung", "Karyawan tidak bekerja keras dan perusahaan tidak untung"], correctAnswer: 0 },
+                            { id: 5, question: "Bentuk ekuivalen dari 'Jika lampu mati, maka ruangan gelap' adalah?", options: ["Lampu tidak mati atau ruangan gelap", "Lampu mati atau ruangan tidak gelap", "Lampu tidak mati dan ruangan gelap", "Ruangan tidak gelap atau lampu mati"], correctAnswer: 0 },
+                            { id: 6, question: "Pernyataan 'Jika peserta mendaftar, maka peserta mendapat sertifikat' ekuivalen dengan?", options: ["Peserta tidak mendaftar atau peserta mendapat sertifikat", "Peserta mendaftar atau peserta tidak mendapat sertifikat", "Peserta mendaftar dan peserta mendapat sertifikat", "Peserta tidak mendaftar dan peserta tidak mendapat sertifikat"], correctAnswer: 0 },
+                            { id: 7, question: "Bentuk ekuivalen dari 'Jika mesin dirawat, maka mesin awet' adalah?", options: ["Mesin tidak dirawat atau mesin awet", "Mesin dirawat atau mesin tidak awet", "Mesin tidak dirawat dan mesin awet", "Mesin awet dan mesin dirawat"], correctAnswer: 0 },
+                            { id: 8, question: "Pernyataan 'Jika hujan turun, maka tanaman segar' setara dengan?", options: ["Hujan tidak turun atau tanaman segar", "Hujan turun atau tanaman tidak segar", "Hujan tidak turun dan tanaman segar", "Tanaman segar dan hujan turun"], correctAnswer: 0 },
+                            { id: 9, question: "Bentuk ekuivalen dari 'Jika siswa disiplin, maka siswa dipuji' adalah?", options: ["Siswa tidak disiplin atau siswa dipuji", "Siswa disiplin atau siswa tidak dipuji", "Siswa disiplin dan siswa dipuji", "Siswa tidak disiplin dan siswa dipuji"], correctAnswer: 0 },
+                            { id: 10, question: "Pernyataan 'Jika aturan ditaati, maka lingkungan tertib' ekuivalen dengan?", options: ["Aturan tidak ditaati atau lingkungan tertib", "Aturan ditaati atau lingkungan tidak tertib", "Aturan tidak ditaati dan lingkungan tertib", "Lingkungan tertib dan aturan ditaati"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Negasi Implikasi (P dan ~Q)",
+                        questions: [
+                            { id: 1, question: "Ingkaran/negasi dari pernyataan 'Jika hari hujan, maka jalanan basah' adalah?", options: ["Hari hujan dan jalanan tidak basah", "Hari tidak hujan dan jalanan basah", "Hari tidak hujan atau jalanan tidak basah", "Jika hari tidak hujan, maka jalanan tidak basah"], correctAnswer: 0 },
+                            { id: 2, question: "Ingkaran dari 'Jika Budi belajar, maka Budi lulus ujian' adalah?", options: ["Budi belajar dan Budi tidak lulus ujian", "Budi tidak belajar dan Budi lulus ujian", "Budi tidak belajar atau Budi tidak lulus ujian", "Jika Budi tidak lulus ujian, maka Budi tidak belajar"], correctAnswer: 0 },
+                            { id: 3, question: "Negasi dari kalimat 'Jika harga BBM naik, maka tarif angkutan naik' adalah?", options: ["Harga BBM naik dan tarif angkutan tidak naik", "Harga BBM tidak naik dan tarif angkutan naik", "Harga BBM tidak naik atau tarif angkutan tidak naik", "Jika tarif angkutan tidak naik, maka harga BBM tidak naik"], correctAnswer: 0 },
+                            { id: 4, question: "Ingkaran dari 'Jika Ani datang, maka acara dimulai' adalah?", options: ["Ani datang dan acara tidak dimulai", "Ani tidak datang dan acara dimulai", "Ani tidak datang atau acara tidak dimulai", "Jika acara tidak dimulai, maka Ani tidak datang"], correctAnswer: 0 },
+                            { id: 5, question: "Negasi dari 'Jika mesin hidup, maka lampu indikator menyala' adalah?", options: ["Mesin hidup dan lampu indikator tidak menyala", "Mesin tidak hidup dan lampu indikator menyala", "Mesin tidak hidup atau lampu indikator tidak menyala", "Mesin hidup atau lampu indikator tidak menyala"], correctAnswer: 0 },
+                            { id: 6, question: "Ingkaran dari 'Jika produk berkualitas, maka penjualan tinggi' adalah?", options: ["Produk berkualitas dan penjualan tidak tinggi", "Produk tidak berkualitas dan penjualan tinggi", "Produk tidak berkualitas atau penjualan tidak tinggi", "Jika penjualan tidak tinggi, maka produk tidak berkualitas"], correctAnswer: 0 },
+                            { id: 7, question: "Negasi dari 'Jika peserta membawa kartu ujian, maka peserta boleh masuk' adalah?", options: ["Peserta membawa kartu ujian dan peserta tidak boleh masuk", "Peserta tidak membawa kartu ujian dan peserta boleh masuk", "Peserta tidak membawa kartu ujian atau peserta tidak boleh masuk", "Jika peserta tidak boleh masuk, maka peserta tidak membawa kartu ujian"], correctAnswer: 0 },
+                            { id: 8, question: "Ingkaran dari 'Jika sinyal kuat, maka video lancar' adalah?", options: ["Sinyal kuat dan video tidak lancar", "Sinyal tidak kuat dan video lancar", "Sinyal tidak kuat atau video tidak lancar", "Sinyal kuat atau video tidak lancar"], correctAnswer: 0 },
+                            { id: 9, question: "Negasi dari 'Jika lampu merah, maka mobil berhenti' adalah?", options: ["Lampu merah dan mobil tidak berhenti", "Lampu tidak merah dan mobil berhenti", "Lampu tidak merah atau mobil tidak berhenti", "Jika mobil tidak berhenti, maka lampu tidak merah"], correctAnswer: 0 },
+                            { id: 10, question: "Ingkaran dari 'Jika obat diminum, maka pasien sembuh' adalah?", options: ["Obat diminum dan pasien tidak sembuh", "Obat tidak diminum dan pasien sembuh", "Obat tidak diminum atau pasien tidak sembuh", "Pasien sembuh dan obat tidak diminum"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Hukum De Morgan & Pernyataan Majemuk",
+                        questions: [
+                            { id: 1, question: "Ingkaran dari 'Budi rajin dan Budi pintar' menurut Hukum De Morgan adalah?", options: ["Budi tidak rajin atau Budi tidak pintar", "Budi tidak rajin dan Budi tidak pintar", "Budi rajin atau Budi tidak pintar", "Budi pintar dan Budi tidak rajin"], correctAnswer: 0 },
+                            { id: 2, question: "Ingkaran dari 'Hari hujan atau angin kencang' adalah?", options: ["Hari tidak hujan dan angin tidak kencang", "Hari tidak hujan atau angin tidak kencang", "Hari hujan dan angin tidak kencang", "Hari tidak hujan atau angin kencang"], correctAnswer: 0 },
+                            { id: 3, question: "Negasi dari 'Siswa lulus ujian dan mendapat hadiah' adalah?", options: ["Siswa tidak lulus ujian atau tidak mendapat hadiah", "Siswa tidak lulus ujian dan tidak mendapat hadiah", "Siswa lulus ujian atau tidak mendapat hadiah", "Siswa tidak lulus ujian dan mendapat hadiah"], correctAnswer: 0 },
+                            { id: 4, question: "Ingkaran dari 'Lampu mati atau air padam' adalah?", options: ["Lampu tidak mati dan air tidak padam", "Lampu tidak mati atau air tidak padam", "Lampu mati dan air tidak padam", "Lampu tidak mati atau air padam"], correctAnswer: 0 },
+                            { id: 5, question: "Negasi dari kalimat 'Andi tidak makan dan Andi tidak minum' adalah?", options: ["Andi makan atau Andi minum", "Andi makan dan Andi minum", "Andi tidak makan atau Andi minum", "Andi makan atau Andi tidak minum"], correctAnswer: 0 },
+                            { id: 6, question: "Ingkaran dari 'Koneksi cepat atau biaya murah' adalah?", options: ["Koneksi tidak cepat dan biaya tidak murah", "Koneksi tidak cepat atau biaya tidak murah", "Koneksi cepat dan biaya tidak murah", "Koneksi tidak cepat dan biaya murah"], correctAnswer: 0 },
+                            { id: 7, question: "Negasi dari 'Sistem aman dan terproteksi' adalah?", options: ["Sistem tidak aman atau tidak terproteksi", "Sistem tidak aman dan tidak terproteksi", "Sistem aman atau tidak terproteksi", "Sistem tidak aman dan terproteksi"], correctAnswer: 0 },
+                            { id: 8, question: "Ingkaran dari 'Toko buka atau barang lengkap' adalah?", options: ["Toko tidak buka dan barang tidak lengkap", "Toko tidak buka atau barang tidak lengkap", "Toko buka dan barang tidak lengkap", "Toko tidak buka dan barang lengkap"], correctAnswer: 0 },
+                            { id: 9, question: "Negasi dari 'Peserta membawa KTP dan membawa kartu ujian' adalah?", options: ["Peserta tidak membawa KTP atau tidak membawa kartu ujian", "Peserta tidak membawa KTP dan tidak membawa kartu ujian", "Peserta membawa KTP atau tidak membawa kartu ujian", "Peserta tidak membawa KTP dan membawa kartu ujian"], correctAnswer: 0 },
+                            { id: 10, question: "Ingkaran dari 'Cuaca cerah atau udara sejuk' adalah?", options: ["Cuaca tidak cerah dan udara tidak sejuk", "Cuaca tidak cerah atau udara tidak sejuk", "Cuaca cerah dan udara tidak sejuk", "Cuaca tidak cerah dan udara sejuk"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Ekuivalensi HOTS Simbolik & Kompleks",
+                        questions: [
+                            { id: 1, question: "Pernyataan yang ekuivalen dengan ~(P -> Q) adalah?", options: ["P dan ~Q", "~P atau Q", "~P dan Q", "P atau ~Q"], correctAnswer: 0 },
+                            { id: 2, question: "Kontraposisi dari bentuk simbolik (~P -> Q) adalah?", options: ["~Q -> P", "Q -> ~P", "~P -> ~Q", "P -> ~Q"], correctAnswer: 0 },
+                            { id: 3, question: "Bentuk ekuivalen dari (P -> ~Q) dalam bentuk disjungsi adalah?", options: ["~P atau ~Q", "P atau Q", "~P dan ~Q", "P dan Q"], correctAnswer: 0 },
+                            { id: 4, question: "Negasi dari bentuk (P v ~Q) menurut De Morgan adalah?", options: ["~P dan Q", "~P atau Q", "P dan Q", "~P dan ~Q"], correctAnswer: 0 },
+                            { id: 5, question: "Pernyataan 'Jika P dan Q, maka R' ekuivalen dengan kontraposisinya yaitu?", options: ["Jika ~R, maka ~P atau ~Q", "Jika ~R, maka ~P dan ~Q", "Jika R, maka P dan Q", "Jika ~P atau ~Q, maka ~R"], correctAnswer: 0 },
+                            { id: 6, question: "Bentuk yang ekuivalen dengan negasi dari Biimplikasi ~(P <-> Q) adalah?", options: ["(P dan ~Q) atau (Q dan ~P)", "(P atau ~Q) dan (Q atau ~P)", "~P <-> ~Q", "P dan ~Q"], correctAnswer: 0 },
+                            { id: 7, question: "Kontraposisi dari 'Jika x^2 = 4, maka x = 2 atau x = -2' adalah?", options: ["Jika x != 2 dan x != -2, maka x^2 != 4", "Jika x != 2 atau x != -2, maka x^2 != 4", "Jika x = 2 atau x = -2, maka x^2 = 4", "Jika x^2 != 4, maka x != 2 dan x != -2"], correctAnswer: 0 },
+                            { id: 8, question: "Bentuk disjungsi yang ekuivalen dengan ~P -> (Q dan R) adalah?", options: ["P atau (Q dan R)", "~P atau (Q dan R)", "P dan (Q atau R)", "~P dan (~Q atau ~R)"], correctAnswer: 0 },
+                            { id: 9, question: "Negasi dari implikasi bertingkat 'P -> (Q -> R)' ekuivalen dengan?", options: ["P dan Q dan ~R", "P atau Q atau ~R", "~P dan ~Q dan R", "P dan ~Q dan ~R"], correctAnswer: 0 },
+                            { id: 10, question: "Pernyataan yang setara dengan (P -> Q) dan (Q -> R) secara silogisme logika adalah?", options: ["P -> R", "R -> P", "~P -> ~R", "P dan R"], correctAnswer: 0 }
+                        ]
+                    }
+                ]
+            },
+
+
             { id: "pu_ch7", title: "Chapter 7: Negasi", description: "Pengingkaran dari pernyataan majemuk.", questions: createDummyQuestions("Negasi Logika") },
             { id: "pu_ch8", title: "Chapter 8: Silogisme", description: "Penarikan kesimpulan dari dua premis.", questions: createDummyQuestions("Silogisme") },
             { id: "pu_ch9", title: "Chapter 9: Bahasa Panda", description: "Kriptografi sederhana dan bahasa buatan.", questions: createDummyQuestions("Bahasa Panda") }
         ];
+// Fungsi untuk membuka Modal Panduan Rumus
+function openFormulaModal() {
+    // 1. Cari data chapter yang sedang aktif berdasarkan currentChapterId
+    // (Atau sesuaikan variabel chapter kamu, contoh: currentChapter / puData)
+    const activeChapter = puData.find(ch => ch.id === currentChapterId);
+    
+    // 2. Periksa apakah chapter tersebut memiliki data formulaHelp
+    if (activeChapter && activeChapter.formulaHelp) {
+        document.getElementById("formula-content").innerHTML = activeChapter.formulaHelp;
+    } else {
+        document.getElementById("formula-content").innerHTML = "<p>Tidak ada panduan rumus khusus untuk chapter ini.</p>";
+    }
+    
+    // 3. Tampilkan modal popup
+    document.getElementById("formula-modal").style.display = "flex";
+}
+
+// Fungsi untuk menutup Modal Panduan Rumus
+function closeFormulaModal() {
+    document.getElementById("formula-modal").style.display = "none";
+}
+        
+
 
         function createDummyQuestions(topicName) {
             return Array.from({ length: 10 }, (_, i) => ({
