@@ -358,13 +358,102 @@
     </footer>
 
     <script>
+        // ==========================================
+        // DATA SET: LOGIKA INFORMATIKA & PENALARAN UMUM
+        // ==========================================
         const logikaData = [
             { id: "log_c1", title: "Chapter 1: Proposisi & Tabel Kebenaran", description: "Dasar logika proposisi dan evaluasi kebenaran.", questions: createDummyQuestions("Logika Proposisi") },
-            { id: "log_c2", title: "Chapter 2: Negasi & Implikasi", description: "Pengingkaran serta operasi syarat majemuk.", questions: createDummyQuestions("Negasi Implikasi") },
+            { id: "log_c2", title: "Chapter 2: Negasi & Implikasi", description: "Pengingkaran serta operasi syarat majemuk.", questions: createDummyQuestions("Negasi Implikasi") }
         ];
 
         const puData = [
-            { id: "pu_ch1", title: "Chapter 1: Pola Barisan", description: "Penalaran pola angka, huruf, dan barisan kognitif.", questions: createDummyQuestions("Pola Barisan") },
+            {
+                id: "pu_ch1",
+                title: "Chapter 1: Pola Barisan",
+                description: "Deret angka, huruf, dan barisan berpola (5 Level Ketuntasan).",
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Pola Dasar & Aritmatika Sederhana",
+                        questions: [
+                            { id: 1, question: "3, 6, 9, 12, 15, ... Berapakah angka selanjutnya?", options: ["16", "17", "18", "19"], correctAnswer: 2 },
+                            { id: 2, question: "2, 4, 8, 16, 32, ... Berapakah suku berikutnya?", options: ["48", "60", "64", "72"], correctAnswer: 2 },
+                            { id: 3, question: "100, 90, 80, 70, 60, ... Angka selanjutnya adalah?", options: ["40", "45", "50", "55"], correctAnswer: 2 },
+                            { id: 4, question: "5, 10, 15, 20, 25, ... Berapakah angka berikutnya?", options: ["28", "30", "32", "35"], correctAnswer: 1 },
+                            { id: 5, question: "81, 27, 9, 3, ... Berapakah nilai selanjutnya?", options: ["0", "1", "2", "1/3"], correctAnswer: 1 },
+                            { id: 6, question: "A, C, E, G, I, ... Huruf berikutnya adalah?", options: ["J", "K", "L", "M"], correctAnswer: 1 },
+                            { id: 7, question: "1, 4, 7, 10, 13, ... Berapakah angka selanjutnya?", options: ["15", "16", "17", "18"], correctAnswer: 1 },
+                            { id: 8, question: "2, 6, 18, 54, ... Berapakah suku berikutnya?", options: ["108", "162", "180", "216"], correctAnswer: 1 },
+                            { id: 9, question: "50, 45, 40, 35, ... Angka berikutnya adalah?", options: ["20", "25", "30", "32"], correctAnswer: 2 },
+                            { id: 10, question: "Z, X, V, T, ... Huruf selanjutnya adalah?", options: ["R", "S", "Q", "P"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Pola Bertingkat & Dua Larik",
+                        questions: [
+                            { id: 1, question: "1, 2, 4, 7, 11, 16, ... Angka selanjutnya adalah?", options: ["20", "22", "23", "24"], correctAnswer: 1 },
+                            { id: 2, question: "3, 5, 9, 17, 33, ... Berapakah suku berikutnya?", options: ["49", "55", "65", "67"], correctAnswer: 2 },
+                            { id: 3, question: "2, 5, 4, 10, 8, 20, 16, ... Berapakah suku berikutnya?", options: ["30", "32", "40", "64"], correctAnswer: 2 },
+                            { id: 4, question: "A, D, G, J, M, ... Huruf selanjutnya adalah?", options: ["N", "O", "P", "Q"], correctAnswer: 2 },
+                            { id: 5, question: "2, 6, 12, 20, 30, 42, ... Berapakah suku berikutnya?", options: ["52", "54", "56", "60"], correctAnswer: 2 },
+                            { id: 6, question: "12, 15, 11, 14, 10, 13, ... Angka selanjutnya adalah?", options: ["8", "9", "12", "16"], correctAnswer: 1 },
+                            { id: 7, question: "4, 9, 16, 25, 36, ... Angka berikutnya adalah?", options: ["42", "48", "49", "64"], correctAnswer: 2 },
+                            { id: 8, question: "100, 95, 85, 70, 50, ... Berapakah angka selanjutnya?", options: ["20", "25", "30", "35"], correctAnswer: 1 },
+                            { id: 9, question: "B, D, H, P, ... Huruf selanjutnya adalah?", options: ["V", "W", "X", "F"], correctAnswer: 3 },
+                            { id: 10, question: "1, 3, 7, 15, 31, 63, ... Angka berikutnya adalah?", options: ["95", "125", "127", "129"], correctAnswer: 2 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Fibonacci & Kuadrat",
+                        questions: [
+                            { id: 1, question: "3, 4, 7, 11, 18, 29, ... Berapakah suku berikutnya?", options: ["37", "40", "47", "51"], correctAnswer: 2 },
+                            { id: 2, question: "1, 8, 27, 64, 125, ... Suku berikutnya adalah?", options: ["180", "216", "243", "343"], correctAnswer: 1 },
+                            { id: 3, question: "A, C, F, J, O, ... Huruf selanjutnya adalah?", options: ["S", "T", "U", "V"], correctAnswer: 2 },
+                            { id: 4, question: "48, 24, 28, 14, 18, 9, ... Berapakah angka selanjutnya?", options: ["4.5", "11", "13", "18"], correctAnswer: 2 },
+                            { id: 5, question: "1, 2, 6, 24, 120, ... Suku selanjutnya adalah?", options: ["240", "360", "600", "720"], correctAnswer: 3 },
+                            { id: 6, question: "5, 7, 10, 15, 22, 33, ... Berapakah suku berikutnya?", options: ["44", "46", "48", "50"], correctAnswer: 1 },
+                            { id: 7, question: "A, E, I, M, Q, ... Huruf berikutnya adalah?", options: ["S", "U", "V", "W"], correctAnswer: 1 },
+                            { id: 8, question: "2, 3, 6, 8, 18, 23, 54, ... Berapakah angka selanjutnya?", options: ["62", "68", "72", "81"], correctAnswer: 0 },
+                            { id: 9, question: "3, 8, 15, 24, 35, 48, ... Angka berikutnya adalah?", options: ["58", "60", "63", "65"], correctAnswer: 2 },
+                            { id: 10, question: "Z, W, T, Q, N, ... Huruf selanjutnya adalah?", options: ["K", "L", "M", "J"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Pola Tiga Larik & Operasi Campuran",
+                        questions: [
+                            { id: 1, question: "2, 3, 5, 4, 6, 10, 6, 9, 15, 8, 12, ... Berapakah angka selanjutnya?", options: ["16", "18", "20", "22"], correctAnswer: 2 },
+                            { id: 2, question: "1, 4, 2, 8, 4, 16, 8, 32, ... Dua suku berikutnya adalah?", options: ["16, 64", "16, 48", "12, 64", "24, 48"], correctAnswer: 0 },
+                            { id: 3, question: "C, E, H, L, Q, ... Huruf selanjutnya adalah?", options: ["V", "W", "X", "Y"], correctAnswer: 1 },
+                            { id: 4, question: "3, 6, 7, 14, 15, 30, 31, ... Suku berikutnya adalah?", options: ["32", "45", "62", "64"], correctAnswer: 2 },
+                            { id: 5, question: "81, 64, 49, 36, 25, ... Angka selanjutnya adalah?", options: ["12", "15", "16", "20"], correctAnswer: 2 },
+                            { id: 6, question: "2, 5, 11, 23, 47, ... Berapakah angka berikutnya?", options: ["85", "95", "96", "99"], correctAnswer: 1 },
+                            { id: 7, question: "B, F, J, N, R, ... Huruf berikutnya adalah?", options: ["T", "U", "V", "W"], correctAnswer: 2 },
+                            { id: 8, question: "10, 12, 24, 28, 112, 118, ... Berapakah suku selanjutnya?", options: ["124", "236", "708", "826"], correctAnswer: 2 },
+                            { id: 9, question: "1, 2, 5, 14, 41, ... Angka selanjutnya adalah?", options: ["82", "122", "123", "124"], correctAnswer: 1 },
+                            { id: 10, question: "Z, Y, W, T, P, ... Huruf selanjutnya adalah?", options: ["K", "L", "M", "N"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Penalaran HOTS",
+                        questions: [
+                            { id: 1, question: "2, 3, 7, 16, 32, 57, ... Berapakah angka selanjutnya?", options: ["82", "91", "93", "100"], correctAnswer: 2 },
+                            { id: 2, question: "A, B, D, G, K, P, ... Huruf selanjutnya adalah?", options: ["U", "V", "W", "X"], correctAnswer: 1 },
+                            { id: 3, question: "1, 3, 6, 11, 20, 37, ... Berapakah suku berikutnya?", options: ["68", "70", "72", "74"], correctAnswer: 1 },
+                            { id: 4, question: "3, 5, 13, 43, 177, ... Angka berikutnya adalah?", options: ["708", "889", "891", "900"], correctAnswer: 2 },
+                            { id: 5, question: "Z, V, R, N, J, ... Huruf selanjutnya adalah?", options: ["E", "F", "G", "H"], correctAnswer: 1 },
+                            { id: 6, question: "2, 6, 3, 9, 5, 15, 11, ... Dua suku berikutnya adalah?", options: ["22, 17", "33, 27", "33, 29", "22, 19"], correctAnswer: 2 },
+                            { id: 7, question: "1, 4, 13, 40, 121, ... Berapakah suku selanjutnya?", options: ["242", "364", "365", "400"], correctAnswer: 1 },
+                            { id: 8, question: "A, C, B, E, C, G, D, ... Huruf selanjutnya adalah?", options: ["H", "I", "J", "K"], correctAnswer: 1 },
+                            { id: 9, question: "0, 4, 18, 48, 100, ... Angka berikutnya adalah?", options: ["144", "180", "200", "216"], correctAnswer: 1 },
+                            { id: 10, question: "10, 11, 19, 46, 110, ... Suku berikutnya adalah?", options: ["225", "235", "245", "255"], correctAnswer: 1 }
+                        ]
+                    }
+                ]
+            },
             { id: "pu_ch2", title: "Chapter 2: Interpretasi Data", description: "Analisis grafik, tabel, dan diagram statistik.", questions: createDummyQuestions("Interpretasi Data") },
             { id: "pu_ch3", title: "Chapter 3: Analitik Kuantitatif", description: "Pemecahan masalah kuantitatif dan logika matematika.", questions: createDummyQuestions("Analitik Kuantitatif") },
             { id: "pu_ch4", title: "Chapter 4: Modus Ponens", description: "Penarikan kesimpulan aturan Implikasi (P -> Q, P).", questions: createDummyQuestions("Modus Ponens") },
@@ -384,14 +473,21 @@
             }));
         }
 
+        // ==========================================
+        // STATE UTAMA
+        // ==========================================
         let currentModule = "logika";
         let currentChapterIndex = 0;
+        let currentLevelIndex = -1;
         let currentQuestionIndex = 0;
         let userAnswers = {};
 
         const STORAGE_KEY_LOGIKA = "LOGIKA_PROGRESS";
         const STORAGE_KEY_PU = "PU_PROGRESS";
 
+        // ==========================================
+        // NAVIGATION & SIDEBAR LOGIC
+        // ==========================================
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("active");
             document.getElementById("overlay").classList.toggle("active");
@@ -418,24 +514,30 @@
             renderChapters();
         }
 
+        // ==========================================
+        // LOCAL STORAGE PROGRESS HANDLER
+        // ==========================================
         function getProgress() {
             const key = currentModule === 'logika' ? STORAGE_KEY_LOGIKA : STORAGE_KEY_PU;
             const data = localStorage.getItem(key);
             return data ? JSON.parse(data) : {};
         }
 
-        function saveChapterResult(chapterId, score, isMastered) {
+        function saveChapterResult(levelId, score, isMastered) {
             const key = currentModule === 'logika' ? STORAGE_KEY_LOGIKA : STORAGE_KEY_PU;
             const progress = getProgress();
-            const prevMastered = progress[chapterId]?.isMastered || false;
+            const prevMastered = progress[levelId]?.isMastered || false;
 
-            progress[chapterId] = {
+            progress[levelId] = {
                 score: score,
                 isMastered: isMastered || prevMastered
             };
             localStorage.setItem(key, JSON.stringify(progress));
         }
 
+        // ==========================================
+        // DASHBOARD RENDERER
+        // ==========================================
         function renderChapters() {
             const container = document.getElementById("chapter-container");
             container.innerHTML = "";
@@ -443,36 +545,79 @@
             const activeDataset = currentModule === 'logika' ? logikaData : puData;
             const progressData = getProgress();
 
-            activeDataset.forEach((ch, index) => {
-                const chProgress = progressData[ch.id] || { score: 0, isMastered: false };
-                
-                let badgeHTML = `<span class="badge badge-pending">Belum Dikerjakan</span>`;
-                if (chProgress.isMastered) {
-                    badgeHTML = `<span class="badge badge-success">✅ Tuntas (10/10)</span>`;
-                } else if (chProgress.score > 0) {
-                    badgeHTML = `<span class="badge badge-warning">🔄 Skor: ${chProgress.score}/10 (Ulangi)</span>`;
-                }
-
+            activeDataset.forEach((ch, chIdx) => {
                 const card = document.createElement("div");
                 card.className = "chapter-card";
-                card.innerHTML = `
-                    <div>
-                        <h3>${ch.title}</h3>
-                        <p style="margin-top: 0.5rem;">${ch.description}</p>
-                    </div>
-                    <div>
-                        <div style="margin-bottom: 0.75rem;">${badgeHTML}</div>
-                        <button class="btn-action" onclick="startChapter(${index})">
-                            ${chProgress.isMastered ? "Kerjakan Ulang" : "Mulai Latihan"}
-                        </button>
-                    </div>
-                `;
+
+                if (ch.levels && ch.levels.length > 0) {
+                    let levelButtonsHTML = "";
+                    ch.levels.forEach((lvl, lvlIdx) => {
+                        const levelKey = `${ch.id}_lvl${lvl.level}`;
+                        const lvlProgress = progressData[levelKey] || { score: 0, isMastered: false };
+                        
+                        let badgeClass = "badge-pending";
+                        let badgeText = "Belum Tuntas";
+
+                        if (lvlProgress.isMastered) {
+                            badgeClass = "badge-success";
+                            badgeText = "✅ Tuntas (10/10)";
+                        } else if (lvlProgress.score > 0) {
+                            badgeClass = "badge-warning";
+                            badgeText = `🔄 Skor: ${lvlProgress.score}/10`;
+                        }
+
+                        levelButtonsHTML += `
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius:8px;">
+                                <div>
+                                    <strong style="font-size:0.85rem; display:block;">${lvl.title}</strong>
+                                    <span class="badge ${badgeClass}" style="margin-top:0.25rem;">${badgeText}</span>
+                                </div>
+                                <button class="btn-action" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="startLevel(${chIdx}, ${lvlIdx})">
+                                    ${lvlProgress.isMastered ? "Ulangi" : "Mulai"}
+                                </button>
+                            </div>
+                        `;
+                    });
+
+                    card.innerHTML = `
+                        <div>
+                            <h3>${ch.title}</h3>
+                            <p style="margin-top: 0.25rem; font-size:0.85rem;">${ch.description}</p>
+                            <div style="margin-top: 0.75rem;">${levelButtonsHTML}</div>
+                        </div>
+                    `;
+                } else {
+                    const chProgress = progressData[ch.id] || { score: 0, isMastered: false };
+                    let badgeHTML = `<span class="badge badge-pending">Belum Dikerjakan</span>`;
+                    if (chProgress.isMastered) {
+                        badgeHTML = `<span class="badge badge-success">✅ Tuntas (10/10)</span>`;
+                    } else if (chProgress.score > 0) {
+                        badgeHTML = `<span class="badge badge-warning">🔄 Skor: ${chProgress.score}/10 (Ulangi)</span>`;
+                    }
+
+                    card.innerHTML = `
+                        <div>
+                            <h3>${ch.title}</h3>
+                            <p style="margin-top: 0.5rem;">${ch.description}</p>
+                        </div>
+                        <div>
+                            <div style="margin-bottom: 0.75rem;">${badgeHTML}</div>
+                            <button class="btn-action" onclick="startChapter(${chIdx})">
+                                ${chProgress.isMastered ? "Kerjakan Ulang" : "Mulai Latihan"}
+                            </button>
+                        </div>
+                    `;
+                }
                 container.appendChild(card);
             });
         }
 
+        // ==========================================
+        // QUIZ LOGIC
+        // ==========================================
         function startChapter(index) {
             currentChapterIndex = index;
+            currentLevelIndex = -1;
             currentQuestionIndex = 0;
             userAnswers = {};
 
@@ -482,13 +627,40 @@
             renderQuestion();
         }
 
+        function startLevel(chIndex, lvlIndex) {
+            currentChapterIndex = chIndex;
+            currentLevelIndex = lvlIndex;
+            currentQuestionIndex = 0;
+            userAnswers = {};
+
+            document.getElementById("dashboard-view").style.display = "none";
+            document.getElementById("quiz-view").style.display = "block";
+
+            renderQuestion();
+        }
+
+        function getCurrentQuestions() {
+            const activeDataset = currentModule === 'logika' ? logikaData : puData;
+            const chapter = activeDataset[currentChapterIndex];
+            if (currentLevelIndex >= 0 && chapter.levels) {
+                return chapter.levels[currentLevelIndex].questions;
+            }
+            return chapter.questions;
+        }
+
         function renderQuestion() {
             const activeDataset = currentModule === 'logika' ? logikaData : puData;
             const chapter = activeDataset[currentChapterIndex];
-            const q = chapter.questions[currentQuestionIndex];
+            const questions = getCurrentQuestions();
+            const q = questions[currentQuestionIndex];
 
-            document.getElementById("quiz-chapter-title").innerText = chapter.title;
-            document.getElementById("quiz-progress-text").innerText = `Soal ${currentQuestionIndex + 1} dari ${chapter.questions.length}`;
+            let titleText = chapter.title;
+            if (currentLevelIndex >= 0 && chapter.levels) {
+                titleText += ` (${chapter.levels[currentLevelIndex].title})`;
+            }
+
+            document.getElementById("quiz-chapter-title").innerText = titleText;
+            document.getElementById("quiz-progress-text").innerText = `Soal ${currentQuestionIndex + 1} dari ${questions.length}`;
             document.getElementById("quiz-question-text").innerText = q.question;
 
             const optionsContainer = document.getElementById("quiz-options-container");
@@ -506,48 +678,54 @@
             });
 
             const nextBtn = document.getElementById("next-btn");
-            if (currentQuestionIndex === chapter.questions.length - 1) {
-                nextBtn.innerText = "Selesaikan Chapter";
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.innerText = "Selesaikan";
             } else {
                 nextBtn.innerText = "Soal Berikutnya";
             }
         }
 
         function nextQuestion() {
-            const activeDataset = currentModule === 'logika' ? logikaData : puData;
-            const chapter = activeDataset[currentChapterIndex];
+            const questions = getCurrentQuestions();
 
-            if (userAnswers[chapter.questions[currentQuestionIndex].id] === undefined) {
+            if (userAnswers[questions[currentQuestionIndex].id] === undefined) {
                 alert("Silakan pilih salah satu jawaban terlebih dahulu!");
                 return;
             }
 
-            if (currentQuestionIndex < chapter.questions.length - 1) {
+            if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
                 renderQuestion();
             } else {
-                finishChapter();
+                finishQuiz();
             }
         }
 
-        function finishChapter() {
+        function finishQuiz() {
             const activeDataset = currentModule === 'logika' ? logikaData : puData;
             const chapter = activeDataset[currentChapterIndex];
+            const questions = getCurrentQuestions();
             let correctCount = 0;
 
-            chapter.questions.forEach(q => {
+            questions.forEach(q => {
                 if (userAnswers[q.id] === q.correctAnswer) {
                     correctCount++;
                 }
             });
 
-            const isPerfect = correctCount === chapter.questions.length;
-            saveChapterResult(chapter.id, correctCount, isPerfect);
+            const isPerfect = correctCount === questions.length;
+            
+            let saveId = chapter.id;
+            if (currentLevelIndex >= 0 && chapter.levels) {
+                saveId = `${chapter.id}_lvl${chapter.levels[currentLevelIndex].level}`;
+            }
+
+            saveChapterResult(saveId, correctCount, isPerfect);
 
             if (isPerfect) {
-                alert(`🎉 SELAMAT! Anda berhasil menuntaskan ${chapter.title} dengan skor sempurna (10/10)!`);
+                alert(`🎉 SELAMAT! Anda berhasil menuntaskan modul ini dengan skor sempurna (${correctCount}/${questions.length})!`);
             } else {
-                alert(`⚠️ Skor Anda: ${correctCount}/10.\n\nSyarat tuntas chapter ini adalah 10/10. Silakan ulangi kembali untuk hasil sempurna.`);
+                alert(`⚠️ Skor Anda: ${correctCount}/${questions.length}.\n\nSyarat tuntas modul ini adalah ${questions.length}/${questions.length}. Silakan ulangi kembali untuk hasil sempurna.`);
             }
 
             exitQuiz();
@@ -561,5 +739,6 @@
 
         renderChapters();
     </script>
+   
 </body>
 </html>
