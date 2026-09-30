@@ -1035,26 +1035,45 @@ const puData = [
             { id: "pu_ch8", title: "Chapter 8: Silogisme", description: "Penarikan kesimpulan dari dua premis.", questions: createDummyQuestions("Silogisme") },
             { id: "pu_ch9", title: "Chapter 9: Bahasa Panda", description: "Kriptografi sederhana dan bahasa buatan.", questions: createDummyQuestions("Bahasa Panda") }
         ];
-// Fungsi untuk membuka Modal Panduan Rumus
+
+        // Fungsi untuk membuka Modal Panduan Rumus (Safe Check)
 function openFormulaModal() {
-    // 1. Cari data chapter yang sedang aktif berdasarkan currentChapterId
-    // (Atau sesuaikan variabel chapter kamu, contoh: currentChapter / puData)
-    const activeChapter = puData.find(ch => ch.id === currentChapterId);
-    
-    // 2. Periksa apakah chapter tersebut memiliki data formulaHelp
-    if (activeChapter && activeChapter.formulaHelp) {
-        document.getElementById("formula-content").innerHTML = activeChapter.formulaHelp;
-    } else {
-        document.getElementById("formula-content").innerHTML = "<p>Tidak ada panduan rumus khusus untuk chapter ini.</p>";
+    let activeChapter = null;
+
+    // Cek variabel chapter secara aman
+    if (typeof currentChapterId !== 'undefined') {
+        activeChapter = puData.find(ch => ch.id === currentChapterId);
+    } else if (typeof currentChapterIndex !== 'undefined' && puData[currentChapterIndex]) {
+        activeChapter = puData[currentChapterIndex];
+    } else if (typeof currentChapter !== 'undefined') {
+        activeChapter = currentChapter;
     }
-    
-    // 3. Tampilkan modal popup
-    document.getElementById("formula-modal").style.display = "flex";
+
+    const modal = document.getElementById("formula-modal");
+    const content = document.getElementById("formula-content");
+
+    if (!modal || !content) {
+        console.error("Elemen modal (#formula-modal / #formula-content) tidak ditemukan di HTML!");
+        return;
+    }
+
+    // Isi konten rumus
+    if (activeChapter && activeChapter.formulaHelp) {
+        content.innerHTML = activeChapter.formulaHelp;
+    } else {
+        content.innerHTML = "<p style='text-align:center; color:#666;'>Tidak ada panduan rumus khusus untuk chapter ini.</p>";
+    }
+
+    // Tampilkan modal
+    modal.style.display = "flex";
 }
 
 // Fungsi untuk menutup Modal Panduan Rumus
 function closeFormulaModal() {
-    document.getElementById("formula-modal").style.display = "none";
+    const modal = document.getElementById("formula-modal");
+    if (modal) {
+        modal.style.display = "none";
+    }
 }
         
 
