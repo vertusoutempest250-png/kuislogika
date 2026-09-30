@@ -281,6 +281,46 @@
             font-size: 0.85rem;
             margin-top: auto;
         }
+
+        /* --- KODE CSS TOMBOL DONASI DI SINI --- */
+.donate-float-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #e11d48;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.donate-float-btn:hover {
+    background-color: #be123c;
+    transform: scale(1.05);
+}
+
+.heart-icon {
+    display: inline-block;
+    color: #ffffff;
+    animation: heartbeat 1.2s infinite ease-in-out;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
     </style>
 </head>
 <body>
@@ -309,13 +349,13 @@
             <li>
                 <a class="nav-link active" id="nav-logika" onclick="switchModule('logika')">
                     <span>Logika Informatika</span>
-                    <small>11 Chapter</small>
+                    
                 </a>
             </li>
             <li>
                 <a class="nav-link" id="nav-pu" onclick="switchModule('pu')">
                     <span>Penalaran Umum</span>
-                    <small>9 Chapter</small>
+                    
                 </a>
             </li>
         </ul>
@@ -327,7 +367,7 @@
         <div id="dashboard-view">
             <div class="hero-banner">
                 <span style="font-size: 0.85rem; color: var(--accent);" id="module-tag">Persiapan SNBT & Evaluasi</span>
-                <h1 id="module-title">Portal Penilaian Logika Informatika</h1>
+                <h1 id="module-title">Portal Penilaian Logika</h1>
                 <p id="module-desc">Uji kemampuan penalaran analitis, logika komputasi, dan struktur proposisi Anda.</p>
             </div>
 
@@ -354,8 +394,18 @@
     </main>
 
     <footer>
-        © 2026 Logika Matematika & Penalaran Umum Study Suite.
+        © 2026 Logika Quiz by Altr-vtr.
     </footer>
+
+    <!-- TARUH KODE HTML TOMBOL DONASI DI SINI -->
+     <div class="donate-container">
+361  <a href="https://tako.id/Alipuyyy" target="_blank" rel="noopener noreferrer" class="donate-float-btn">
+362      <svg class="heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+363          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+364      </svg>
+365      <span>Dukung Kami</span>
+366  </a>
+    </div>
 
     <script>
         // ==========================================
@@ -365,8 +415,7 @@
             { id: "log_c1", title: "Chapter 1: Proposisi & Tabel Kebenaran", description: "Dasar logika proposisi dan evaluasi kebenaran.", questions: createDummyQuestions("Logika Proposisi") },
             { id: "log_c2", title: "Chapter 2: Negasi & Implikasi", description: "Pengingkaran serta operasi syarat majemuk.", questions: createDummyQuestions("Negasi Implikasi") }
         ];
-
-        const puData = [
+const puData = [
             {
                 id: "pu_ch1",
                 title: "Chapter 1: Pola Barisan",
@@ -454,8 +503,181 @@
                     }
                 ]
             },
-            { id: "pu_ch2", title: "Chapter 2: Interpretasi Data", description: "Analisis grafik, tabel, dan diagram statistik.", questions: createDummyQuestions("Interpretasi Data") },
-            { id: "pu_ch3", title: "Chapter 3: Analitik Kuantitatif", description: "Pemecahan masalah kuantitatif dan logika matematika.", questions: createDummyQuestions("Analitik Kuantitatif") },
+            {
+                id: "pu_ch2",
+                title: "Chapter 2: Interpretasi Data",
+                description: "Analisis grafik, tabel, dan diagram statistik (5 Level Ketuntasan).",
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Membaca Tabel & Diagram Batang",
+                        questions: [
+                            { id: 1, question: "Tabel penjualan: Senin (10), Selasa (15), Rabu (20), Kamis (12), Jumat (18). Hari dengan penjualan tertinggi adalah?", options: ["Selasa", "Rabu", "Kamis", "Jumat"], correctAnswer: 1 },
+                            { id: 2, question: "Berdasarkan data soal nomor 1, berapa total penjualan dari Senin hingga Rabu?", options: ["35", "40", "45", "50"], correctAnswer: 2 },
+                            { id: 3, question: "Diagram batang menunjukkan tinggi siswa: A (150cm), B (155cm), C (160cm), D (148cm). Siapakah siswa tertinggi?", options: ["Siswa A", "Siswa B", "Siswa C", "Siswa D"], correctAnswer: 2 },
+                            { id: 4, question: "Berapa selisih tinggi siswa C dan siswa D pada soal nomor 3?", options: ["8 cm", "10 cm", "12 cm", "15 cm"], correctAnswer: 2 },
+                            { id: 5, question: "Data nilai kuis: 70, 80, 80, 90, 100. Berapakah nilai terbanyak (modus)?", options: ["70", "80", "90", "100"], correctAnswer: 1 },
+                            { id: 6, question: "Jumlah buku dibaca: Jan (5), Feb (8), Mar (12). Berapa rata-rata buku dibaca per bulan?", options: ["7", "8.33", "8.5", "9"], correctAnswer: 1 },
+                            { id: 7, question: "Tabel jumlah lulusan: 2021 (100 orang), 2022 (120 orang), 2023 (150 orang). Berapa kenaikan dari 2021 ke 2023?", options: ["20 orang", "30 orang", "50 orang", "70 orang"], correctAnswer: 2 },
+                            { id: 8, question: "Diagram lingkaran total 100 siswa: Olahraga 40%, Seni 30%, Sains 30%. Berapa jumlah siswa penggemar Olahraga?", options: ["30 siswa", "40 siswa", "50 siswa", "70 siswa"], correctAnswer: 1 },
+                            { id: 9, question: "Berdasarkan soal nomor 8, berapa total siswa yang menyukai Seni atau Sains?", options: ["30 siswa", "50 siswa", "60 siswa", "70 siswa"], correctAnswer: 2 },
+                            { id: 10, question: "Data produksi padi: Q1 (50 ton), Q2 (40 ton), Q3 (60 ton), Q4 (30 ton). Berapa total produksi selama satu tahun?", options: ["150 ton", "170 ton", "180 ton", "200 ton"], correctAnswer: 2 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Perhitungan Persentase & Rata-rata",
+                        questions: [
+                            { id: 1, question: "Penjualan toko naik dari 200 unit menjadi 250 unit. Berapa persentase kenaikan penjualan?", options: ["20%", "25%", "30%", "50%"], correctAnswer: 1 },
+                            { id: 2, question: "Jumlah pegawai 80 orang. 20% di antaranya berada di divisi Pemasaran. Berapa jumlah pegawai Pemasaran?", options: ["12 orang", "16 orang", "20 orang", "24 orang"], correctAnswer: 1 },
+                            { id: 3, question: "Data nilai 5 siswa: 60, 70, 80, 90, 100. Berapakah nilai rata-rata kelompok tersebut?", options: ["75", "80", "85", "90"], correctAnswer: 1 },
+                            { id: 4, question: "Harga barang turun dari Rp 100.000 menjadi Rp 80.000. Berapa persen penurunan harganya?", options: ["15%", "20%", "25%", "30%"], correctAnswer: 1 },
+                            { id: 5, question: "Diagram lingkaran total 200 unit: Produk A (25%), B (35%), C (40%). Berapa jumlah unit Produk B?", options: ["50 unit", "70 unit", "80 unit", "90 unit"], correctAnswer: 1 },
+                            { id: 6, question: "Data pendapatan bulanan: Rp 4 jt, Rp 5 jt, Rp 6 jt, Rp 5 jt. Berapa nilai tengah (median) dari data tersebut?", options: ["Rp 4.5 jt", "Rp 5 jt", "Rp 5.5 jt", "Rp 6 jt"], correctAnswer: 1 },
+                            { id: 7, question: "Rata-rata nilai 4 siswa adalah 80. Jika masuk siswa ke-5 dengan nilai 90, berapa rata-rata barunya?", options: ["81", "82", "83", "84"], correctAnswer: 1 },
+                            { id: 8, question: "Total anggaran 50 juta. 40% untuk Operasional dan 35% untuk Gaji. Berapa sisa anggaran lainnya?", options: ["10.5 juta", "12.5 juta", "15 juta", "17.5 juta"], correctAnswer: 1 },
+                            { id: 9, question: "Hasil survei 500 orang: 60% memilih Opsi X. Berapa orang yang TIDAK memilih Opsi X?", options: ["150 orang", "200 orang", "250 orang", "300 orang"], correctAnswer: 1 },
+                            { id: 10, question: "Tabel pengeluaran mingguan: M1 (100rb), M2 (150rb), M3 (120rb), M4 (130rb). Berapa rata-rata pengeluaran per minggu?", options: ["120 ribu", "125 ribu", "130 ribu", "135 ribu"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Analisis Grafik Garis & Tren",
+                        questions: [
+                            { id: 1, question: "Grafik suhu harian: Senin (30 C), Selasa (32 C), Rabu (28 C), Kamis (31 C). Kapan penurunan suhu terbesar terjadi?", options: ["Senin ke Selasa", "Selasa ke Rabu", "Rabu ke Kamis", "Kamis ke Jumat"], correctAnswer: 1 },
+                            { id: 2, question: "Laba perusahaan: 2020 (10jt), 2021 (15jt), 2022 (12jt), 2023 (18jt). Pada tahun berapa terjadi penurunan laba?", options: ["2021", "2022", "2023", "Tidak ada"], correctAnswer: 1 },
+                            { id: 3, question: "Jumlah pengunjung web: Jan (1000), Feb (1200), Mar (1500). Berapa persentase kenaikan dari Feb ke Mar?", options: ["20%", "25%", "30%", "33%"], correctAnswer: 1 },
+                            { id: 4, question: "Berdasarkan data soal nomor 3, berapa rata-rata jumlah pengunjung per bulan?", options: ["1200", "1233", "1250", "1300"], correctAnswer: 1 },
+                            { id: 5, question: "Grafik laju pertumbuhan: T1 (2%), T2 (4%), T3 (8%), T4 (16%). Berapa faktor kelipatannya setiap periode?", options: ["1.5 kali", "2 kali", "3 kali", "4 kali"], correctAnswer: 1 },
+                            { id: 6, question: "Jumlah kendaraan melintas: Pagi (500), Siang (300), Sore (600), Malam (200). Kapan volume lalu lintas paling sepi?", options: ["Pagi", "Siang", "Sore", "Malam"], correctAnswer: 3 },
+                            { id: 7, question: "Berdasarkan soal nomor 6, berapa rasio jumlah kendaraan pada Sore dibandingkan Pagi hari?", options: ["1 : 2", "5 : 6", "6 : 5", "2 : 1"], correctAnswer: 2 },
+                            { id: 8, question: "Ekspor kopi (ton): 2021 (40), 2022 (50), 2023 (60). Jika tren berlanjut secara linier, perkiraan ekspor tahun 2024 adalah?", options: ["65 ton", "70 ton", "75 ton", "80 ton"], correctAnswer: 1 },
+                            { id: 9, question: "Penjualan tiket konsert: Hari 1 (50%), Hari 2 (30%), Hari 3 (20%). Berapa rasio penjualan Hari 1 dan Hari 3?", options: ["5 : 2", "5 : 3", "3 : 2", "2 : 1"], correctAnswer: 0 },
+                            { id: 10, question: "Grafik populasi kota X bertambah 5% per tahun dari 100.000 jiwa. Berapa populasi pada akhir tahun pertama?", options: ["102.500", "105.000", "110.000", "115.000"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Perbandingan Tabel Ganda & Matriks Data",
+                        questions: [
+                            { id: 1, question: "Toko A jual 50 barang (laba Rp 2rb/unit). Toko B jual 40 barang (laba Rp 3rb/unit). Toko manakah yang menghasilkan laba lebih besar?", options: ["Toko A", "Toko B", "Sama besar", "Tidak dapat ditentukan"], correctAnswer: 1 },
+                            { id: 2, question: "Berapa selisih total laba antara Toko A dan Toko B pada soal nomor 1?", options: ["Rp 10.000", "Rp 20.000", "Rp 30.000", "Rp 40.000"], correctAnswer: 1 },
+                            { id: 3, question: "Matriks Nilai: Kelas X (Rata-rata 75, 30 siswa), Kelas Y (Rata-rata 85, 20 siswa). Berapa rata-rata gabungan kedua kelas?", options: ["78", "79", "80", "81"], correctAnswer: 1 },
+                            { id: 4, question: "Pabrik I menghasilkan 100 produk (5% cacat). Pabrik II menghasilkan 200 produk (3% cacat). Berapa total produk cacat?", options: ["9 produk", "11 produk", "13 produk", "15 produk"], correctAnswer: 1 },
+                            { id: 5, question: "Tabel Biaya Produksi vs Pendapatan: Biaya Rp 80jt, Pendapatan Rp 100jt. Berapa persentase keuntungan terhadap biaya produksi?", options: ["20%", "25%", "30%", "35%"], correctAnswer: 1 },
+                            { id: 6, question: "Data lulusan PT: Laki-laki 120 (60% bekerja), Perempuan 80 (75% bekerja). Berapa total alumni yang bekerja?", options: ["120 orang", "132 orang", "140 orang", "150 orang"], correctAnswer: 1 },
+                            { id: 7, question: "Berdasarkan soal nomor 6, berapa persentase total alumni yang sudah bekerja?", options: ["62.5%", "66%", "68.5%", "70%"], correctAnswer: 1 },
+                            { id: 8, question: "Kota A (Luas 10 km2, Pop 50.000). Kota B (Luas 20 km2, Pop 80.000). Kota manakah yang memiliki kepadatan lebih tinggi?", options: ["Kota A", "Kota B", "Sama padat", "Tidak ada data"], correctAnswer: 0 },
+                            { id: 9, question: "Tabel konsumsi BBM: Mobil X (1 liter/12 km), Mobil Y (1 liter/15 km). Untuk jarak 60 km, berapa selisih BBM yang dibutuhkan?", options: ["1 liter", "2 liter", "3 liter", "4 liter"], correctAnswer: 0 },
+                            { id: 10, question: "Data Efisiensi Mesin A (80% efektif, 10 jam) vs Mesin B (90% efektif, 8 jam). Berapa total jam kerja efektif gabungan?", options: ["14.2 jam", "15.2 jam", "16.0 jam", "16.8 jam"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Analisis Proyeksi Kompleks & HOTS",
+                        questions: [
+                            { id: 1, question: "Suatu wilayah memiliki 1000 pemilih. Partai A mendapat 40%, Partai B 35%, sisa belum memilih. Berapa suara belum memilih?", options: ["200 suara", "250 suara", "300 suara", "350 suara"], correctAnswer: 1 },
+                            { id: 2, question: "Jika 60% dari pemilih belum memilih pada soal 1 akhirnya memilih Partai B, berapa total suara Partai B?", options: ["400 suara", "450 suara", "500 suara", "550 suara"], correctAnswer: 1 },
+                            { id: 3, question: "Investasi Rp 100jt tumbuh 10% di tahun pertama, lalu turun 10% di tahun kedua. Berapa nilai investasi pada akhir tahun kedua?", options: ["Rp 98 juta", "Rp 99 juta", "Rp 100 juta", "Rp 101 juta"], correctAnswer: 1 },
+                            { id: 4, question: "Siswa lulus ujian jika nilai >= 75. Data: 70 (3 orang), 75 (5 orang), 80 (4 orang), 90 (2 orang). Berapa persen tingkat kelulusan?", options: ["71.4%", "78.6%", "80.0%", "85.7%"], correctAnswer: 1 },
+                            { id: 5, question: "Rata-rata gaji 10 karyawan Rp 5 juta. Jika gaji direktur masuk, rata-rata naik jadi Rp 6 juta. Berapa gaji direktur?", options: ["Rp 12 juta", "Rp 15 juta", "Rp 16 juta", "Rp 18 juta"], correctAnswer: 2 },
+                            { id: 6, question: "Tabel Pertumbuhan Majemuk: Modal Rp 10 juta dengan bunga 20% per tahun. Berapa total modal setelah 2 tahun?", options: ["Rp 14 juta", "Rp 14.4 juta", "Rp 15 juta", "Rp 15.2 juta"], correctAnswer: 1 },
+                            { id: 7, question: "Dalam sampel 400 barang, terdapat 5% produk cacat. Berapa jumlah produk yang tidak cacat?", options: ["360 barang", "370 barang", "380 barang", "390 barang"], correctAnswer: 2 },
+                            { id: 8, question: "Peluang hujan berdasarkan data historis bulan November adalah 0.6. Berapa hari diperkirakan hujan dalam bulan November (30 hari)?", options: ["16 hari", "18 hari", "20 hari", "22 hari"], correctAnswer: 1 },
+                            { id: 9, question: "Data campuran: Larutan A (200 ml, 10% gula) dicampur Larutan B (300 ml, 20% gula). Berapa konsentrasi gula campuran?", options: ["14%", "15%", "16%", "18%"], correctAnswer: 2 },
+                            { id: 10, question: "Skor tes 3 gelombang: G1 (Rata-rata 70, 50 peserta), G2 (Rata-rata 80, 30 peserta), G3 (Rata-rata 90, 20 peserta). Berapa rata-rata total seluruh gelombang?", options: ["76.5", "77.0", "78.0", "79.5"], correctAnswer: 1 }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "pu_ch3",
+                title: "Chapter 3: Analitik Kuantitatif",
+                description: "Pemecahan masalah kuantitatif dan logika matematika (5 Level Ketuntasan).",
+                levels: [
+                    {
+                        level: 1,
+                        title: "Level 1: Operasi Bilangan & Aritmatika Dasar",
+                        questions: [
+                            { id: 1, question: "Jika 3x + 5 = 20, berapakah nilai x?", options: ["3", "4", "5", "6"], correctAnswer: 2 },
+                            { id: 2, question: "Berapakah hasil dari 15% dari 200?", options: ["20", "25", "30", "35"], correctAnswer: 2 },
+                            { id: 3, question: "Sebuah barang berharga Rp 80.000 diskon 25%. Berapakah harga akhir barang tersebut?", options: ["Rp 50.000", "Rp 55.000", "Rp 60.000", "Rp 65.000"], correctAnswer: 2 },
+                            { id: 4, question: "Jika x = 4 dan y = 3, berapakah nilai dari 2x + 3y?", options: ["14", "17", "18", "20"], correctAnswer: 1 },
+                            { id: 5, question: "Rasio laki-laki dan perempuan di kelas adalah 2 : 3. Jika total siswa 30 orang, berapa jumlah siswa laki-laki?", options: ["10", "12", "15", "18"], correctAnswer: 1 },
+                            { id: 6, question: "Hasil dari (12 + 8) * 5 - 20 / 4 adalah?", options: ["90", "95", "100", "105"], correctAnswer: 1 },
+                            { id: 7, question: "Manakah pecahan yang nilainya paling besar?", options: ["1/2", "3/5", "2/3", "3/4"], correctAnswer: 3 },
+                            { id: 8, question: "Sebuah mobil menempuh 180 km dalam waktu 3 jam. Berapakah kecepatan rata-rata mobil tersebut?", options: ["50 km/jam", "60 km/jam", "70 km/jam", "80 km/jam"], correctAnswer: 1 },
+                            { id: 9, question: "Jika x/4 = 9, berapakah nilai x?", options: ["18", "27", "32", "36"], correctAnswer: 3 },
+                            { id: 10, question: "Berapakah nilai dari 2 pangkat 5?", options: ["16", "24", "32", "64"], correctAnswer: 2 }
+                        ]
+                    },
+                    {
+                        level: 2,
+                        title: "Level 2: Perbandingan, Aljabar & Kecepatan",
+                        questions: [
+                            { id: 1, question: "Sebuah pekerjaan diselesaikan 6 orang dalam 12 hari. Jika dikerjakan oleh 8 orang, berapa hari pekerjaan tersebut selesai?", options: ["8 hari", "9 hari", "10 hari", "11 hari"], correctAnswer: 1 },
+                            { id: 2, question: "Jika a + b = 10 dan a - b = 4, berapakah nilai dari a * b?", options: ["16", "21", "24", "28"], correctAnswer: 1 },
+                            { id: 3, question: "Budi berkendara 60 km/jam selama 2 jam, lalu 80 km/jam selama 1 jam. Berapa total jarak yang ditempuh?", options: ["180 km", "200 km", "220 km", "240 km"], correctAnswer: 1 },
+                            { id: 4, question: "Harga 5 buah buku adalah Rp 35.000. Berapakah harga 8 buah buku yang sama?", options: ["Rp 48.000", "Rp 56.000", "Rp 60.000", "Rp 64.000"], correctAnswer: 1 },
+                            { id: 5, question: "Jika 2^(x+1) = 32, berapakah nilai x?", options: ["3", "4", "5", "6"], correctAnswer: 1 },
+                            { id: 6, question: "Suatu wadah berisi air 3/4 bagian. Jika ditambah 5 liter, wadah menjadi penuh. Berapa kapasitas penuh wadah tersebut?", options: ["15 liter", "20 liter", "25 liter", "30 liter"], correctAnswer: 1 },
+                            { id: 7, question: "Jika P = 2a + 3b dan Q = 3a + 2b, jika a = 2 dan b = 4, hubungan P dan Q yang benar adalah?", options: ["P > Q", "P < Q", "P = Q", "Tidak dapat ditentukan"], correctAnswer: 1 },
+                            { id: 8, question: "Rata-rata dari lima bilangan berpola kuadrat 1, 4, 9, 16, 25 adalah?", options: ["10", "11", "12", "13"], correctAnswer: 1 },
+                            { id: 9, question: "Seseorang membeli barang seharga Rp 200.000 dan menjualnya kembali dengan keuntungan 15%. Berapakah harga jualnya?", options: ["Rp 215.000", "Rp 230.000", "Rp 240.000", "Rp 250.000"], correctAnswer: 1 },
+                            { id: 10, question: "Jika x^2 - 9 = 0 dan x > 0, berapakah nilai x + 5?", options: ["6", "7", "8", "9"], correctAnswer: 2 }
+                        ]
+                    },
+                    {
+                        level: 3,
+                        title: "Level 3: Pertidaksamaan & Himpunan Kuantitatif",
+                        questions: [
+                            { id: 1, question: "Jika 2x - 3 < 7 dan x adalah bilangan bulat positif, berapakah banyaknya nilai x yang memenuhi?", options: ["3", "4", "5", "6"], correctAnswer: 1 },
+                            { id: 2, question: "Dari 40 siswa, 25 suka Matematika, 20 suka Fisika, dan 10 suka keduanya. Berapa siswa yang TIDAK suka keduanya?", options: ["3", "5", "7", "10"], correctAnswer: 1 },
+                            { id: 3, question: "Jika x = 3/8 dan y = 37.5%, maka hubungan x dan y yang tepat adalah?", options: ["x > y", "x < y", "x = y", "x + y = 1"], correctAnswer: 2 },
+                            { id: 4, question: "Panjang persegi panjang 2 cm lebih panjang dari lebarnya. Jika kelilingnya 28 cm, berapakah luasnya?", options: ["45 cm2", "48 cm2", "54 cm2", "60 cm2"], correctAnswer: 1 },
+                            { id: 5, question: "A dan B berangkat dari titik yang sama berlawanan arah. A dengan kecepatan 40 km/jam, B 60 km/jam. Setelah berapa jam jarak mereka 300 km?", options: ["2.5 jam", "3 jam", "3.5 jam", "4 jam"], correctAnswer: 1 },
+                            { id: 6, question: "Jika a > b dan b > c, manakah pernyataan berikut yang pasti BENAR?", options: ["a * c > b", "a - c > 0", "a + c < b", "a / c = 1"], correctAnswer: 1 },
+                            { id: 7, question: "Suatu kelompok terdiri dari 15 orang. Rata-rata umur mereka 20 tahun. Jika umur ketua tidak dihitung, rata-rata menjadi 19 tahun. Umur ketua adalah?", options: ["30 tahun", "34 tahun", "35 tahun", "40 tahun"], correctAnswer: 1 },
+                            { id: 8, question: "Manakah nilai berikut yang habis dibagi oleh 3 dan 4 sekaligus?", options: ["114", "128", "132", "142"], correctAnswer: 2 },
+                            { id: 9, question: "Jika p = 0.75 dan q = 3/4, berapakah p^2 - q^2?", options: ["-0.5", "0", "0.25", "0.5"], correctAnswer: 1 },
+                            { id: 10, question: "Keuntungan toko meningkat 10% tiap bulan. Jika keuntungan bulan Januari Rp 10 juta, berapa keuntungan bulan Maret?", options: ["Rp 12 juta", "Rp 12.1 juta", "Rp 12.2 juta", "Rp 12.5 juta"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 4,
+                        title: "Level 4: Peluang, Kombinatorika & Fungsi",
+                        questions: [
+                            { id: 1, question: "Berapa banyaknya cara menyusun 3 buku berbeda dari total 5 buku yang tersedia?", options: ["10", "20", "60", "120"], correctAnswer: 2 },
+                            { id: 2, question: "Dua buah dadu dilempar bersamaan. Berapakah peluang muncul mata dadu berjumlah 7?", options: ["1/6", "5/36", "1/12", "7/36"], correctAnswer: 0 },
+                            { id: 3, question: "Jika f(x) = 2x^2 - 3x + 5, berapakah nilai f(3)?", options: ["12", "14", "16", "18"], correctAnswer: 1 },
+                            { id: 4, question: "Sebuah kotak berisi 5 bola merah dan 3 bola putih. Jika diambil 2 bola sekaligus, berapa peluang terambil keduanya bola merah?", options: ["5/14", "10/28", "15/56", "5/28"], correctAnswer: 0 },
+                            { id: 5, question: "Nilai rata-rata dari x, y, dan z adalah 12. Jika rata-rata x dan y adalah 10, berapakah nilai z?", options: ["14", "16", "18", "20"], correctAnswer: 2 },
+                            { id: 6, question: "Jika g(x) = 3x - 1 dan g(a) = 14, berapakah nilai a?", options: ["4", "5", "6", "7"], correctAnswer: 1 },
+                            { id: 7, question: "Dalam suatu rapat terdapat 6 orang. Jika semua orang saling berjabat tangan satu sama lain tepat satu kali, berapa total jabat tangan?", options: ["12", "15", "18", "30"], correctAnswer: 1 },
+                            { id: 8, question: "Jika 0 < x < 1, manakah bilangan yang nilainya paling BESAR?", options: ["x", "x^2", "1/x", "akar(x)"], correctAnswer: 2 },
+                            { id: 9, question: "Seseorang meminjam uang Rp 5.000.000 dengan bunga tunggal 12% per tahun. Berapa total pengembalian setelah 6 bulan?", options: ["Rp 5.200.000", "Rp 5.300.000", "Rp 5.400.000", "Rp 5.600.000"], correctAnswer: 1 },
+                            { id: 10, question: "Persamaan garis melalui titik (0,3) dan (2,7) memiliki gradien m sebesar?", options: ["1", "2", "3", "4"], correctAnswer: 1 }
+                        ]
+                    },
+                    {
+                        level: 5,
+                        title: "Level 5: Penalaran Kuantitatif HOTS",
+                        questions: [
+                            { id: 1, question: "A dan B dapat menyelesaikan proyek bersama dalam 12 hari. A sendiri selesai dalam 20 hari. Berapa hari B dapat menyelesaikan sendiri?", options: ["25 hari", "30 hari", "35 hari", "40 hari"], correctAnswer: 1 },
+                            { id: 2, question: "Jika x^2 + y^2 = 25 dan x*y = 12, berapakah nilai dari (x + y)^2?", options: ["37", "49", "64", "81"], correctAnswer: 1 },
+                            { id: 3, question: "Seseorang mengisi tanki air. Kran A mengisi penuh dalam 4 jam, Kran B menguras dalam 6 jam. Jika keduanya dibuka bersama, berapa jam tanki penuh?", options: ["8 jam", "10 jam", "12 jam", "14 jam"], correctAnswer: 2 },
+                            { id: 4, question: "Jika p dan q adalah akar-akar dari x^2 - 5x + 6 = 0, berapakah nilai dari (1/p) + (1/q)?", options: ["5/6", "6/5", "1/5", "1/6"], correctAnswer: 0 },
+                            { id: 5, question: "Tiga buah bilangan membentuk deret aritmatika. Jumlah ketiga bilangan adalah 30 dan hasil kalinya 750. Suku terbesar adalah?", options: ["12", "15", "18", "20"], correctAnswer: 2 },
+                            { id: 6, question: "Jika x% dari y adalah 20, berapakah y% dari 2x?", options: ["10", "20", "40", "80"], correctAnswer: 2 },
+                            { id: 7, question: "Diberikan x > 0. Jika (x + 1/x)^2 = 16, berapakah nilai x^2 + 1/x^2?", options: ["12", "14", "16", "18"], correctAnswer: 1 },
+                            { id: 8, question: "Suatu pipa memotong kayu menjadi 2 bagian dengan perbandingan 2 : 3. Bagian yang lebih panjang dipotong lagi 1 : 2. Berapa bagian terpendek dari total kayu awal?", options: ["1/5", "2/5", "1/3", "2/9"], correctAnswer: 0 },
+                            { id: 9, question: "Sebuah deret geometri tak hingga memiliki suku pertama 12 dan jumlah tak hingga 36. Berapakah rasio deret tersebut?", options: ["1/3", "1/2", "2/3", "3/4"], correctAnswer: 2 },
+                            { id: 10, question: "Jika log(a) + log(b) = 2 dan log(a) - log(b) = 0, berapakah nilai dari a * b?", options: ["10", "50", "100", "1000"], correctAnswer: 2 }
+                        ]
+                    }
+                ]
+            },
+        
             { id: "pu_ch4", title: "Chapter 4: Modus Ponens", description: "Penarikan kesimpulan aturan Implikasi (P -> Q, P).", questions: createDummyQuestions("Modus Ponens") },
             { id: "pu_ch5", title: "Chapter 5: Modus Tollens", description: "Penarikan kesimpulan Kontraposisi (P -> Q, ~Q).", questions: createDummyQuestions("Modus Tollens") },
             { id: "pu_ch6", title: "Chapter 6: Ekuivalensi Logika", description: "Pernyataan majemuk yang senilai.", questions: createDummyQuestions("Ekuivalensi Logika") },
