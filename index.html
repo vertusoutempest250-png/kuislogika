@@ -321,6 +321,37 @@
     70% { transform: scale(1); }
 }
 
+/* STYLE ANIMASI KEMBANG API & GLOW */
+@keyframes pulseGlow {
+    0% { filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6)); }
+    50% { filter: drop-shadow(0 0 20px rgba(239, 68, 68, 1)); }
+    100% { filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6)); }
+}
+
+.confetti-box {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+.confetti-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: bounce 0.6s infinite alternate ease-in-out;
+}
+.c1 { background: #ef4444; animation-delay: 0.1s; }
+.c2 { background: #3b82f6; animation-delay: 0.2s; }
+.c3 { background: #10b981; animation-delay: 0.3s; }
+.c4 { background: #f59e0b; animation-delay: 0.4s; }
+.c5 { background: #8b5cf6; animation-delay: 0.5s; }
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-16px); }
+}
+
+
+
     </style>
 </head>
 <body>
@@ -432,6 +463,8 @@
         © 2026 Logika Quiz by Altr-vtr.
     </footer>
 
+
+
     <!-- TARUH KODE HTML TOMBOL DONASI DI SINI -->
      <div class="donate-container">
   <a href="https://tako.id/Alipuyyy" target="_blank" rel="noopener noreferrer" class="donate-float-btn">
@@ -441,6 +474,26 @@
      <span>Support</span>
   </a>
     </div>
+
+    <div id="score-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(6px);">
+    <div style="background: #1e293b; width: 100%; max-width: 380px; border-radius: 18px; padding: 28px 20px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6); border: 1px solid #334155; color: #f8fafc; position: relative; overflow: hidden;">
+        
+        <!-- Wadah Ikon/Animasi -->
+        <div id="score-icon-container" style="display: flex; justify-content: center; align-items: center; min-height: 70px; margin-bottom: 12px;"></div>
+        
+        <!-- Judul Modal -->
+        <h3 id="score-title" style="margin: 0 0 8px 0; font-size: 1.3rem; font-weight: 700; color: #f8fafc;">Hasil Kuis</h3>
+        
+        <!-- Pesan Skor -->
+        <div id="score-message" style="font-size: 0.95rem; line-height: 1.5; color: #cbd5e1; margin-bottom: 24px;"></div>
+
+        <!-- Tombol Aksi -->
+        <button id="score-btn" onclick="closeScoreModal()" style="width: 100%; padding: 12px; background: #2563eb; color: #ffffff; border: none; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);">
+            Oke, Mengerti
+        </button>
+    </div>
+</div>
+
 
     <script>
         // ==========================================
@@ -1793,6 +1846,58 @@ function closeFormulaModal() {
         }
 
         renderChapters();
+
+        // Fungsi untuk menampilkan Modal Hasil Skor Custom
+function showScoreModal(score, total, passed) {
+    const modal = document.getElementById("score-modal");
+    const iconContainer = document.getElementById("score-icon-container");
+    const title = document.getElementById("score-title");
+    const message = document.getElementById("score-message");
+    const btn = document.getElementById("score-btn");
+
+    if (passed) {
+        // TAMPILAN BERHASIL (10/10): Animasi Titik Warna-Warni
+        iconContainer.innerHTML = `
+            <div class="confetti-box">
+                <div class="confetti-dot c1"></div>
+                <div class="confetti-dot c2"></div>
+                <div class="confetti-dot c3"></div>
+                <div class="confetti-dot c4"></div>
+                <div class="confetti-dot c5"></div>
+            </div>
+        `;
+        title.innerText = "Sempurna!";
+        title.style.color = "#10b981";
+        message.innerHTML = `Skor Anda: <b style="color:#10b981; font-size:1.1rem;">${score}/${total}</b><br><br>Luar biasa! Kamu berhasil memenuhi syarat tuntas modul ini.`;
+        btn.style.background = "#10b981";
+        btn.style.boxShadow = "0 4px 12px rgba(16, 185, 129, 0.4)";
+    } else {
+        // TAMPILAN GAGAL (<10/10): SVG Tanda Peringatan Merah + Glowing
+        iconContainer.innerHTML = `
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: pulseGlow 1.8s infinite ease-in-out;">
+                <path d="M12 9V13M12 17H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33975 16C2.56995 17.3333 3.53223 19 5.07183 19Z" 
+                      stroke="#ef4444" 
+                      stroke-width="2" 
+                      stroke-linecap="round" 
+                      stroke-linejoin="round"/>
+            </svg>
+        `;
+        title.innerText = "Belum Tuntas";
+        title.style.color = "#ef4444";
+        message.innerHTML = `Skor Anda: <b style="color:#ef4444; font-size:1.1rem;">${score}/${total}</b><br><br>Syarat tuntas modul ini adalah <b>${total}/${total}</b>. Silakan ulangi kembali untuk hasil sempurna.`;
+        btn.style.background = "#ef4444";
+        btn.style.boxShadow = "0 4px 12px rgba(239, 68, 68, 0.4)";
+    }
+
+    modal.style.display = "flex";
+}
+
+// Fungsi untuk menutup Modal Skor
+function closeScoreModal() {
+    const modal = document.getElementById("score-modal");
+    if (modal) modal.style.display = "none";
+}
+
     </script>
    
 </body>
