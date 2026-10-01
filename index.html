@@ -1830,11 +1830,7 @@ function closeFormulaModal() {
 
             saveChapterResult(saveId, correctCount, isPerfect);
 
-            if (isPerfect) {
-                alert(`🎉 SELAMAT! Anda berhasil menuntaskan modul ini dengan skor sempurna (${correctCount}/${questions.length})!`);
-            } else {
-                alert(`⚠️ Skor Anda: ${correctCount}/${questions.length}.\n\nSyarat tuntas modul ini adalah ${questions.length}/${questions.length}. Silakan ulangi kembali untuk hasil sempurna.`);
-            }
+            showScoreModal(correctCount, questions.length, isPerfect);
 
             exitQuiz();
         }
